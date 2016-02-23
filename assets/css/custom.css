@@ -1,0 +1,265 @@
+/*reset*/
+a {
+	text-decoration: none!important;
+}
+.inline-block{
+	display: inline-block;
+}
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{
+	padding: 0!important
+}
+.container{
+	width: 100%!important;
+	padding: 0!important;
+	margin: 0!important;
+}
+.row{
+	padding:0!important;
+}
+
+/*reset*/
+body{
+}
+.direita{
+	float:right;
+}
+.esquerda{
+	float: left;
+}
+/*HEADER*//*HEADER*/
+#header{
+	position: relative;
+	width:100%;
+	z-index: 999;
+	background-color: #9ab87a;
+	font-family: 'Ubuntu', sans-serif;
+	font-style:italic;
+	font-weight:200;
+	-webkit-box-shadow: 0px 5px 11px 0px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    0px 5px 11px 0px rgba(50, 50, 50, 0.75);
+	box-shadow:         0px 5px 11px 0px rgba(50, 50, 50, 0.75);}
+#header a{
+	color: #fff;
+
+
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form{
+	border:none;
+	background-color: transparent;
+	display:inline-block!important;
+}
+.navbar-default {
+ 	background-color: transparent;
+   	border:none;
+   	text-align: center;
+}
+.navbar-default ul li{
+	margin:0 20px;
+}
+#header #main-navigation{
+	margin:0;
+}
+/*HEADER*//*HEADER*/
+#resumo-fundo{
+	padding: 65px 0 20px;
+	background-image:url('../images/fundo-header-banco.png'); 
+	background-color: #f8f8f8;
+	background-size: cover;
+}
+#resumo>div{
+	text-align: right;
+}
+#novos-logo{
+	width: 263px;
+	margin-top:20px;
+}
+#resumo h1{
+	text-transform: uppercase;
+	font-size: 50px;
+	color: #ff754c;
+}
+#resumo p{
+	font-size: 16.5px;
+	font-family: 'Source Sans pro', sans-serif;
+	text-align: center;
+	font-weight: 300;
+	color: #7E7878;
+	margin-top: 20px
+}
+#resumo #continue{
+	font-weight: 400;
+	font-style: italic;
+}
+#busca-cadastro{
+	background-color: #fff;
+}
+.row{
+    width: 980px;
+    margin:0 auto;
+
+}
+#busca-cadastro {
+	padding: 50px 0!important;
+}
+#busca-cadastro h3{
+	font-size: 21px;
+	font-style: italic;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 100;
+	width: 250px;
+	display: block;
+	margin:0 auto;
+	text-align: center;
+	color: #7E7878;
+	margin-bottom: 25px
+
+}
+#busca-cadastro >div:first-child {
+	padding-right: 18px!important;
+}
+#busca-cadastro >div:nth-child(2) {
+	padding-left: 18px!important;
+}
+.form-control { border-radius: 0; }
+
+#busca-cadastro form>input,#busca-cadastro form>select, #busca-cadastro form option{
+	height:40px;
+	color:#fff;
+	background-color: #9ab87a;
+	font-size: 16.5px;
+	border-radius: 0!important;
+   border: 1px solid #ccc;
+   margin-bottom: 15px;
+   padding-left:10px;
+       font-weight: 100;
+
+	font-family: 'Source Sans pro', sans-serif;
+
+
+}
+#busca-cadastro form>select, #busca-cadastro form option{
+	-webkit-appearance: none;
+   background-position: right 50%;
+    background-repeat: no-repeat;
+    background-image: url('../images/seta-box.png');
+    padding: .5em;
+    padding-right: 1.5em
+}
+#busca-cadastro form option:first-child{
+    font-weight: 100;
+
+}
+#busca-cadastro input::-webkit-input-placeholder {
+    color:    #fff;
+    font-weight: 100
+}
+#busca-cadastro input:-moz-placeholder {
+    color:    #fff;
+    font-weight: 100;
+}
+#busca-cadastro input::-moz-placeholder {
+    color:    #fff;
+    font-weight: 100;
+}
+#busca-cadastro input:-ms-input-placeholder {
+    color:    #fff;
+    font-weight: 100;
+}
+#busca-cadastro input{
+	width: 100%;
+}
+#busca-cadastro select{
+	width: 100%;
+}
+#busca-cadastro select[name="uf"]{
+	width:33%;
+}
+#busca-cadastro select[name="cidade"]{
+	width:63%;
+	float:right;
+}
+#pesquisa a span{
+	font-size: 20px;
+	color: #9ab87a;
+	font-size:40px;
+	font-style: normal;
+	margin-right: 10px;
+	padding-top:5px;
+}
+#pesquisa a, #cadastro a {
+	font-family: 'Ubuntu', sans-serif;
+	font-style: italic;
+	font-weight: 100;
+	color: #7E7878;
+	font-size: 15px;
+}
+#busca-cadastro .enviar{
+	font-size:22px;
+	float: right;
+}
+#busca-cadastro .enviar img{
+	margin-left: 17px;
+	vertical-align: bottom;
+}
+#modificar h3{
+	margin-top: 75px;
+	text-align: center;
+	width: 100%
+}
+#modificar a{
+	color: #9ab87a;
+}
+#footer{
+	font-size: 16px;
+	font-weight: 100;
+	position: relative;
+	height: initial;
+	background-color: #605f65;
+	text-align: left;
+	color: #fff;
+	border-top:solid 15px #9ab87a;
+	padding: 45px 0;
+	font-family: 'Source Sans pro', sans-serif!important;
+}
+#form-footer{
+	padding: 0 50px!important;
+}
+#footer ul{
+	list-style: none;
+	padding: 0;
+}
+#footer ul a{
+	color:#fff;
+}
+#footer input, #footer textarea{
+	width: 100%;
+	height:40px;
+	margin-top: 10px;
+	padding-left: 10px;
+}
+ #footer textarea{
+ 	height: 100px;
+ }
+#footer input[type="submit"]{
+	width:150px;
+
+}
+#footer h4{
+	font-size:24px;
+	text-transform: uppercase;
+}
+#info-footer p{
+	color: #F2EEEE;
+margin:5px 0 0;
+	}
+	.social-footer{
+		margin-top:15px;
+	}
+#info-footer img{
+	margin-bottom: 15px;
+}
+#rodape-baixo{
+	margin-top: 40px;
+	background-color: #fff;
+}
