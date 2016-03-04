@@ -21,12 +21,12 @@ get_header('banco'); ?>
 				<div class="clearfix"></div>
 				<?php
 					while ( have_posts() ) : the_post();
-							the_excerpt();
+							the_content();
 
 					endwhile;
 				?>
-				<p id="continue">
-					Continue lendo<br>
+				<p id="continue-p">
+					<a id="continue" href="#" >Continue lendo</a><br>
 					<img src="<?php echo get_template_directory_uri(); ?>/assets/images/leia-banco.png">
 				</p>
 
@@ -35,15 +35,34 @@ get_header('banco'); ?>
 		<div id='busca-cadastro' class='row'>
 			<div id='pesquisa' class="col-sm-6"><form action="">
 				<h3>Faça uma pesquisa nas práticas cadastradas</h3>
-				<input placeholder="Palavra-chave" type="text">
-				<select name="tema" id="">
-					<option>Tema</option>
+				<input id="filtro-palavra" placeholder="Palavra-chave" type="text">
+				<?php drop_tags('Tema', 'tema', 1, 1)?>
+				<select name="uf-busca" class="uf" id="uf-busca">
+					<option value="">UF</option>
+					<?php
+					global $wpdb;
+					$results = $wpdb->get_results( 'SELECT cod_estados, sigla
+								FROM wp_17_w_estados
+								ORDER BY sigla', OBJECT );
+					foreach ($results as $key ) {
+						echo '<option value="'.$key->cod_estados.'">'.$key->sigla.'</option>';	
+					}
+					?>
 				</select>
-				<select class='inline-block' name="uf" id="">
-					<option>UF</option>
-				</select>
-				<select class='inline-block' name="cidade" id="">
-					<option>Cidade</option>
+
+				
+				<select class='inline-block cidade'  name="cidade-busca" id="">
+					<span class="cidade-carregando">Aguarde, carregando...</span>
+				<?php
+					global $wpdb;
+					$results = $wpdb->get_results( 'SELECT cod_cidades, nome
+					FROM wp_17_w_cidades
+					ORDER BY nome', OBJECT );
+					echo '<option value="0">Cidade</option>';	
+
+				foreach ($results as $key ) {
+					echo '<option value="'.$key->cod_cidades.'">'.$key->nome.'</option>';	
+				}?>
 				</select>
 				<div class="inline-block"><a href="#"><span>+</span>Mais opções de pesquisa</a></div>
 				<a  class="inline-block enviar" href="#">Pesquisar<img src="<?php echo get_template_directory_uri(); ?>/assets/images/busca-banco.png"></a>
@@ -51,15 +70,32 @@ get_header('banco'); ?>
 			<div id='cadastro' class="col-sm-6"><form action="">
 				<h3>Cadastre uma nova prática sustentável</h3>
 				<input placeholder="Nome do Projeto" type="text">
-				<select name="tema" id="">
-					<option>Tema</option>
+				<?php drop_tags('Tema', 'tema', 0)?>
+				<select class='uf inline-block' name="uf-cadastro" id="uf-cadastro">
+					<option value="">UF</option>
+					<?php
+					global $wpdb;
+					$results = $wpdb->get_results( 'SELECT cod_estados, sigla
+								FROM wp_17_w_estados
+								ORDER BY sigla', OBJECT );
+					foreach ($results as $key ) {
+						echo '<option value="'.$key->cod_estados.'">'.$key->sigla.'</option>';	
+					}
+					?>
 				</select>
-				<select class='inline-block' name="uf" id="">
-					<option>UF</option>
-				</select>
-				<select class='inline-block' name="cidade" id="">
-					<option>Cidade</option>
-				</select>
+				<span class="cidade-carregando">Aguarde, carregando...</span>
+
+				<select class='inline-block cidade' name="cidade-cadastro" id="">
+				<?php
+					global $wpdb;
+					$results = $wpdb->get_results( 'SELECT cod_cidades, nome
+					FROM wp_17_w_cidades
+					ORDER BY nome', OBJECT );
+					echo '<option value="0">Cidade</option>';	
+
+				foreach ($results as $key ) {
+					echo '<option value="'.$key->cod_cidades.'">'.$key->nome.'</option>';	
+				}?>				</select>
 				<a class="enviar" href="#">Continuar Cadastro<img src="<?php echo get_template_directory_uri(); ?>/assets/images/cadastrar-banco.png"></a>
 
 			</form></div>

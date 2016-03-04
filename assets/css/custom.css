@@ -43,6 +43,9 @@ body{
 
 
 }
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus{
+	background-color: transparent;
+}
 
 .navbar-default .navbar-collapse, .navbar-default .navbar-form{
 	border:none;
@@ -69,6 +72,16 @@ body{
 }
 #resumo>div{
 	text-align: right;
+}
+#resumo p:nth-child(5){
+	max-height:0;
+	overflow: hidden;
+	-webkit-transition: max-height 1;
+	-moz-transition: max-height 1s;
+	transition: max-height 1s;
+}
+#resumo a, #resumo a:active, #resumo a:hover{
+	color:#7E7878;
 }
 #novos-logo{
 	width: 263px;
@@ -172,13 +185,26 @@ body{
 #busca-cadastro select{
 	width: 100%;
 }
-#busca-cadastro select[name="uf"]{
+#busca-cadastro select.uf{
 	width:33%;
 }
-#busca-cadastro select[name="cidade"]{
+#busca-cadastro select.cidade{
 	width:63%;
 	float:right;
-}
+	-webkit-transition: opacity 1s;
+	-moz-transition: opacity 1s;
+	transition: opacity 1s;
+	}
+	.cidade-carregando{
+		position: absolute;
+		opacity: 0;
+		-webkit-transition: opacity 1s;
+	-moz-transition: opacity 1s;
+	transition: opacity 1s;
+	}
+select.cidade:disabled{
+	opacity: 0.7;
+}	
 #pesquisa a span{
 	font-size: 20px;
 	color: #9ab87a;

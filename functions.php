@@ -31,7 +31,7 @@ require_once get_template_directory() . '/core/classes/class-thumbnail-resizer.p
 // require_once get_template_directory() . '/core/classes/class-options-helper.php';
 // require_once get_template_directory() . '/core/classes/class-post-type.php';
 // require_once get_template_directory() . '/core/classes/class-taxonomy.php';
-// require_once get_template_directory() . '/core/classes/class-metabox.php';
+require_once get_template_directory() . '/core/classes/class-metabox.php';
 // require_once get_template_directory() . '/core/classes/abstracts/abstract-front-end-form.php';
 // require_once get_template_directory() . '/core/classes/class-contact-form.php';
 // require_once get_template_directory() . '/core/classes/class-post-form.php';
@@ -214,7 +214,12 @@ function odin_enqueue_scripts() {
 	wp_enqueue_style( 'odin-style', get_stylesheet_uri(), array(), null, 'all' );
 	wp_enqueue_style( 'custom-style', $template_url . '/assets/css/custom.css', array(), null, 'all' );
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300|Ubuntu:400,300,300italic,400italic,500,500italic', array(), null, 'all' );
+	if( is_page_template('page-equipe.php')) { 
+		wp_enqueue_script( 'owl-js',$template_url .'/inc/owl-carousel/owl-carousel/owl.carousel.js', array(), null, true );
+		wp_enqueue_style( 'owl-style', $template_url .'/inc/owl-carousel/owl-carousel/owl.carousel.css', array(), null, 'all' );
+		wp_enqueue_style( 'owl-theme', $template_url .'/inc/owl-carousel/owl-carousel/owl.theme.css', array(), null, 'all' );
 
+ 	}
 	// jQuery.
 	wp_enqueue_script( 'jquery' );
 
@@ -300,3 +305,58 @@ if ( is_woocommerce_activated() ) {
 	require get_template_directory() . '/inc/woocommerce/template-tags.php';
 }
 add_post_type_support('page', 'excerpt');
+
+
+/**
+*custom post types
+*/
+require_once get_template_directory() . '/inc/custom-post.php';
+/**
+*custom fields
+*/
+require_once get_template_directory() . '/inc/custom-fields.php';
+/**
+*funcoes do ajax
+*/
+require_once get_template_directory() . '/inc/ajax-functions.php';
+
+add_action("after_switch_theme", "cria_cidades"); 
+
+global $wpdb;
+$table_name = $wpdb->prefix.'w_cidades';
+if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
+     $charset_collate = $wpdb->get_charset_collate();
+     $sql = "CREATE TABLE $table_name(
+	  `estados_cod_estados` int(11) DEFAULT NULL,
+	  `cod_cidades` int(11) DEFAULT NULL,
+	  `nome` varchar(72) COLLATE utf8_unicode_ci DEFAULT NULL,
+	  `cep` varchar(8) COLLATE utf8_unicode_ci DEFAULT NULL
+	) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
+     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+     dbDelta( $sql );
+
+
+}
+$table_name_est = $wpdb->prefix.'w_estados';
+if($wpdb->get_var("SHOW TABLES LIKE '$table_name_est'") != $table_name) {
+     $charset_collate = $wpdb->get_charset_collate();
+     $sql = "CREATE TABLE $table_name_est(
+	  `cod_estados` int(11) DEFAULT NULL,
+  `sigla` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nome` varchar(72) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
+     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+     dbDelta( $sql );
+}
+
+function cria_cidades(){
+	
+}
+
+function drop_tags($nome,$tax,$cont, $esconde=0)
+{?>
+		<?php wp_dropdown_categories( 'show_option_none='.$nome.'&hide_empty='.$esconde.'&option_none_value=&taxonomy='.$tax.'&show_count='.$cont.'&class=ajax-filtro-materiais taxonomia&id='.$tax.'&name='.$tax.'&include='.$include.'&option_none_value=0&selected='.$selected ); ?>
+<?php
+}
+
+
