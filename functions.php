@@ -353,10 +353,34 @@ function cria_cidades(){
 	
 }
 
-function drop_tags($nome,$tax,$cont, $esconde=0)
+function drop_tags($nome,$tax,$cont,$id, $esconde=0, $mae)
 {?>
-		<?php wp_dropdown_categories( 'show_option_none='.$nome.'&hide_empty='.$esconde.'&option_none_value=&taxonomy='.$tax.'&show_count='.$cont.'&class=ajax-filtro-materiais taxonomia&id='.$tax.'&name='.$tax.'&include='.$include.'&option_none_value=0&selected='.$selected ); ?>
+		<?php wp_dropdown_categories( 'show_option_none='.$nome.'&hierarchical=true&depth=1&child_of='.$mae.'&hide_empty='.$esconde.'&option_none_value=&taxonomy='.$tax.'&show_count='.$cont.'&class=ajax-filtro-materiais taxonomia'.$tax.'&id='.$id.'&name='.$tax.'&include='.$include.'&option_none_value=0&selected='.$selected ); ?>
 <?php
 }
 
 
+$result = add_role(
+    'degustador',
+    __( 'Associado Degustador' ),
+    array(
+        'read'         => true,  // true allows this capability
+        'edit_posts'   => false,
+        'delete_posts' => false, // Use false to explicitly deny
+    )
+);
+
+
+add_filter( 'manage_edit-pratica_columns', 'colunas_praticas' ) ;
+
+function colunas_praticas( $columns ) {
+
+	$columns = array(
+		'cb' => '<input type="checkbox" />',
+		'title' => __( 'Movie' ),
+		'author' => __( 'Entidade' ),
+		'date' => __( 'Date' )
+	);
+
+	return $columns;
+}

@@ -115,7 +115,15 @@ body{
 #busca-cadastro {
 	padding: 50px 0!important;
 }
-#busca-cadastro h3{
+.home-banco h2{
+	font-size: 30px;
+	font-family: 'Ubuntu', sans-serif;
+	text-align: center;
+	color: #7E7878;
+	font-weight: 100;
+
+}
+.home-banco h3{
 	font-size: 21px;
 	font-style: italic;
 	font-family: 'Ubuntu', sans-serif;
@@ -128,6 +136,13 @@ body{
 	margin-bottom: 25px
 
 }
+.home-banco h4{
+	font-size: 18px;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 200;
+	color: #7E7878;
+
+}
 #busca-cadastro >div:first-child {
 	padding-right: 18px!important;
 }
@@ -136,7 +151,7 @@ body{
 }
 .form-control { border-radius: 0; }
 
-#busca-cadastro form>input,#busca-cadastro form>select, #busca-cadastro form option{
+#busca-cadastro form>input,#continua-cadastro form input,#continua-cadastro form select,#busca-cadastro form>select, #busca-cadastro form option{
 	height:40px;
 	color:#fff;
 	background-color: #9ab87a;
@@ -145,13 +160,13 @@ body{
    border: 1px solid #ccc;
    margin-bottom: 15px;
    padding-left:10px;
-       font-weight: 100;
+   font-weight: 100;
 
 	font-family: 'Source Sans pro', sans-serif;
 
 
 }
-#busca-cadastro form>select, #busca-cadastro form option{
+#busca-cadastro form>select, #busca-cadastro form option, #continua-cadastro form select, #continua-cadastro form option{
 	-webkit-appearance: none;
    background-position: right 50%;
     background-repeat: no-repeat;
@@ -163,26 +178,26 @@ body{
     font-weight: 100;
 
 }
-#busca-cadastro input::-webkit-input-placeholder {
+.home-banco  input::-webkit-input-placeholder {
     color:    #fff;
     font-weight: 100
 }
-#busca-cadastro input:-moz-placeholder {
+.home-banco input:-moz-placeholder {
     color:    #fff;
     font-weight: 100;
 }
-#busca-cadastro input::-moz-placeholder {
+.home-banco  input::-moz-placeholder {
     color:    #fff;
     font-weight: 100;
 }
-#busca-cadastro input:-ms-input-placeholder {
+.home-banco  input:-ms-input-placeholder {
     color:    #fff;
     font-weight: 100;
 }
 #busca-cadastro input{
 	width: 100%;
 }
-#busca-cadastro select{
+#busca-cadastro select, #continua-cadastro select{
 	width: 100%;
 }
 #busca-cadastro select.uf{
@@ -202,7 +217,7 @@ body{
 	-moz-transition: opacity 1s;
 	transition: opacity 1s;
 	}
-select.cidade:disabled{
+select:disabled, input:disabled{
 	opacity: 0.7;
 }	
 #pesquisa a span{
@@ -213,13 +228,16 @@ select.cidade:disabled{
 	margin-right: 10px;
 	padding-top:5px;
 }
-#pesquisa a, #cadastro a {
+#pesquisa a, #cadastro a, #enviar-cadastro {
 	font-family: 'Ubuntu', sans-serif;
 	font-style: italic;
 	font-weight: 100;
 	color: #7E7878;
 	font-size: 15px;
 }
+ #enviar-cadastro:hover {
+ 	color:#000;
+ }
 #busca-cadastro .enviar{
 	font-size:22px;
 	float: right;
@@ -229,12 +247,43 @@ select.cidade:disabled{
 	vertical-align: bottom;
 }
 #modificar h3{
-	margin-top: 75px;
 	text-align: center;
 	width: 100%
 }
 #modificar a{
 	color: #9ab87a;
+}
+#continua-cadastro{
+	display: none;
+}
+#continua-cadastro input, #continua-cadastro textarea {
+	width:100%;
+}
+#continua-cadastro h3{
+	font-weight: 300;
+	margin: 18px 0;
+	width: 100%;
+
+}
+.col-cadastro:first-child{
+	padding-right: 20px!important;
+	float: left;
+}
+.col-cadastro:nth-child(2){
+	padding-left: 20px!important;
+	float: left
+}
+#subtema{
+	display: none;
+}
+#enviar-cadastro{
+	display:block;	
+	text-align: center;
+	margin:20px auto 60px;
+	float: none;
+	clear: both;
+    width: 70px;
+
 }
 #footer{
 	font-size: 16px;

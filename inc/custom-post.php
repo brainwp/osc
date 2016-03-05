@@ -82,30 +82,30 @@ function pratica_cpt() {
 	// wp_insert_term( 'Práticas democráticas', 'tema' ); 
 
 
-	$agricultura = ['Agroecologia','Solos ','Sementes ','Alimentos ','Relação entre produtores e consumidores'];
-	$florestas = ['Sistemas agroflorestais ','Reservas extrativistas ','Reservas ambientais ','Recriação de florestas'];
-	$energia = ['Energias renováveis' , 'Conservação de energia','Eficiência energética'];
+	// $agricultura = ['Agroecologia','Solos ','Sementes ','Alimentos ','Relação entre produtores e consumidores'];
+	// $florestas = ['Sistemas agroflorestais ','Reservas extrativistas ','Reservas ambientais ','Recriação de florestas'];
+	// $energia = ['Energias renováveis' , 'Conservação de energia','Eficiência energética'];
 
-	$term=get_term_by ( 'slug', 'florestas', 'tema');
+	// $term=get_term_by ( 'slug', 'florestas', 'tema');
 
-	foreach ($florestas as $filho) {
-		wp_insert_term( $filho, 'tema', array('parent'=>$term->term_id) ); 
-	}
+	// foreach ($florestas as $filho) {
+	// 	wp_insert_term( $filho, 'tema', array('parent'=>$term->term_id) ); 
+	// }
 	}
 	add_action( 'init', 'add_custom_taxonomies', 0 );
 	//metaboxes//
 	// metaboxes//
 $galeria_metabox = new Odin_Metabox(
-    'galeria', // Slug/ID do Metabox (obrigatório)
+    'galeria1', // Slug/ID do Metabox (obrigatório)
     'Galeria de Imagens', // Nome do Metabox  (obrigatório)
     'pratica', // Slug do Post Type, sendo possível enviar apenas um valor ou um array com vários (opcional)
-    'normal', // Contexto (opções: normal, advanced, ou side) (opcional)
-    'high' // Prioridade (opções: high, core, default ou low) (opcional)
+    'advanced', // Contexto (opções: normal, advanced, ou side) (opcional)
+    'low' // Prioridade (opções: high, core, default ou low) (opcional)
 );
 $galeria_metabox->set_fields(
     array(
         array(
-    	'id'          => 'galeria_pratica', // Obrigatório
+    	'id'          => 'galeria1_pratica', // Obrigatório
     	'label'       => __( 'Imagens da prática', 'odin' ), // Obrigatório
     	'type'        => 'image_plupload', // Obrigatório
     	'default'     => '', // Opcional (deve ser o id de uma imagem em mídias, separe os ids com virtula)

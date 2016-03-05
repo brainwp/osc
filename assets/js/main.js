@@ -33,9 +33,12 @@ jQuery(document).ready(function($) {
 		$('#resumo p:nth-child(5)').css('max-height','500px');
 		$('#continue-p').fadeOut();
 	});
-	
+
+
+
 	$('.uf').change(function(){
 		if( $(this).val() ) {
+			val=$(this).val();
 			$(this).siblings('select.cidade').prop('disabled', 'disabled');
 			// $(this).siblings('.cidade-carregando').css('opacity', '1');
 			var data = {
@@ -46,8 +49,10 @@ jQuery(document).ready(function($) {
 		console.log(data);
 			$.post(odin_main.ajaxurl, data, function(response) {
 			// console.log(response);
-			$(select_cidade).html(response);
-			$('select.cidade').prop('disabled', false);
+			$(document).find(select_cidade).html(response);
+			$(document).find('#uf-continua-cadastro').val(val);
+
+			$(document).find('select.cidade').prop('disabled', false);
 			// $('.cidade-carregando').css('opacity', '0');
 		});
 
@@ -64,4 +69,70 @@ jQuery(document).ready(function($) {
 			$('#cod_cidades').html('<option value="">– Escolha um estado –</option>');
 		}
 	});
+	$('#tema-continua-cadastro').change(function(){
+		tema_change($(this));
+	});
+
+
+		function tema_change(e){
+		var data = {
+				'action': 'pega_sub',
+				'mae':$(e).val(),
+		};
+		$.post(odin_main.ajaxurl, data, function(response) {
+			// console.log(response);
+			$('#subs').html(response);
+		});	
+	};
+	
+	$("#enviar-cadastro").click(function(e){
+		e.preventDefault();
+		var data = {
+				'action': 'cadastra_pratica',
+				'tax':'',
+				'title':$('.title').val()
+
+		};
+		var tax={}
+		
+		$(".acf").each(function (i) {
+			var nome=$(this).attr('name');
+			
+			data[nome]=$(this).val();
+    	});
+    	$("#continua-cadastro .ajax-filtro-materiais").each(function (i) {
+			var nome=$(this).attr('name');
+			// console.log();
+			data.tax=$(this).children('option:selected').val()+','+data.tax;
+    	});
+
+		console.log(data);
+		$.post(odin_main.ajaxurl, data, function(response) {
+			$('#continua-cadastro').html(response);
+		});	
+	});
+
+	// continua cadastro
+	$("#continua-cadastro-btn").click(function(e){
+				e.preventDefault();
+		nome=$('#cadastro .nome').val();
+		uf=$('#cadastro .uf').val();
+		cidade=$('#cadastro .cidade').val();
+		tema=$('#cadastro #tema-cadastro').val();
+		$("#continua-cadastro .uf").val(uf);
+		$("#continua-cadastro .cidade").val(cidade);
+		$("#tema-continua-cadastro").val(tema);
+		$('#continua-cadastro .nome').val(nome);
+		tema_change($("#tema-continua-cadastro"));
+		$('#cadastro .nome').prop('disabled', 'disabled');
+		$('#cadastro .uf').prop('disabled', 'disabled');
+		$('#cadastro .cidade').prop('disabled', 'disabled');
+		$('#cadastro #tema-cadastro').prop('disabled', 'disabled');
+
+		$('#continua-cadastro').fadeIn();
+		$('html, body').animate({
+        scrollTop: $("#continua-cadastro").offset().top
+    }, 2000);
+	});
+	
 });
