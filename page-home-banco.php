@@ -66,7 +66,7 @@ get_header('banco'); ?>
 					}?>
 					</select>
 					<div class="inline-block"><a href="#"><span>+</span>Mais opções de pesquisa</a></div>
-					<a  class="inline-block enviar" href="#">Pesquisar<img src="<?php echo get_template_directory_uri(); ?>/assets/images/busca-banco.png"></a>
+					<a  class="inline-block enviar" href="">Pesquisar<img src="<?php echo get_template_directory_uri(); ?>/assets/images/busca-banco.png"></a>
 				</form>
 			</div>
 			<div id='cadastro' class="col-sm-6">
@@ -180,5 +180,14 @@ get_header('banco'); ?>
 
 	</main><!-- #main -->
 
-<?php
+<form action="kv-upload.php" method="post" enctype="multipart/form-data" name="front_end_upload" >
+
+ <label> Attach all your files here :<input type="file" name="kv_multiple_attachments[]"  multiple="multiple" > </label>
+
+<input type="submit" name="Upload" >
+
+</form>
+<?php 
+
+
 get_footer();

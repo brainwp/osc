@@ -64,6 +64,9 @@ body{
 	margin:0;
 }
 /*HEADER*//*HEADER*/
+main{
+	background-color: #fff;
+}
 #resumo-fundo{
 	padding: 65px 0 20px;
 	background-image:url('../images/fundo-header-banco.png'); 

@@ -49,10 +49,9 @@ jQuery(document).ready(function($) {
 		console.log(data);
 			$.post(odin_main.ajaxurl, data, function(response) {
 			// console.log(response);
-			$(document).find(select_cidade).html(response);
-			$(document).find('#uf-continua-cadastro').val(val);
+			$(select_cidade).html(response);
 
-			$(document).find('select.cidade').prop('disabled', false);
+			$(select_cidade).prop('disabled', false);
 			// $('.cidade-carregando').css('opacity', '0');
 		});
 
@@ -117,7 +116,7 @@ jQuery(document).ready(function($) {
 				e.preventDefault();
 		nome=$('#cadastro .nome').val();
 		uf=$('#cadastro .uf').val();
-		cidade=$('#cadastro .cidade').val();
+		cidade=$('#cidade-cadastro').val();
 		tema=$('#cadastro #tema-cadastro').val();
 		$("#continua-cadastro .uf").val(uf);
 		$("#continua-cadastro .cidade").val(cidade);
@@ -134,5 +133,18 @@ jQuery(document).ready(function($) {
         scrollTop: $("#continua-cadastro").offset().top
     }, 2000);
 	});
-	
+	$('#pesquisa a').click(function(e){
+					e.preventDefault();
+	uf=$("#pesquisa .uf").val();
+	cidade=$("#pesquisa .cidade").val();
+	tema=$("#tema-busca").val();
+	nome=$("#filtro-palavra").val();
+	console.log('uf'+uf);
+	console.log('cidade'+cidade);
+	console.log('tema'+tema);
+	console.log('nome'+nome);
+
+	window.location.href = "http://rede.com.br/osc/pratica/?s="+nome+"&tema="+tema+"&cidade="+cidade+"&uf="+uf;
+	});
 });
+
