@@ -95,7 +95,7 @@ main{
 	font-size: 50px;
 	color: #ff754c;
 }
-#resumo p{
+#resumo p, .cada-pratica-lista p{
 	font-size: 16.5px;
 	font-family: 'Source Sans pro', sans-serif;
 	text-align: center;
@@ -118,7 +118,15 @@ main{
 #busca-cadastro {
 	padding: 50px 0!important;
 }
-.home-banco h2{
+.banco h1{
+	font-size: 36px;
+	font-family: 'Ubuntu', sans-serif;
+	text-align: center;
+	color: #7E7878;
+	font-weight: 100;
+
+}
+.banco h2{
 	font-size: 30px;
 	font-family: 'Ubuntu', sans-serif;
 	text-align: center;
@@ -126,7 +134,7 @@ main{
 	font-weight: 100;
 
 }
-.home-banco h3{
+.banco h3{
 	font-size: 21px;
 	font-style: italic;
 	font-family: 'Ubuntu', sans-serif;
@@ -139,7 +147,7 @@ main{
 	margin-bottom: 25px
 
 }
-.home-banco h4{
+.banco h4{
 	font-size: 18px;
 	font-family: 'Ubuntu', sans-serif;
 	font-weight: 200;
@@ -341,3 +349,64 @@ margin:5px 0 0;
 	margin-top: 40px;
 	background-color: #fff;
 }
+/*busca de pratica*/
+/*busca de pratica*/
+.cada-pratica-lista hr{
+	height: 2px;
+	color: #9ab87a;
+}
+.busca-banco #resumo p{
+	text-align:left;
+	margin-top:0;
+}
+.busca-banco .entry-meta{
+	margin-top:20px;
+	
+}
+.busca-banco .entry-title{
+	text-align: left;
+}
+.busca-banco .entry-title a, .saiba a{
+	color:  #9ab87a;
+
+	text-decoration: none;
+}
+.cada-pratica-lista span{
+	font-weight:100;
+	font-style:italic;
+	text-transform: uppercase;
+	color:  #9ab87a;
+	margin-right: 5px;
+}
+.cada-pratica-lista p{
+	text-align:left;
+	margin:10px 0;
+}
+.cada-pratica-lista img{
+	border: 3px solid #9ab87a;
+}
+.cada-pratica-lista hr{
+	border-top: 3px solid #9ab87a;
+
+}
+.saiba {
+text-align: right;
+text-transform: uppercase;
+font-weight: 200;
+font-size: 20px
+}
+.busca-banco  h4 {
+    font-size: 21px;
+    margin-bottom: 19px;
+    text-align: center;
+    text-decoration: underline;
+}
+.busca-banco h2 span{
+	font-size:28px;
+	margin-right: 5px;
+
+	color:#7E7878;
+	text-transform: inherit;
+}
+/*busca de pratica*/
+/*busca de pratica*/

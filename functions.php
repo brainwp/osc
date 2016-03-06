@@ -385,7 +385,7 @@ function colunas_praticas( $columns ) {
 	return $columns;
 }
 
-
+add_image_size('pratica-lista', 200, 200, 1 );
 function kv_handle_attachment($file_handler,$post_id,$set_thu=true) {
 	// check to make sure its a successful upload
 	if ($_FILES[$file_handler]['error'] !== UPLOAD_ERR_OK) __return_false();

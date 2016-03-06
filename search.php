@@ -65,11 +65,11 @@ $query = new WP_Query( $args );
 
 ?>
 
-<main id="content" class="<?php echo odin_classes_page_sidebar(); ?>" tabindex="-1" role="main">
+<main id="content" class="busca-banco banco" tabindex="-1" role="main">
 			<?php if ( $query->have_posts() ) : ?>
 
-				<header class="page-header">
-					<h1 class="page-title"><?php printf( __( 'Busca', 'odin' ), get_search_query() ); ?></h1>
+				<header class="row page-header">
+					<h1 class="page-title"><?php printf( __( 'Busca de Práticas', 'odin' ), get_search_query() ); ?></h1>
 				</header><!-- .page-header -->
 
 					<?php
@@ -95,7 +95,7 @@ $query = new WP_Query( $args );
 
 				endif;
 			?>
-
+	
 	</main><!-- #main -->
 
 <?php

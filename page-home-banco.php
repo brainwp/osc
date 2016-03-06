@@ -11,7 +11,7 @@ acf_form_head();
 
 get_header('banco'); ?>
 
-	<main id="content" class="home-banco <?php echo odin_classes_page_full(); ?>" tabindex="-1" role="main">
+	<main id="content" class="home-banco banco <?php echo odin_classes_page_full(); ?>" tabindex="-1" role="main">
 		<div id='resumo-fundo'class=''>	
 			<div id='resumo' class="row">
 				<h1 class='col-sm-7'>Banco de práticas alternativas</h1>
