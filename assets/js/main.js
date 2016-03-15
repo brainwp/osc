@@ -83,34 +83,8 @@ jQuery(document).ready(function($) {
 			$('#subs').html(response);
 		});	
 	};
-	
-	$("#enviar-cadastro").click(function(e){
-		e.preventDefault();
-		var data = {
-				'action': 'cadastra_pratica',
-				'tax':'',
-				'title':$('.title').val()
-
-		};
-		var tax={}
-		
-		$(".acf").each(function (i) {
-			var nome=$(this).attr('name');
-			
-			data[nome]=$(this).val();
-    	});
-    	$("#continua-cadastro .ajax-filtro-materiais").each(function (i) {
-			var nome=$(this).attr('name');
-			// console.log();
-			data.tax=$(this).children('option:selected').val()+','+data.tax;
-    	});
-
-		console.log(data);
-		$.post(odin_main.ajaxurl, data, function(response) {
-			$('#continua-cadastro').html(response);
-		});	
-	});
-
+	// continua cadastro
+	// continua cadastro
 	// continua cadastro
 	$("#continua-cadastro-btn").click(function(e){
 				e.preventDefault();
@@ -133,6 +107,56 @@ jQuery(document).ready(function($) {
         scrollTop: $("#continua-cadastro").offset().top
     }, 2000);
 	});
+	// continua cadastro
+	// continua cadastro
+	// continua cadastro
+	// continua cadastro
+
+
+	// envia cadastro
+	// envia cadastro
+	// envia cadastro
+
+	$("#enviar-cadastro").click(function(e){
+		e.preventDefault();
+		var data = {
+				'action': 'cadastra_pratica',
+				'tax':'',
+				'title':$('.title').val()
+
+		};
+		var tax={}
+		
+		$(".acf").each(function (i) {
+			var nome=$(this).attr('name');
+			data[nome]=$(this).val();
+    	});
+    	$("#continua-cadastro .ajax-filtro-materiais").each(function (i) {
+			var nome=$(this).attr('name');
+			// console.log();
+			data.tax=$(this).children('option:selected').val()+','+data.tax;
+    	});
+    	data.imagem_destacada=$('#imagem_destacada').attr('data-id');
+		
+
+		console.log(data);
+		$.post(odin_main.ajaxurl, data, function(response) {
+			if (response == "<h3>Obrigado, sua prátia ira ser analizada e publicada futuramente.</h3>"){
+				$('#continua-cadastro').html(response);
+			}
+			else{
+				$('#continua-cadastro #resultado').html(response);
+
+			}
+		});	
+	});
+	// envia cadastro
+	// envia cadastro
+	// envia cadastro
+
+
+	// pesquisa
+	// pesquisa
 	$('#pesquisa a').click(function(e){
 					e.preventDefault();
 	uf=$("#pesquisa .uf").val();
@@ -144,7 +168,108 @@ jQuery(document).ready(function($) {
 	console.log('tema'+tema);
 	console.log('nome'+nome);
 
-	window.location.href = "http://rede.com.br/osc/pratica/?s="+nome+"&tema="+tema+"&cidade="+cidade+"&uf="+uf;
+	window.location.href = "http://beta.brasa.art.br/osc/pratica/?s="+nome+"&tema="+tema+"&cidade="+cidade+"&uf="+uf;
 	});
+
+
+
+
+
+
+// Just to be sure that the input will be called
+		$("#ibenic_file_upload").on("click", function(){
+		  	$('#ibenic_file_input').click(function(event) {
+				event.stopPropagation();
+      			});
+    		});
+
+		$('#ibenic_file_input').on('change', prepareUpload);
+
+		
+function prepareUpload(event) { 
+	var file = event.target.files;
+  	var parent = $("#" + event.target.id).parent();
+  	var data = new FormData();
+  	data.append("action", "ibenic_file_upload");
+  	$.each(file, function(key, value)
+    	{
+      		data.append("ibenic_file_upload", value);
+    	});
+
+    	$.ajax({
+    		  url: odin_main.ajaxurl,
+	          type: 'POST',
+	          data: data,
+	          cache: false,
+	          dataType: 'json',
+	          processData: false, // Don't process the files
+	          contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+	          success: function(data, textStatus, jqXHR) {	
+	  	 
+	              if( data.response == "SUCCESS" ){
+		                var preview = "";
+		                if( data.type === "image/jpg" 
+		                  || data.type === "image/png" 
+		                  || data.type === "image/gif"
+		                  || data.type === "image/jpeg"
+		                ) {
+		                  preview = "<img src='" + data.url + "' />";
+		                } else {
+		                  preview = data.filename;
+		                }
+		  
+		                var previewID = parent.attr("id") + "_preview";
+		                var previewParent = $("#"+previewID);
+		                previewParent.show();
+		                previewParent.children(".ibenic_file_preview").empty().append( preview );
+		                previewParent.children( "button" ).attr("data-fileurl",data.url );
+		                parent.children("input").val("");
+		                parent.hide();
+		                $('#imagem_destacada').attr('data-id', data.id);
+	                
+	                 } else {
+		             alert( data.error );
+	                 }
+
+		}
+
+	});
+
+}
+$(".ibenic_file_delete").on("click", function(e){
+	e.preventDefault();
+
+	var fileurl = $(this).attr("data-fileurl");
+	var data = { fileurl: fileurl, action: 'ibenic_file_delete' };
+	$.ajax({
+	  url:  odin_main.ajaxurl,
+	  type: 'POST',
+	  data: data,
+	  cache: false,
+	  dataType: 'json',
+	  success: function(data, textStatus, jqXHR) {	
+		 
+	  	if( data.response == "SUCCESS" ){
+	  		$("#ibenic_file_upload_preview").hide();
+	  		$("#ibenic_file_upload").show();
+	  		console.log( "File successfully deleted", "success");
+            $('#imagem_destacada').attr('data-id', '');
+  	}
+
+    	if( data.response == "ERROR" ){
+    		add_message( data.error, "danger");
+    	}
+	  },
+ 	  error: function(jqXHR, textStatus, errorThrown)
+    { 
+      	add_message( textStatus, "danger" );
+    }
+  });
+
 });
 
+
+
+
+
+});

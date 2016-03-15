@@ -274,6 +274,8 @@ select:disabled, input:disabled{
 	font-weight: 300;
 	margin: 18px 0;
 	width: 100%;
+    font-size: 33px;
+
 
 }
 .col-cadastro:first-child{
@@ -290,7 +292,7 @@ select:disabled, input:disabled{
 #enviar-cadastro{
 	display:block;	
 	text-align: center;
-	margin:20px auto 60px;
+	margin:20px auto 0;
 	float: none;
 	clear: both;
     width: 70px;
@@ -351,6 +353,10 @@ margin:5px 0 0;
 }
 /*busca de pratica*/
 /*busca de pratica*/
+.row.page-header{
+	border-bottom: 3px solid #9ab87a;
+
+}
 .cada-pratica-lista hr{
 	height: 2px;
 	color: #9ab87a;
@@ -366,7 +372,7 @@ margin:5px 0 0;
 .busca-banco .entry-title{
 	text-align: left;
 }
-.busca-banco .entry-title a, .saiba a{
+.busca-banco .entry-title a{
 	color:  #9ab87a;
 
 	text-decoration: none;
@@ -393,7 +399,21 @@ margin:5px 0 0;
 text-align: right;
 text-transform: uppercase;
 font-weight: 200;
-font-size: 20px
+font-size: 20px;
+	margin-top:20px;
+
+}
+.saiba a{
+	border:1px solid  #9ab87a;
+	padding:10px;
+	color:  #fff;
+	background-color:#9ab87a; 
+	font-weight: 200;
+
+}
+.saiba a:hover{
+	background-color:  #fff;
+	color:#9ab87a; 
 }
 .busca-banco  h4 {
     font-size: 21px;
@@ -410,3 +430,96 @@ font-size: 20px
 }
 /*busca de pratica*/
 /*busca de pratica*/
+.pagination>li>a, ul.page-numbers>li>a, .pagination>li>span, ul.page-numbers>li>span{
+	color:#9ab87a;
+}
+ul.page-numbers>li>span.current, ul.page-numbers>li>span.current:hover, ul.page-numbers>li>span.current:focus{
+	background-color:#9ab87a;
+	border-color: #9ab87a;
+}
+@media (max-width: 1000px){
+.row {
+    width: 95%;
+    margin: 0 auto;
+    display: block;
+    float: none;
+	}
+	.busca-banco #resumo p{
+		padding-left:10px;
+	}
+}
+@media (max-width: 767px){
+	
+	.saiba {
+	text-align: center;
+	
+	}
+	.cada-pratica-lista img{
+    float: none;
+    margin: 0 auto;
+    display: block;
+	}
+}
+
+
+
+
+
+
+
+
+
+.file-upload {
+	position: relative;
+	display:block;	
+	width:150px;
+	height:150px;
+	border-radius: 3px;
+	background-color:transparent;
+	font-size: 14px;
+	color:#9ab87a;
+	text-align: center; 
+	line-height: 150px;
+	border:solid 1px #9ab87a;
+
+}
+
+.file-upload input {
+	opacity: 0;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: block;
+	cursor: pointer;
+}
+
+.file-preview img{
+	width:100%;
+	height: auto;
+}
+#ibenic_file_input{
+	height:150px!important;
+}
+.file-preview .ibenic_file_preview {
+	position: absolute;
+	width:100%;
+	height:100%;
+	overflow: hidden;
+}
+
+.ibenic_file_delete {
+	position: absolute;
+	width: 100%;
+	top:98%;
+	left:0;
+	padding:0.5em;
+	text-align: center;
+	color:white;
+	background-color:#9ab87a;
+}
+#resultado p{
+	color:red;
+}
+main#content{
+	padding-bottom: 60px!important;
+}

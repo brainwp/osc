@@ -50,14 +50,14 @@
 			<?php 
 
 				$results = $wpdb->get_results( 'SELECT cod_estados, sigla
-					FROM wp_17_w_estados
+					FROM '.$wpdb->prefix.'w_estados
 					WHERE cod_estados='.get_field('uf').'
 					ORDER BY sigla', OBJECT );
 					foreach ($results as $key ) {
 					echo '<p><span>Estado: </span>'. $key->sigla.'</p>';	
 				}
 				$results = $wpdb->get_results( 'SELECT cod_cidades, nome
-					FROM wp_17_w_cidades
+					FROM '.$wpdb->prefix.'w_cidades
 					WHERE cod_cidades='.get_field('uf').'
 					ORDER BY nome', OBJECT );
 				foreach ($results as $key ) {

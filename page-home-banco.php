@@ -43,7 +43,7 @@ get_header('banco'); ?>
 						<?php
 						global $wpdb;
 						$results = $wpdb->get_results( 'SELECT cod_estados, sigla
-									FROM wp_17_w_estados
+									FROM '.$wpdb->prefix.'w_estados
 									ORDER BY sigla', OBJECT );
 						foreach ($results as $key ) {
 							echo '<option value="'.$key->cod_estados.'">'.$key->sigla.'</option>';	
@@ -57,7 +57,7 @@ get_header('banco'); ?>
 					<?php
 						global $wpdb;
 						$results = $wpdb->get_results( 'SELECT cod_cidades, nome
-						FROM wp_17_w_cidades
+						FROM '.$wpdb->prefix.'w_cidades
 						ORDER BY nome', OBJECT );
 						echo '<option value="0">Cidade</option>';	
 
@@ -71,15 +71,16 @@ get_header('banco'); ?>
 			</div>
 			<div id='cadastro' class="col-sm-6">
 				<form action="">
-					<h3>Cadastre uma nova prática sustentável</h3>
+					<h3>Cadastre uma nova prática alternativa</h3>
 					<input class="nome" name="nome-projeto" placeholder="Nome do Projeto" type="text">
-					<?php drop_tags('Tema', 'tema', 0, "tema-cadastro")?>
+					<?php 
+					drop_tags('Tema', 'tema', 0, "tema-cadastro")?>
 					<select class='uf inline-block' name="uf" id="uf-cadastro">
 						<option value="">UF</option>
 						<?php
 						global $wpdb;
 						$results = $wpdb->get_results( 'SELECT cod_estados, sigla
-									FROM wp_17_w_estados
+									FROM '.$wpdb->prefix.'w_estados
 									ORDER BY sigla', OBJECT );
 						foreach ($results as $key ) {
 							echo '<option value="'.$key->cod_estados.'">'.$key->sigla.'</option>';	
@@ -92,7 +93,7 @@ get_header('banco'); ?>
 					<?php
 						global $wpdb;
 						$results = $wpdb->get_results( 'SELECT cod_cidades, nome
-						FROM wp_17_w_cidades
+						FROM '.$wpdb->prefix.'w_cidades
 						ORDER BY nome', OBJECT );
 						echo '<option value="0">Cidade</option>';	
 
@@ -122,7 +123,7 @@ get_header('banco'); ?>
 						<?php
 						global $wpdb;
 						$results = $wpdb->get_results( 'SELECT cod_estados, sigla
-									FROM wp_17_w_estados
+									FROM '.$wpdb->prefix.'w_estados
 									ORDER BY sigla', OBJECT );
 						foreach ($results as $key ) {
 							echo '<option value="'.$key->cod_estados.'">'.$key->sigla.'</option>';	
@@ -135,7 +136,7 @@ get_header('banco'); ?>
 					<?php
 						global $wpdb;
 						$results = $wpdb->get_results( 'SELECT cod_cidades, nome
-						FROM wp_17_w_cidades
+						FROM '.$wpdb->prefix.'w_cidades
 						ORDER BY nome', OBJECT );
 						echo '<option value="0">Cidade</option>';	
 
@@ -171,22 +172,40 @@ get_header('banco'); ?>
 					<input class='acf' name="local_de_implementacao" placeholder="Local de implementação" type="text">
 					<textarea class='acf' rows="5"name='descricao_das_acoes' placeholder="Descrição da Ação"></textarea>
 					<textarea class='acf' rows="5"name='resultados' placeholder="Resultados"></textarea>
-					
-				</div>
-				<div class="clearfix"></div>
-				<a class="enviar" id="enviar-cadastro" href="#"><img src="http://rede.com.br/osc/wp-content/themes/osc/assets/images/cadastrar-banco.png">Cadastrar</a>			</form>
-		</div>
+					<div class="ibenic_upload_message"></div>
+ 					<div id="ibenic_file_upload" class="file-upload">
+  						<input type="file" id="ibenic_file_input" style="opacity:0;" />
+  						<p class="ibenic_file_upload_text"><?php _e( 'Imagem destacada', 'ibenic_upload' ); ?></p>
+  					</div>
+  					<input type="hidden" name="imagem_destacada" id="imagem_destacada">
+  					<div id="ibenic_file_upload_preview" class="file-upload file-preview" style="display:none;">
+  						<div class="ibenic_file_preview"></div>
+  						<button data-fileurl="" class="ibenic_file_delete">
+  						  <?php _e( 'Delete', 'ibenic_upload' ); ?>
+  						</button>
+					</div>
 
+					 <label> Attach all your files here :<input accept = "image/*" type="file" name="kv_multiple_attachments[]"  multiple="multiple" > </label>
+
+					
+				<div class="clearfix"></div>
+
+				<a class="enviar" id="enviar-cadastro" href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/cadastrar-banco.png">Cadastrar</a>			</form>
+				<div id="resultado"></div>
+
+		</div>
 
 	</main><!-- #main -->
 
-<form action="kv-upload.php" method="post" enctype="multipart/form-data" name="front_end_upload" >
+<!-- <form action="kv-upload.php" method="post" enctype="multipart/form-data" name="front_end_upload" >
 
  <label> Attach all your files here :<input type="file" name="kv_multiple_attachments[]"  multiple="multiple" > </label>
 
 <input type="submit" name="Upload" >
 
-</form>
+</form> -->
+
+
 <?php 
 
 

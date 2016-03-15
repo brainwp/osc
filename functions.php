@@ -320,42 +320,42 @@ require_once get_template_directory() . '/inc/custom-fields.php';
 */
 require_once get_template_directory() . '/inc/ajax-functions.php';
 
-add_action("after_switch_theme", "cria_cidades"); 
+// add_action("after_switch_theme", "cria_cidades"); 
 
-global $wpdb;
-$table_name = $wpdb->prefix.'w_cidades';
-if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
-     $charset_collate = $wpdb->get_charset_collate();
-     $sql = "CREATE TABLE $table_name(
-	  `estados_cod_estados` int(11) DEFAULT NULL,
-	  `cod_cidades` int(11) DEFAULT NULL,
-	  `nome` varchar(72) COLLATE utf8_unicode_ci DEFAULT NULL,
-	  `cep` varchar(8) COLLATE utf8_unicode_ci DEFAULT NULL
-	) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
-     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-     dbDelta( $sql );
+// global $wpdb;
+// $table_name = $wpdb->prefix.'w_cidades';
+// if($wpdb->get_var("SHOW TABLES LIKE '$table_name'") != $table_name) {
+//      $charset_collate = $wpdb->get_charset_collate();
+//      $sql = "CREATE TABLE $table_name(
+// 	  `estados_cod_estados` int(11) DEFAULT NULL,
+// 	  `cod_cidades` int(11) DEFAULT NULL,
+// 	  `nome` varchar(72) COLLATE utf8_unicode_ci DEFAULT NULL,
+// 	  `cep` varchar(8) COLLATE utf8_unicode_ci DEFAULT NULL
+// 	) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
+//      require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+//      dbDelta( $sql );
 
 
-}
-$table_name_est = $wpdb->prefix.'w_estados';
-if($wpdb->get_var("SHOW TABLES LIKE '$table_name_est'") != $table_name) {
-     $charset_collate = $wpdb->get_charset_collate();
-     $sql = "CREATE TABLE $table_name_est(
-	  `cod_estados` int(11) DEFAULT NULL,
-  `sigla` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `nome` varchar(72) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
-     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-     dbDelta( $sql );
-}
+// }
+// $table_name_est = $wpdb->prefix.'w_estados';
+// if($wpdb->get_var("SHOW TABLES LIKE '$table_name_est'") != $table_name) {
+//      $charset_collate = $wpdb->get_charset_collate();
+//      $sql = "CREATE TABLE $table_name_est(
+// 	  `cod_estados` int(11) DEFAULT NULL,
+//   `sigla` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
+//   `nome` varchar(72) COLLATE utf8_unicode_ci DEFAULT NULL
+// ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
+//      require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+//      dbDelta( $sql );
+// }
 
 function cria_cidades(){
 	
 }
 
-function drop_tags($nome,$tax,$cont,$id, $esconde=0, $mae)
+function drop_tags($nome,$tax,$cont,$id, $esconde=0, $mae='')
 {?>
-		<?php wp_dropdown_categories( 'show_option_none='.$nome.'&hierarchical=true&depth=1&child_of='.$mae.'&hide_empty='.$esconde.'&option_none_value=&taxonomy='.$tax.'&show_count='.$cont.'&class=ajax-filtro-materiais taxonomia'.$tax.'&id='.$id.'&name='.$tax.'&include='.$include.'&option_none_value=0&selected='.$selected ); ?>
+		<?php wp_dropdown_categories( 'show_option_none='.$nome.'&hierarchical=true&depth=1&child_of='.$mae.'&hide_empty='.$esconde.'&option_none_value=&taxonomy='.$tax.'&show_count='.$cont.'&class=ajax-filtro-materiais taxonomia'.$tax.'&id='.$id.'&name='.$tax.'&option_none_value=0'); ?>
 <?php
 }
 
@@ -377,7 +377,7 @@ function colunas_praticas( $columns ) {
 
 	$columns = array(
 		'cb' => '<input type="checkbox" />',
-		'title' => __( 'Movie' ),
+		'title' => __( 'Prática Alternativa' ),
 		'author' => __( 'Entidade' ),
 		'date' => __( 'Date' )
 	);
