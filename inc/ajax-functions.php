@@ -52,9 +52,30 @@ function cadastra_pratica_func(){
     		'post_author' => $cadastra_usuario
     	);
 		$pratica_id =  wp_insert_post( $pratica );
+		$anexos = $data['anexos'];
+		$galeria = $data['galeria'];
+		$anexosvetor = explode(",", $anexos);
+		$galeriavetor = explode(",", $galeria);
+		foreach ($galeriavetor as $id) {
+			// Update post 37
+ 			 $my_post = array(
+   				 'ID'           => $id,
+     			'post_parent'   =>$pratica_id
+ 			 );
 
-	
+			// Update the post into the database
+ 			 wp_update_post( $my_post );
+		}
+		foreach ($anexosvetor as $id) {
+			// Update post 37
+ 			 $my_post = array(
+   				 'ID'           => $id,
+     			'post_parent'   =>$pratica_id
+ 			 );
 
+			// Update the post into the database
+ 			 wp_update_post( $my_post );
+		}
 
 		foreach ($data as $key => $value) {
 			if ($key!=='action' && $key !== 'title' && $key!=='tax') {
@@ -67,7 +88,6 @@ function cadastra_pratica_func(){
 		// update_field('video',$att['url'],'https://www.youtube.com/watch?v=I38EcMJX8A8');
 		set_post_thumbnail( $pratica_id, $data['imagem_destacada'] ); 
 		
-
 			echo '<h3>Obrigado, sua prátia ira ser analizada e publicada futuramente.</h3>';
 
 		wp_die();
@@ -94,8 +114,7 @@ add_action( 'wp_ajax_nopriv_cadastra_pratica', 'cadastra_pratica_func' );
 // cadastro de usuario
 function ajax_cadastra_usuario($nome, $email, $senha, $site){
 	$user_email = get_user_by( 'email', $email);
-	echo username_exists( 'ssssssffff' );
-	if ( $user_email !== false && wp_check_password(  $senha, $user_email->data->user_pass, $user->ID ) ){
+	if ( $user_email !== false && wp_check_password(  $senha, $user_email->data->user_pass, $user_email->ID ) ){
 		 return $user_email->ID;
 	wp_die();
 
@@ -226,4 +245,217 @@ function ibenic_file_delete() {
 		echo json_encode( $response );
 	} 
 	die();
+}
+
+
+
+// uploads
+add_action('wp_ajax_cvf_upload_files', 'cvf_upload_files');
+add_action('wp_ajax_nopriv_cvf_upload_files', 'cvf_upload_files'); // Allow front-end submission 
+
+function cvf_upload_files(){
+    
+    $parent_post_id = isset( $_POST['post_id'] ) ? $_POST['post_id'] : 0;  // The parent ID of our attachments
+    $valid_formats = array("jpg", "png", "gif", "bmp", "jpeg"); // Supported file types
+    $max_file_size = 1024 * 5000; // in kb
+    $max_image_upload = 10; // Define how many images can be uploaded to the current post
+    $wp_upload_dir = wp_upload_dir();
+    $path = $wp_upload_dir['path'] . '/';
+    $count = 0;
+    $response =array();
+    $response['idsAnexos']='';
+    // print_r($_FILES);
+    $attachments = get_posts( array(
+        'post_type'         => 'attachment',
+        'posts_per_page'    => -1,
+        'post_parent'       => $parent_post_id,
+        'exclude'           => get_post_thumbnail_id() // Exclude post thumbnail to the attachment count
+    ) );
+
+    // Image upload handler
+    if( $_SERVER['REQUEST_METHOD'] == "POST" ){
+        if(!isset( $_FILES['files']['name'])){
+    	$response['msg'] = 'nenhum arquivo selecionado';
+    	
+  		}
+        // Check if user is trying to upload more than the allowed number of images for the current post
+        else if( (count( $_FILES['files']['name'] ) ) > $max_image_upload ) {
+            $upload_message[] = "Só são permitidos " . $max_image_upload . " anexos para cada prática.";
+        } else {
+            
+            foreach ( $_FILES['files']['name'] as $f => $name ) {
+                $extension = pathinfo( $name, PATHINFO_EXTENSION );
+                // Generate a randon code for each file name
+                $new_filename = cvf_td_generate_random_code( 20 )  . '.' . $extension;
+                
+                if ( $_FILES['files']['error'][$f] == 4 ) {
+                    continue; 
+                }
+                
+                if ( $_FILES['files']['error'][$f] == 0 ) {
+                    // Check if image size is larger than the allowed file size
+                    if ( $_FILES['files']['size'][$f] > $max_file_size ) {
+                        $upload_message[] = "$name é muito grande!.";
+                        continue;
+                    
+                    // Check if the file being uploaded is in the allowed file types
+                    }  else{ 
+                        // If no errors, upload the file...
+                        if( move_uploaded_file( $_FILES["files"]["tmp_name"][$f], $path.$new_filename ) ) {
+                            
+                            $count++; 
+
+                            $filename = $path.$new_filename;
+                            $filetype = wp_check_filetype( basename( $filename ), null );
+                            $wp_upload_dir = wp_upload_dir();
+                            $attachment = array(
+                                'guid'           => $wp_upload_dir['url'] . '/' . basename( $filename ), 
+                                'post_mime_type' => $filetype['type'],
+                                'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
+                                'post_content'   => '',
+                                'post_status'    => 'inherit'
+                            );
+                            // Insert attachment to the database
+                            $attach_id = wp_insert_attachment( $attachment, $filename, $parent_post_id );
+
+                            require_once( ABSPATH . 'wp-admin/includes/image.php' );
+                            
+                            // Generate meta data
+                            $attach_data = wp_generate_attachment_metadata( $attach_id, $filename ); 
+                            wp_update_attachment_metadata( $attach_id, $attach_data );
+                            $response['idsAnexos'] .= $attach_id.',';
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // Loop through each error then output it to the screen
+    if ( isset( $upload_message ) ) :
+        foreach ( $upload_message as $msg ){        
+            $response['msg']= $msg;
+        }
+    endif;
+    
+    // If no error, show success message
+    if( $count != 0 ){
+        $response['msg']= 'Upload feito com sucesso!';   
+    }
+    echo json_encode($response);
+    exit();
+}
+
+
+// uploads
+add_action('wp_ajax_cvf_upload_files_gal', 'cvf_upload_files_gal');
+add_action('wp_ajax_nopriv_cvf_upload_files_gal', 'cvf_upload_files_gal'); // Allow front-end submission 
+
+function cvf_upload_files_gal(){
+    
+    $parent_post_id = isset( $_POST['post_id'] ) ? $_POST['post_id'] : 0;  // The parent ID of our attachments
+    $valid_formats = array("jpg", "png", "gif", "bmp", "jpeg"); // Supported file types
+    $max_file_size = 1024 * 5000; // in kb
+    $max_image_upload = 10; // Define how many images can be uploaded to the current post
+    $wp_upload_dir = wp_upload_dir();
+    $path = $wp_upload_dir['path'] . '/';
+    $count = 0;
+    $response =array();
+    $response['idsAnexos']='';
+    // print_r($_FILES);
+    $attachments = get_posts( array(
+        'post_type'         => 'attachment',
+        'posts_per_page'    => -1,
+        'post_parent'       => $parent_post_id,
+        'exclude'           => get_post_thumbnail_id() // Exclude post thumbnail to the attachment count
+    ) );
+
+    // Image upload handler
+    if( $_SERVER['REQUEST_METHOD'] == "POST" ){
+        if(!isset( $_FILES['files']['name'])){
+    	$response['msg'] = 'nenhum arquivo selecionado';
+    	
+  		}
+        // Check if user is trying to upload more than the allowed number of images for the current post
+        else if( (count( $_FILES['files']['name'] ) ) > $max_image_upload ) {
+            $upload_message[] = "Só são permitidas " . $max_image_upload . " imagens para cada prática.";
+        } else {
+            
+            foreach ( $_FILES['files']['name'] as $f => $name ) {
+                $extension = pathinfo( $name, PATHINFO_EXTENSION );
+                // Generate a randon code for each file name
+                $new_filename = cvf_td_generate_random_code( 20 )  . '.' . $extension;
+                
+                if ( $_FILES['files']['error'][$f] == 4 ) {
+                    continue; 
+                }
+                
+                if ( $_FILES['files']['error'][$f] == 0 ) {
+                    // Check if image size is larger than the allowed file size
+                    if ( $_FILES['files']['size'][$f] > $max_file_size ) {
+                        $upload_message[] = "$name é muito grande!.";
+                        continue;
+                    
+                    // Check if the file being uploaded is in the allowed file types
+                    } elseif( ! in_array( strtolower( $extension ), $valid_formats ) ){
+                        $upload_message[] = "$name não é uma imagem de formato válido";
+                        continue; 
+                    
+                    } else{ 
+                        // If no errors, upload the file...
+                        if( move_uploaded_file( $_FILES["files"]["tmp_name"][$f], $path.$new_filename ) ) {
+                            
+                            $count++; 
+
+                            $filename = $path.$new_filename;
+                            $filetype = wp_check_filetype( basename( $filename ), null );
+                            $wp_upload_dir = wp_upload_dir();
+                            $attachment = array(
+                                'guid'           => $wp_upload_dir['url'] . '/' . basename( $filename ), 
+                                'post_mime_type' => $filetype['type'],
+                                'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
+                                'post_content'   => '',
+                                'post_status'    => 'inherit'
+                            );
+                            // Insert attachment to the database
+                            $attach_id = wp_insert_attachment( $attachment, $filename, $parent_post_id );
+
+                            require_once( ABSPATH . 'wp-admin/includes/image.php' );
+                            
+                            // Generate meta data
+                            $attach_data = wp_generate_attachment_metadata( $attach_id, $filename ); 
+                            wp_update_attachment_metadata( $attach_id, $attach_data );
+                            $response['idsAnexos'] .= $attach_id.',';
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // Loop through each error then output it to the screen
+    if ( isset( $upload_message ) ) :
+        foreach ( $upload_message as $msg ){        
+            $response['msg']= $msg;
+        }
+    endif;
+    
+    // If no error, show success message
+    if( $count != 0 ){
+        $response['msg']= 'Upload feito com sucesso!';   
+    }
+    echo json_encode($response);
+    exit();
+}
+
+// Random code generator used for file names.
+function cvf_td_generate_random_code($length=10) {
+ 
+   $string = '';
+   $characters = "23456789ABCDEFHJKLMNPRTVWXYZabcdefghijklmnopqrstuvwxyz";
+ 
+   for ($p = 0; $p < $length; $p++) {
+       $string .= $characters[mt_rand(0, strlen($characters)-1)];
+   }
+ 
+   return $string;
+ 
 }

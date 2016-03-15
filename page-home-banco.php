@@ -8,7 +8,14 @@
  * @since 2.2.0
  */
 acf_form_head();
-
+add_action('wp_head','pluginname_ajaxurl');
+function pluginname_ajaxurl() {
+?>
+<script type="text/javascript">
+var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
+</script>
+<?php
+}
 get_header('banco'); ?>
 
 	<main id="content" class="home-banco banco <?php echo odin_classes_page_full(); ?>" tabindex="-1" role="main">
@@ -185,25 +192,28 @@ get_header('banco'); ?>
   						</button>
 					</div>
 
-					 <label> Attach all your files here :<input accept = "image/*" type="file" name="kv_multiple_attachments[]"  multiple="multiple" > </label>
-
+					<div class = "anexos">
+      					<label>Selecione os arquivos para anexo</label>
+      			 	 	<input type = "file" name = "files[]" id="anexosUp"  class = "files-data form-control" multiple />
+   					    <input type = "submit" value = "Upload" id="anexos" class = "btn btn-primary btn-upload" />
+   					    <input type="hidden" id="ids-anexos" name="ids_anexos">
+						<div class="upload-response"></div>
+   					 </div>
+   					 <div class = "galeria">
+      					<label>Selecione as fotos para a galeria</label>
+      			 	 	<input type = "file" name = "files_gal[]" id="anexosUpGal" accept = "image/*" class = "files-data form-control" multiple />
+   					    <input type = "submit" value = "Upload" id="anexos-gal" class = "btn btn-primary btn-upload" />
+   					    <input type="hidden" id="ids-anexos-gal" name="ids_anexos_gal">
+						<div  class="upload-response-gal"></div>
+   					 </div>
 					
 				<div class="clearfix"></div>
-
 				<a class="enviar" id="enviar-cadastro" href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/cadastrar-banco.png">Cadastrar</a>			</form>
-				<div id="resultado"></div>
-
+				</div>
+			</form>
 		</div>
-
 	</main><!-- #main -->
 
-<!-- <form action="kv-upload.php" method="post" enctype="multipart/form-data" name="front_end_upload" >
-
- <label> Attach all your files here :<input type="file" name="kv_multiple_attachments[]"  multiple="multiple" > </label>
-
-<input type="submit" name="Upload" >
-
-</form> -->
 
 
 <?php 

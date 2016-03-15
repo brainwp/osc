@@ -137,10 +137,13 @@ jQuery(document).ready(function($) {
 			data.tax=$(this).children('option:selected').val()+','+data.tax;
     	});
     	data.imagem_destacada=$('#imagem_destacada').attr('data-id');
-		
+		data.attachments=$('#attachments').val();
+		data.anexos=$('#ids-anexos').val();
+		data.galeria=$('#ids-anexos-gal').val();
 
 		console.log(data);
 		$.post(odin_main.ajaxurl, data, function(response) {
+			console.log(response);
 			if (response == "<h3>Obrigado, sua prátia ira ser analizada e publicada futuramente.</h3>"){
 				$('#continua-cadastro').html(response);
 			}
@@ -270,6 +273,69 @@ $(".ibenic_file_delete").on("click", function(e){
 
 
 
+$("#anexos").click(function(e){
+		e.preventDefault();
+		var fd = new FormData();
+        var files_data = $('#anexosUp'); // The <input type="file" /> field
+        
+        // Loop through each data and create an array file[] containing our files data.
+        $.each($(files_data), function(i, obj) {
+            $.each(obj.files,function(j,file){
+                fd.append('files[' + j + ']', file);
+            })
+        });
+        
+        // our AJAX identifier
+        fd.append('action', 'cvf_upload_files');  
+        
+        // Remove this code if you do not want to associate your uploads to the current page.
 
+        $.ajax({
+            type: 'POST',
+            url: ajaxurl,
+            data: fd,
+            contentType: false,
+            processData: false,
+            success: function(response){
+            	console.log(response);
+            	response=jQuery.parseJSON(response);
+
+                $('.upload-response').html(response.msg); // Append Server Response
+                $('#ids-anexos').val(response.idsAnexos);
+            }
+        });
+	});
+$("#anexos-gal").click(function(e){
+		e.preventDefault();
+		var fd = new FormData();
+        var files_data = $('#anexosUpGal'); // The <input type="file" /> field
+        
+        // Loop through each data and create an array file[] containing our files data.
+        $.each($(files_data), function(i, obj) {
+            $.each(obj.files,function(j,file){
+                fd.append('files[' + j + ']', file);
+            })
+        });
+        
+        // our AJAX identifier
+        fd.append('action', 'cvf_upload_files_gal');  
+        
+        // Remove this code if you do not want to associate your uploads to the current page.
+
+        $.ajax({
+            type: 'POST',
+            url: ajaxurl,
+            data: fd,
+            contentType: false,
+            processData: false,
+            success: function(response){
+            	console.log(response);
+            	response=jQuery.parseJSON(response);
+
+                $('.upload-response-gal').html(response.msg); // Append Server Response
+                $('#ids-anexos-gal').val(response.idsAnexos);
+            }
+        });
+	});
 
 });
