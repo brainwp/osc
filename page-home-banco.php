@@ -72,14 +72,14 @@ get_header('banco'); ?>
 						echo '<option value="'.$key->cod_cidades.'">'.$key->nome.'</option>';	
 					}?>
 					</select>
-					<div class="inline-block"><a href="#"><span>+</span>Mais opções de pesquisa</a></div>
+					<!-- <div class="inline-block"><a href="#"><span>+</span>Mais opções de pesquisa</a></div> -->
 					<a  class="inline-block enviar" href="">Pesquisar<img src="<?php echo get_template_directory_uri(); ?>/assets/images/busca-banco.png"></a>
 				</form>
 			</div>
 			<div id='cadastro' class="col-sm-6">
 				<form action="">
 					<h3>Cadastre uma nova prática alternativa</h3>
-					<input class="nome" name="nome-projeto" placeholder="Nome do Projeto" type="text">
+					<input class="nome" name="nome-projeto" placeholder="Nome da prática" type="text">
 					<?php 
 					drop_tags('Tema', 'tema', 0, "tema-cadastro")?>
 					<select class='uf inline-block' name="uf" id="uf-cadastro">
@@ -114,19 +114,19 @@ get_header('banco'); ?>
 			</div>
 		</div>
 		<div class="clearfix"></div>
-		<div id="modificar" class='col-sm-12'>
+		<!-- <div id="modificar" class='col-sm-12'>
 			<h3>Já cadastrou e quer modificar sua prática? <a href="#">Clique aqui</a></h3>
-		</div>
+		</div> -->
 		<div id="resultados-busca" class="row"></div>
 
 		<div id="continua-cadastro" class="row">
-			<h2>Cadastro de Projetos</h2>
+			<h2>Cadastro de Práticas</h2>
 			<form>
 				<div class="col-cadastro col-sm-6">
 					<h3>Identificação da prática</h3>
-					<input class="title nome" name="nome-projeto" placeholder="Nome do Projeto" type="text">
+					<input class="title nome" name="nome-projeto" placeholder="Nome da prática *" type="text">
 					<select class='uf inline-block acf' name="uf" id="uf-continua-cadastro">
-						<option value="">UF</option>
+						<option value="">UF *</option>
 						<?php
 						global $wpdb;
 						$results = $wpdb->get_results( 'SELECT cod_estados, sigla
@@ -151,38 +151,45 @@ get_header('banco'); ?>
 						echo '<option value="'.$key->cod_cidades.'">'.$key->nome.'</option>';	
 					}?>	
 					</select>
-
-					<h4 class="subtitulo-cadastro">Entidade Responsável</h4>
-					<input class="acf" name="nome_da_entidade" placeholder="Nome da Entidade" type="text">
-					<input class="acf" name="telefone_da_entidade" placeholder="Telefone da Entidade" type="text">
-					<input class="acf" name="endereço_da_entidade" placeholder="Endereço" type="text">
+					<h4 class="subtitulo-cadastro">Cadastro do usuário</h4>
+					<input class="acf" name="login" placeholder="Nome de usuário *" type="text">
+					<input class="acf" name="e-mail_de_cadastro" placeholder="E-mail de cadastro *" type="email">
+					<input class="acf" name="senha" placeholder="Cadastre uma senha *" type="password">
+					<input class="acf" name="senha-repetir" placeholder="Repita a senha *" type="password">
+					<h4 class="subtitulo-cadastro">Responsável pela prática</h4>
+					<input class="acf" name="nome_da_entidade" placeholder="Nome da Entidade ou pessoa *" type="text">
+					<input class="acf" name="telefone_da_entidade" placeholder="Telefone" type="text">
+					<input class="acf" name="endereco_da_entidade" placeholder="Endereço" type="text">
 					<input class="acf" name="site_da_entidade" placeholder="Site" type="text">
-					<input class="acf" name="e-mail_da_entidade" placeholder="E-mail" type="email">
-					<input class="acf" name="senha" placeholder="Cadastre uma senha" type="password">
-					<input class="acf" name="senha-repetir" placeholder="Repita a senha" type="password">
+					<label>Você pode colocar multiplos valores separados por virgula</label>
+					<input class="acf" name="e-mail_de_contato" placeholder="E-mail de contato *" type="email">
+					<label>Você pode colocar multiplos valores separados por virgula</label>
 
 
-					<h4 class="subtitulo-cadastro">Responsável pelo projeto</h4>
+
+					<!-- <h4 class="subtitulo-cadastro">Responsável pela prática</h4>
 					<input class="acf" name="nome_do_responsavel" placeholder="Nome" type="text">
 					<input class="acf" name="e-mail_do_responsavel" placeholder="E-mail" type="text">
-					<input class="telefone acf " name="telefone_do_responsavel" placeholder="Telefone do responsável" type="text">
+					<input class="telefone acf " name="telefone_do_responsavel" placeholder="Telefone do responsável" type="text"> -->
 				</div>
 				<div class="col-cadastro col-sm-6">
 					<h3>Descrição das Ações</h3>
-					<?php drop_tags('Tema', 'tema', 0, "tema-continua-cadastro")?>
+					<?php drop_tags('Tema *', 'tema', 0, "tema-continua-cadastro")?>
 					<div id="subs"></div>
-					<textarea class="acf" maxlength="800" rows="5"name='resumo_da_pratica' placeholder="Resumo da prática"></textarea>
+					<div id="subs2"></div>
+					<textarea class="acf" maxlength="800" rows="5"name='resumo_da_pratica' placeholder="Resumo da prática *"></textarea>
 
-					<textarea class='acf' rows="5"name='objetivo' placeholder="Objetivo"></textarea>
-					<input class='acf' name="publico-alvo" placeholder="Público-alvo" type="text">
+					<textarea class='acf' rows="5"name='objetivo' placeholder="Objetivo *"></textarea>
+					<input class='acf' name="publico-alvo" placeholder="Público-alvo *" type="text">
 					<input class='acf' name="video" placeholder="Link do Vídeo" type="text">
 					<input class='acf' name="local_de_implementacao" placeholder="Local de implementação" type="text">
-					<textarea class='acf' rows="5"name='descricao_das_acoes' placeholder="Descrição da Ação"></textarea>
-					<textarea class='acf' rows="5"name='resultados' placeholder="Resultados"></textarea>
+					<textarea class='acf' rows="5"name='descricao_das_acoes' placeholder="Descrição da Ação *"></textarea>
+					<textarea class='acf' rows="5"name='resultados' placeholder="Resultados *"></textarea>
 					<div class="ibenic_upload_message"></div>
  					<div id="ibenic_file_upload" class="file-upload">
   						<input type="file" id="ibenic_file_input" style="opacity:0;" />
   						<p class="ibenic_file_upload_text"><?php _e( 'Imagem destacada', 'ibenic_upload' ); ?></p>
+  						<div class="ajax-loader"></div>
   					</div>
   					<input type="hidden" name="imagem_destacada" id="imagem_destacada">
   					<div id="ibenic_file_upload_preview" class="file-upload file-preview" style="display:none;">
@@ -193,21 +200,28 @@ get_header('banco'); ?>
 					</div>
 
 					<div class = "anexos">
-      					<label>Selecione os arquivos para anexo</label>
       			 	 	<input type = "file" name = "files[]" id="anexosUp"  class = "files-data form-control" multiple />
-   					    <input type = "submit" value = "Upload" id="anexos" class = "btn btn-primary btn-upload" />
-   					    <input type="hidden" id="ids-anexos" name="ids_anexos">
+   					    <label>Selecione os arquivos para anexo e clique em enviar</label>
+  						<div class="ajax-loader"></div>
 						<div class="upload-response"></div>
+   					    <input type = "submit" value = "Enviar" id="anexos" class = "btn btn-primary btn-upload" />
+						<input type="hidden" id="ids-anexos" name="ids_anexos">
+
    					 </div>
    					 <div class = "galeria">
-      					<label>Selecione as fotos para a galeria</label>
       			 	 	<input type = "file" name = "files_gal[]" id="anexosUpGal" accept = "image/*" class = "files-data form-control" multiple />
-   					    <input type = "submit" value = "Upload" id="anexos-gal" class = "btn btn-primary btn-upload" />
-   					    <input type="hidden" id="ids-anexos-gal" name="ids_anexos_gal">
+       					<label>Selecione as fotos para a galeria e clique em enviar</label>
+       					<div class="ajax-loader"></div>
 						<div  class="upload-response-gal"></div>
+
+   					    <input type = "submit" value = "Enviar" id="anexos-gal" class = "btn btn-primary btn-upload" />
+
+   					    <input type="hidden" id="ids-anexos-gal" name="ids_anexos_gal">
+
    					 </div>
 					
 				<div class="clearfix"></div>
+				<div id="resultado"></div>
 				<a class="enviar" id="enviar-cadastro" href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/cadastrar-banco.png">Cadastrar</a>			</form>
 				</div>
 			</form>

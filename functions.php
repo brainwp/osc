@@ -400,3 +400,4 @@ function kv_handle_attachment($file_handler,$post_id,$set_thu=true) {
 	if ($set_thu) set_post_thumbnail($post_id, $attach_id);
 	return $attach_id;
 }
+show_admin_bar(false);

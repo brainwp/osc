@@ -27,10 +27,10 @@
 			</div>
 			<div id='info-footer' class="col-sm-4">
 				<img src="<?php echo get_template_directory_uri(); ?>/assets/images/observatorio-footer.png">
-				<p>Rua general Jardin, 660-7º andar</p>
+				<p>Rua general Jardim, 660 - 7º andar</p>
 				<p>Vila Buarque - CEP 01223-010 - São Paulo/SP</p>
 				<p>Horário de funcionamento do escritório:</p>
-				<p>Segunda a sexta, das 13h às 19h</p>
+				<p>Segunda a sexta, das 9h às 19h</p>
 				<img  class="social-footer" class='inline-block' src="<?php echo get_template_directory_uri(); ?>/assets/images/face-footer.png">
 				<img class="social-footer"  class='inline-block' src="<?php echo get_template_directory_uri(); ?>/assets/images/twitter-footer.png">
 			</div>

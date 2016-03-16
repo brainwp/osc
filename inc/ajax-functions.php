@@ -40,10 +40,83 @@ function pega_sub_func(){
 add_action( 'wp_ajax_pega_sub', 'pega_sub_func' );
 add_action( 'wp_ajax_nopriv_pega_sub', 'pega_sub_func' );
 
+function pega_sub_func2(){
+	$mae= $_POST['mae'];
+  	if ( count( get_term_children( $mae, 'tema' ) ) !== 0 ) {
+		drop_tags('SubTema', 'tema', 0, "sub-tema-continua-cadastro_".$mae, 0, $mae); 
+	 }
+
+
+	
+	wp_die();
+
+	
+}
+add_action( 'wp_ajax_pega_sub2', 'pega_sub_func2' );
+add_action( 'wp_ajax_nopriv_pega_sub2', 'pega_sub_func2' );
 // cadastro de pratica
 function cadastra_pratica_func(){
 	$data= $_POST;
-	$cadastra_usuario = ajax_cadastra_usuario($data['nome_da_entidade'], $data['e-mail_da_entidade'], $data['senha'], $data['site_da_entidade']);
+	if ($data['title']=="") {
+		echo '<p>Preencha o campo Nome da prática</p>';
+		wp_die();	
+	}
+	elseif ($data['uf']==0) {
+		echo '<p>Preencha o campo UF</p>';
+		wp_die();	
+	}
+	elseif ($data['login']=="") {
+		echo '<p>Preencha o campo nome de usuário</p>';
+		wp_die();	
+	}
+	elseif ($data['e-mail_de_cadastro']=="") {
+		echo '<p>Preencha o campo email de cadastro</p>';
+		wp_die();	
+	}
+	
+	elseif ($data['senha']=="") {
+		echo '<p>Preencha o campo senha</p>';
+		wp_die();	
+	}
+	elseif ($data['senha']!=$data['senha-repetir']) {
+		echo '<p>A confirmação é diferente da senha</p>';
+		wp_die();	
+	}
+	
+	elseif ($data['nome_da_entidade']=="") {
+		echo '<p>Preencha o campo Nome da entidade ou pessoa</p>';
+		wp_die();	
+	}
+	elseif ($data['e-mail_de_contato']=="") {
+		echo '<p>Preencha o campo email de contato</p>';
+		wp_die();	
+	}
+	elseif ($data['tax']==',0') {
+		echo '<p>Preencha o campo tema</p>';
+		wp_die();	
+	}
+	elseif ($data['resumo_da_pratica']=="") {
+		echo '<p>Preencha o campo resumo</p>';
+		wp_die();	
+	}
+	elseif ($data['objetivo']=="") {
+		echo '<p>Preencha o campo objetivo</p>';
+		wp_die();	
+	}
+	elseif ($data['publico-alvo']=="") {
+		echo '<p>Preencha o campo público alvo</p>';
+		wp_die();	
+	}
+	elseif ($data['descricao_das_acoes']=="") {
+		echo '<p>Preencha o campo descrição das ações</p>';
+		wp_die();	
+	}
+	elseif ($data['resultados']=="") {
+		echo '<p>Preencha o campo resultados</p>';
+		wp_die();	
+	}
+
+	$cadastra_usuario = ajax_cadastra_usuario($data['login'], $data['e-mail_de_cadastro'], $data['senha'], $data['site_da_entidade']);
 	if (is_int($cadastra_usuario)){
 		$pratica = array(
     		'post_title' => $data['title'],
@@ -86,9 +159,10 @@ function cadastra_pratica_func(){
 
 		wp_set_post_terms( $pratica_id, $data['tax'], 'tema', true );
 		// update_field('video',$att['url'],'https://www.youtube.com/watch?v=I38EcMJX8A8');
-		set_post_thumbnail( $pratica_id, $data['imagem_destacada'] ); 
-		
-			echo '<h3>Obrigado, sua prátia ira ser analizada e publicada futuramente.</h3>';
+		if (isset($data['imagem_destacada'])){
+			set_post_thumbnail( $pratica_id, $data['imagem_destacada'] ); 
+		}
+			echo '<h3>Obrigado, sua prática será ser analisada e publicada futuramente.</h3>';
 
 		wp_die();
 
@@ -114,6 +188,7 @@ add_action( 'wp_ajax_nopriv_cadastra_pratica', 'cadastra_pratica_func' );
 // cadastro de usuario
 function ajax_cadastra_usuario($nome, $email, $senha, $site){
 	$user_email = get_user_by( 'email', $email);
+	
 	if ( $user_email !== false && wp_check_password(  $senha, $user_email->data->user_pass, $user_email->ID ) ){
 		 return $user_email->ID;
 	wp_die();
@@ -286,8 +361,9 @@ function cvf_upload_files(){
             foreach ( $_FILES['files']['name'] as $f => $name ) {
                 $extension = pathinfo( $name, PATHINFO_EXTENSION );
                 // Generate a randon code for each file name
-                $new_filename = cvf_td_generate_random_code( 20 )  . '.' . $extension;
-                
+                // $new_filename = cvf_td_generate_random_code( 20 )  . '.' . $extension;
+                $new_filename = $name;
+
                 if ( $_FILES['files']['error'][$f] == 4 ) {
                     continue; 
                 }
@@ -383,7 +459,8 @@ function cvf_upload_files_gal(){
             foreach ( $_FILES['files']['name'] as $f => $name ) {
                 $extension = pathinfo( $name, PATHINFO_EXTENSION );
                 // Generate a randon code for each file name
-                $new_filename = cvf_td_generate_random_code( 20 )  . '.' . $extension;
+                $new_filename = $name;
+                // $new_filename = cvf_td_generate_random_code( 20 )  . '.' . $extension;
                 
                 if ( $_FILES['files']['error'][$f] == 4 ) {
                     continue; 

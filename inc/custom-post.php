@@ -95,22 +95,22 @@ function pratica_cpt() {
 	add_action( 'init', 'add_custom_taxonomies', 0 );
 	//metaboxes//
 	// metaboxes//
-$galeria_metabox = new Odin_Metabox(
-    'galeria1', // Slug/ID do Metabox (obrigatório)
-    'Galeria de Imagens', // Nome do Metabox  (obrigatório)
-    'pratica', // Slug do Post Type, sendo possível enviar apenas um valor ou um array com vários (opcional)
-    'advanced', // Contexto (opções: normal, advanced, ou side) (opcional)
-    'low' // Prioridade (opções: high, core, default ou low) (opcional)
-);
-$galeria_metabox->set_fields(
-    array(
-        array(
-    	'id'          => 'galeria1_pratica', // Obrigatório
-    	'label'       => __( 'Imagens da prática', 'odin' ), // Obrigatório
-    	'type'        => 'image_plupload', // Obrigatório
-    	'default'     => '', // Opcional (deve ser o id de uma imagem em mídias, separe os ids com virtula)
-    	'description' => __( 'Selecione as imagens da galeria', 'odin' ), // Opcional
-)
-    )
-);
+// $galeria_metabox = new Odin_Metabox(
+//     'galeria1', // Slug/ID do Metabox (obrigatório)
+//     'Galeria de Imagens', // Nome do Metabox  (obrigatório)
+//     'pratica', // Slug do Post Type, sendo possível enviar apenas um valor ou um array com vários (opcional)
+//     'advanced', // Contexto (opções: normal, advanced, ou side) (opcional)
+//     'low' // Prioridade (opções: high, core, default ou low) (opcional)
+// );
+// $galeria_metabox->set_fields(
+//     array(
+//         array(
+//     	'id'          => 'galeria1_pratica', // Obrigatório
+//     	'label'       => __( 'Imagens da prática', 'odin' ), // Obrigatório
+//     	'type'        => 'image_plupload', // Obrigatório
+//     	'default'     => '', // Opcional (deve ser o id de uma imagem em mídias, separe os ids com virtula)
+//     	'description' => __( 'Selecione as imagens da galeria', 'odin' ), // Opcional
+// )
+//     )
+// );
 // metaboxes//

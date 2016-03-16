@@ -68,6 +68,18 @@ jQuery(document).ready(function($) {
 			$('#cod_cidades').html('<option value="">– Escolha um estado –</option>');
 		}
 	});
+	$(document).on('change',"#subs select",function(e){
+		//Write stuffs		
+		var data = {
+				'action': 'pega_sub2',
+				'mae':$(this).val(),
+		};
+		$.post(odin_main.ajaxurl, data, function(response) {
+			// console.log(response);
+			$('#subs2').html(response);
+		});		
+	});
+
 	$('#tema-continua-cadastro').change(function(){
 		tema_change($(this));
 	});
@@ -134,7 +146,7 @@ jQuery(document).ready(function($) {
     	$("#continua-cadastro .ajax-filtro-materiais").each(function (i) {
 			var nome=$(this).attr('name');
 			// console.log();
-			data.tax=$(this).children('option:selected').val()+','+data.tax;
+			data.tax=data.tax+','+$(this).children('option:selected').val();
     	});
     	data.imagem_destacada=$('#imagem_destacada').attr('data-id');
 		data.attachments=$('#attachments').val();
@@ -144,7 +156,7 @@ jQuery(document).ready(function($) {
 		console.log(data);
 		$.post(odin_main.ajaxurl, data, function(response) {
 			console.log(response);
-			if (response == "<h3>Obrigado, sua prátia ira ser analizada e publicada futuramente.</h3>"){
+			if (response == "<h3>Obrigado, sua prática será ser analisada e publicada futuramente.</h3>"){
 				$('#continua-cadastro').html(response);
 			}
 			else{
@@ -187,7 +199,6 @@ jQuery(document).ready(function($) {
     		});
 
 		$('#ibenic_file_input').on('change', prepareUpload);
-
 		
 function prepareUpload(event) { 
 	var file = event.target.files;
@@ -198,6 +209,7 @@ function prepareUpload(event) {
     	{
       		data.append("ibenic_file_upload", value);
     	});
+		$('#ibenic_file_upload .ajax-loader').fadeIn();
 
     	$.ajax({
     		  url: odin_main.ajaxurl,
@@ -229,6 +241,8 @@ function prepareUpload(event) {
 		                parent.children("input").val("");
 		                parent.hide();
 		                $('#imagem_destacada').attr('data-id', data.id);
+						$('#ibenic_file_upload .ajax-loader').fadeOut();
+
 	                
 	                 } else {
 		             alert( data.error );
@@ -275,6 +289,8 @@ $(".ibenic_file_delete").on("click", function(e){
 
 $("#anexos").click(function(e){
 		e.preventDefault();
+		$('.anexos .ajax-loader').fadeIn();
+
 		var fd = new FormData();
         var files_data = $('#anexosUp'); // The <input type="file" /> field
         
@@ -302,6 +318,8 @@ $("#anexos").click(function(e){
 
                 $('.upload-response').html(response.msg); // Append Server Response
                 $('#ids-anexos').val(response.idsAnexos);
+           		$('.anexos .ajax-loader').fadeOut();
+
             }
         });
 	});
@@ -309,7 +327,8 @@ $("#anexos-gal").click(function(e){
 		e.preventDefault();
 		var fd = new FormData();
         var files_data = $('#anexosUpGal'); // The <input type="file" /> field
-        
+       	$('.galeria .ajax-loader').fadeIn();
+
         // Loop through each data and create an array file[] containing our files data.
         $.each($(files_data), function(i, obj) {
             $.each(obj.files,function(j,file){
@@ -334,8 +353,33 @@ $("#anexos-gal").click(function(e){
 
                 $('.upload-response-gal').html(response.msg); // Append Server Response
                 $('#ids-anexos-gal').val(response.idsAnexos);
+				$('.galeria .ajax-loader').fadeOut();
             }
         });
 	});
+
+
+    
+    
+    $(window).scroll(function () {
+    	var scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
+    	console.log(scrollBottom);
+        if ($(this).scrollTop() > 275 && scrollBottom > 500){
+	        $('#sidebar').addClass("fixo");
+        } 
+        else if(scrollBottom < 500){
+        	topo=$(this).scrollTop();
+            $('#sidebar').removeClass("fixo");
+
+        	$('#sidebar').addClass("fundo");
+
+        }
+        else {
+            $('#sidebar').removeClass("fixo");
+            $('#sidebar').removeClass("fundo");
+        }
+    });
+ 
+
 
 });
