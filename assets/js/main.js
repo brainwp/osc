@@ -323,40 +323,40 @@ $("#anexos").click(function(e){
             }
         });
 	});
-$("#anexos-gal").click(function(e){
-		e.preventDefault();
-		var fd = new FormData();
-        var files_data = $('#anexosUpGal'); // The <input type="file" /> field
-       	$('.galeria .ajax-loader').fadeIn();
+// $("#anexos-gal").click(function(e){
+// 		e.preventDefault();
+// 		var fd = new FormData();
+//         var files_data = $('#anexosUpGal'); // The <input type="file" /> field
+//        	$('.galeria .ajax-loader').fadeIn();
 
-        // Loop through each data and create an array file[] containing our files data.
-        $.each($(files_data), function(i, obj) {
-            $.each(obj.files,function(j,file){
-                fd.append('files[' + j + ']', file);
-            })
-        });
+//         // Loop through each data and create an array file[] containing our files data.
+//         $.each($(files_data), function(i, obj) {
+//             $.each(obj.files,function(j,file){
+//                 fd.append('files[' + j + ']', file);
+//             })
+//         });
         
-        // our AJAX identifier
-        fd.append('action', 'cvf_upload_files_gal');  
+//         // our AJAX identifier
+//         fd.append('action', 'cvf_upload_files_gal');  
         
-        // Remove this code if you do not want to associate your uploads to the current page.
+//         // Remove this code if you do not want to associate your uploads to the current page.
 
-        $.ajax({
-            type: 'POST',
-            url: ajaxurl,
-            data: fd,
-            contentType: false,
-            processData: false,
-            success: function(response){
-            	console.log(response);
-            	response=jQuery.parseJSON(response);
+//         $.ajax({
+//             type: 'POST',
+//             url: ajaxurl,
+//             data: fd,
+//             contentType: false,
+//             processData: false,
+//             success: function(response){
+//             	console.log(response);
+//             	response=jQuery.parseJSON(response);
 
-                $('.upload-response-gal').html(response.msg); // Append Server Response
-                $('#ids-anexos-gal').val(response.idsAnexos);
-				$('.galeria .ajax-loader').fadeOut();
-            }
-        });
-	});
+//                 $('.upload-response-gal').html(response.msg); // Append Server Response
+//                 $('#ids-anexos-gal').val(response.idsAnexos);
+// 				$('.galeria .ajax-loader').fadeOut();
+//             }
+//         });
+// 	});
 
 
     
@@ -380,6 +380,18 @@ $("#anexos-gal").click(function(e){
         }
     });
  
+	$(".praticaEdit").click(function(e){
+		e.preventDefault();
+		var id = $(this).attr('data-id');
+		var data = {
+				'action': 'edita_pratica_pega',
+				'id':id,
+		};
+		$.post(odin_main.ajaxurl, data, function(response) {
+			console.log(response);
+		});
 
 
+	});
+    
 });

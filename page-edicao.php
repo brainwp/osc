@@ -1,8 +1,8 @@
 <?php
 /**
- * Template Name: Home-Banco
+ * Template Name: Edição
  *
- * Template para a home do banco
+ * Template para a Edição de práticas existentes
  *
  * @package Odin
  * @since 2.2.0
@@ -19,106 +19,49 @@ var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
 get_header('banco'); ?>
 
 	<main id="content" class="home-banco banco <?php echo odin_classes_page_full(); ?>" tabindex="-1" role="main">
-		<div id='resumo-fundo'class=''>	
-			<div id='resumo' class="row">
-				<h1 class='col-sm-7'>Banco de práticas alternativas</h1>
-				<div class="col-sm-5">
-					<img id='novos-logo'class=''src="<?php echo get_template_directory_uri(); ?>/assets/images/paradigmas.png">
+		<h1>Edição de práticas existentes</h1>
+		<?php if (!is_user_logged_in()){
+			?>
+
+				<div class="row" id="login">
+					<h3>Entre para editar suas práticas</h3>
+					<?php
+					$args = array(
+						'redirect' => get_permalink( ),
+
+						'label_username'=>'E-mail'
+						);
+					 wp_login_form($args);
+					 if (isset($_GET['erro'])){
+					 	echo '<h4>'.urldecode($_GET['erro']).'</h4>';
+					 } ?>
 				</div>
-				<div class="clearfix"></div>
-				<?php
-					while ( have_posts() ) : the_post();
-							the_content();
 
+		<?php }
+		else{
+			global $user_ID;
+			$user_id = $user_ID;
+			$args = array( 'author' => $user_id, 'post_type'=>'pratica' );
+			$query = new WP_Query(  $args);
+			// echo '<pre>';
+			// print_r($user_ID);
+			// echo '</pre>';
+			?>
+				<div class="row" id="login">
+					<h4>Quer mudar de usuário? Clique em <a href="<?php echo wp_logout_url(get_permalink( )); ?>"> sair</a>.</h4>
+				</div>
+	
+		<div  <?php if (is_user_logged_in()){echo "style='display:block;'"; }?> class="row" id="praticas-usuario">
+			<h4>Selecione a prática que quer editar.</h4>
+			<?php if ( $query->have_posts() ) { 
+					while ( $query->have_posts() ) : $query->the_post();
+						echo '<a class="praticaEdit" href="#" data-id="'.get_the_id().'" > <h5>'.get_the_title( ).'</h5></a>';
 					endwhile;
-				?>
-				<p id="continue-p">
-					<a id="continue" href="#" >Continue lendo</a><br>
-					<img src="<?php echo get_template_directory_uri(); ?>/assets/images/leia-banco.png">
-				</p>
-
-			</div>
+				 }
+			else{
+				echo "<h3>Você não tem práticas cadastradas</h3";
+			} ?>
 		</div>
-		<div id='busca-cadastro' class='row'>
-			<div id='pesquisa' class="col-sm-6">
-				<form action="">
-					<h3>Faça uma pesquisa nas práticas cadastradas</h3>
-					<input id="filtro-palavra" placeholder="Palavra-chave" type="text">
-					<?php drop_tags('Tema', 'tema', 1,"tema-busca", 1)?>
-					<select name="uf-busca" class="uf" id="uf-busca">
-						<option value="">UF</option>
-						<?php
-						global $wpdb;
-						$results = $wpdb->get_results( 'SELECT cod_estados, sigla
-									FROM '.$wpdb->prefix.'w_estados
-									ORDER BY sigla', OBJECT );
-						foreach ($results as $key ) {
-							echo '<option value="'.$key->cod_estados.'">'.$key->sigla.'</option>';	
-						}
-						?>
-					</select>
-
-					
-					<select class='inline-block cidade'  name="cidade-busca" id="cidade-busca">
-						<span class="cidade-carregando">Aguarde, carregando...</span>
-					<?php
-						global $wpdb;
-						$results = $wpdb->get_results( 'SELECT cod_cidades, nome
-						FROM '.$wpdb->prefix.'w_cidades
-						ORDER BY nome', OBJECT );
-						echo '<option value="0">Cidade</option>';	
-
-					foreach ($results as $key ) {
-						echo '<option value="'.$key->cod_cidades.'">'.$key->nome.'</option>';	
-					}?>
-					</select>
-					<!-- <div class="inline-block"><a href="#"><span>+</span>Mais opções de pesquisa</a></div> -->
-					<a  class="inline-block enviar" href="">Pesquisar<img src="<?php echo get_template_directory_uri(); ?>/assets/images/busca-banco.png"></a>
-				</form>
-			</div>
-			<div id='cadastro' class="col-sm-6">
-				<form action="">
-					<h3>Cadastre uma nova prática alternativa</h3>
-					<input class="nome" name="nome-projeto" placeholder="Nome da prática" type="text">
-					<?php 
-					drop_tags('Tema', 'tema', 0, "tema-cadastro")?>
-					<select class='uf inline-block' name="uf" id="uf-cadastro">
-						<option value="">UF</option>
-						<?php
-						global $wpdb;
-						$results = $wpdb->get_results( 'SELECT cod_estados, sigla
-									FROM '.$wpdb->prefix.'w_estados
-									ORDER BY sigla', OBJECT );
-						foreach ($results as $key ) {
-							echo '<option value="'.$key->cod_estados.'">'.$key->sigla.'</option>';	
-						}
-						?>
-					</select>
-					<span class="cidade-carregando">Aguarde, carregando...</span>
-
-					<select class='inline-block cidade' name="cidade-cadastro" id="cidade-cadastro">
-					<?php
-						global $wpdb;
-						$results = $wpdb->get_results( 'SELECT cod_cidades, nome
-						FROM '.$wpdb->prefix.'w_cidades
-						ORDER BY nome', OBJECT );
-						echo '<option value="0">Cidade</option>';	
-
-					foreach ($results as $key ) {
-						echo '<option value="'.$key->cod_cidades.'">'.$key->nome.'</option>';	
-					}?>	
-					</select>
-					<a id="continua-cadastro-btn" class="enviar" href="#">Continuar Cadastro<img src="<?php echo get_template_directory_uri(); ?>/assets/images/cadastrar-banco.png"></a>
-
-				</form>
-			</div>
-		</div>
-		<div class="clearfix"></div>
-		<!-- <div id="modificar" class='col-sm-12'>
-			<h3>Já cadastrou e quer modificar sua prática? <a href="#">Clique aqui</a></h3>
-		</div> -->
-		<div id="resultados-busca" class="row"></div>
-
 		<div id="continua-cadastro" class="row">
 			<h2>Cadastro de Práticas</h2>
 			<form>
@@ -208,7 +151,7 @@ get_header('banco'); ?>
 						<input type="hidden" id="ids-anexos" name="ids_anexos">
 
    					 </div>
-   					 <!-- <div class = "galeria">
+   					 <div class = "galeria">
       			 	 	<input type = "file" name = "files_gal[]" id="anexosUpGal" accept = "image/*" class = "files-data form-control" multiple />
        					<label>Selecione as fotos para a galeria e clique em enviar</label>
        					<div class="ajax-loader"></div>
@@ -218,7 +161,7 @@ get_header('banco'); ?>
 
    					    <input type="hidden" id="ids-anexos-gal" name="ids_anexos_gal">
 
-   					 </div> -->
+   					 </div>
 					
 				<div class="clearfix"></div>
 				<div id="resultado"></div>
@@ -226,6 +169,9 @@ get_header('banco'); ?>
 				</div>
 			</form>
 		</div>
+				<?php 
+		} ?>
+		<!-- fecha o if do login -->
 	</main><!-- #main -->
 
 

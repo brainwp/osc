@@ -610,6 +610,9 @@ label.cabinet input.file
 }
 #sidebar p{
 	margin-top: 2px;
+    word-break: break-word;
+;
+
 }
 #sidebar h5{
 	margin-bottom: 2px;
@@ -621,4 +624,37 @@ label.cabinet input.file
 }
 .single-pratica #resumo-fundo{
 	padding-top:0;
+}
+#login{
+	/*padding-top: 50px!important;*/
+}
+#login{
+	text-align:center;
+}
+#login h3{
+	width: initial;
+}
+#login input{
+	color:#7E7878;
+	border-radius: 0;
+}	
+#login input[type="submit"]{
+	background-color: #9ab87a;
+	color: #fff;
+	display: inline-block;
+}
+#login .login-remember, .login-submit{
+	display: inline-block;
+}
+#login label{
+	color: #7E7878;
+	margin:0 10px;
+
+}
+#login #rememberme{
+	margin-right: 10px;
+	vertical-align: top;
+}
+#praticas-usuario{
+	margin-top: 20px;
 }

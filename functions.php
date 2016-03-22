@@ -401,3 +401,81 @@ function kv_handle_attachment($file_handler,$post_id,$set_thu=true) {
 	return $attach_id;
 }
 show_admin_bar(false);
+
+
+//remove wordpress authentication
+remove_filter('authenticate', 'wp_authenticate_username_password', 20);
+add_filter('authenticate', function($user, $email, $password){
+
+    //Check for empty fields
+        if(empty($email) || empty ($password)){        
+            //create new error object and add errors to it.
+            $error = new WP_Error();
+
+            if(empty($email)){ //No email
+                $error->add('empty_username', __('<strong>Erro</strong>: E-mail está em branco.'));
+            }
+            else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){ //Invalid Email
+                $error->add('invalid_username', __('<strong>Erro</strong>: E-mail é inválido.'));
+            }
+
+            if(empty($password)){ //No password
+                $error->add('empty_password', __('<strong>Erro</strong>: Senha está em branco.'));
+            }
+
+            return $error;
+        }
+
+        //Check if user exists in WordPress database
+        $user = get_user_by('email', $email);
+
+        //bad email
+        if(!$user){
+            $error = new WP_Error();
+            $error->add('invalid', __('<strong>Erro</strong>: E-mail ou senha inválidos.'));
+            return $error;
+        }
+        else{ //check password
+            if(!wp_check_password($password, $user->user_pass, $user->ID)){ //bad password
+                $error = new WP_Error();
+                $error->add('invalid', __('<strong>Erro</strong>: E-mail ou senha inválidos.'));
+                return $error;
+            }else{
+                return $user; //passed
+            }
+        }
+}, 20, 3);
+add_filter('login_redirect', '_catch_login_error', 10, 3);
+ 
+function _catch_login_error($redir1, $redir2, $wperr_user)
+{
+    if(!is_wp_error($wperr_user) || !$wperr_user->get_error_code()) return $redir1;
+ 	$url=parse_url(($_SERVER["HTTP_REFERER"]));
+
+    switch($wperr_user->get_error_code())
+    {   
+    	case 'invalid':
+        	$erro=urlencode("Senha não confere ou e-mail incorreto.");
+            wp_redirect($url['host'].$url['path'].'/?erro='.$erro); 
+        
+    }
+ 
+    return $redir1;
+}
+add_action( 'wp_authenticate', '_catch_empty_user', 1, 2 );
+
+function _catch_empty_user( $username, $pwd ) {
+	 	$url=parse_url(($_SERVER["HTTP_REFERER"]));
+
+  if ( empty( $username ) ) {
+  	    $erro= urlencode("E-mail em branco");
+
+        wp_redirect($url['host'].$url['path'].'/?erro='.$erro); 
+    exit();
+  }
+  elseif( empty($pwd)){
+  		$erro= urlencode("Senha em branco");
+
+        wp_redirect($url['host'].$url['path'].'/?erro='.$erro); 
+  }
+}

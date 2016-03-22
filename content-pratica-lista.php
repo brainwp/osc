@@ -53,7 +53,7 @@
 				}
 				$results = $wpdb->get_results( 'SELECT cod_cidades, nome
 					FROM '.$wpdb->prefix.'w_cidades
-					WHERE cod_cidades='.get_field('uf').'
+					WHERE cod_cidades='.get_field('cidade').'
 					ORDER BY nome', OBJECT );
 				foreach ($results as $key ) {
 				echo '<p><span>Cidade: </span>'. $key->nome.'</p>';			}
