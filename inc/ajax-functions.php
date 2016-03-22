@@ -115,61 +115,75 @@ function cadastra_pratica_func(){
 		echo '<p>Preencha o campo resultados</p>';
 		wp_die();	
 	}
-
-	$cadastra_usuario = ajax_cadastra_usuario($data['login'], $data['e-mail_de_cadastro'], $data['senha'], $data['site_da_entidade']);
-	if (is_int($cadastra_usuario)){
-		$pratica = array(
-    		'post_title' => $data['title'],
-    		'post_status' => 'draft',
-    		'post_type' => 'pratica',
-    		'post_author' => $cadastra_usuario
-    	);
-		$pratica_id =  wp_insert_post( $pratica );
-		$anexos = $data['anexos'];
-		$galeria = $data['galeria'];
-		$anexosvetor = explode(",", $anexos);
-		$galeriavetor = explode(",", $galeria);
-		foreach ($galeriavetor as $id) {
-			// Update post 37
- 			 $my_post = array(
-   				 'ID'           => $id,
-     			'post_parent'   =>$pratica_id
- 			 );
-
-			// Update the post into the database
- 			 wp_update_post( $my_post );
-		}
-		foreach ($anexosvetor as $id) {
-			// Update post 37
- 			 $my_post = array(
-   				 'ID'           => $id,
-     			'post_parent'   =>$pratica_id
- 			 );
-
-			// Update the post into the database
- 			 wp_update_post( $my_post );
-		}
+	if ($edicao=1){
+		$postID=$_POST['postId'];
 
 		foreach ($data as $key => $value) {
 			if ($key!=='action' && $key !== 'title' && $key!=='tax') {
-				update_field($key, $value,$pratica_id );
+				update_field($key, $value,$postID );
 			}
-
 		}
-
-		wp_set_post_terms( $pratica_id, $data['tax'], 'tema', true );
-		// update_field('video',$att['url'],'https://www.youtube.com/watch?v=I38EcMJX8A8');
-		if (isset($data['imagem_destacada'])){
-			set_post_thumbnail( $pratica_id, $data['imagem_destacada'] ); 
-		}
-			echo '<h3>Obrigado, sua prática será ser analisada e publicada futuramente.</h3>';
-
+		echo '<h3>Obrigado, sua prática será ser analisada e publicada futuramente.</h3>';
 		wp_die();
 
 	}
-	else {
-		echo '<p>'.$cadastra_usuario.'</p>';
-		wp_die();
+	else{
+		$cadastra_usuario = ajax_cadastra_usuario($data['login'], $data['e-mail_de_cadastro'], $data['senha'], $data['edicao']);
+		if (is_int($cadastra_usuario)){
+			$pratica = array(
+	    		'post_title' => $data['title'],
+	    		'post_status' => 'draft',
+	    		'post_type' => 'pratica',
+	    		'post_author' => $cadastra_usuario
+	    	);
+			$pratica_id =  wp_insert_post( $pratica );
+			$anexos = $data['anexos'];
+			$galeria = $data['galeria'];
+			$anexosvetor = explode(",", $anexos);
+			$galeriavetor = explode(",", $galeria);
+			foreach ($galeriavetor as $id) {
+				// Update post 37
+	 			 $my_post = array(
+	   				 'ID'           => $id,
+	     			'post_parent'   =>$pratica_id
+	 			 );
+
+				// Update the post into the database
+	 			 wp_update_post( $my_post );
+			}
+			foreach ($anexosvetor as $id) {
+				// Update post 37
+	 			 $my_post = array(
+	   				 'ID'           => $id,
+	     			'post_parent'   =>$pratica_id
+	 			 );
+
+				// Update the post into the database
+	 			 wp_update_post( $my_post );
+			}
+
+			foreach ($data as $key => $value) {
+				if ($key!=='action' && $key !== 'title' && $key!=='tax') {
+					update_field($key, $value,$pratica_id );
+				}
+
+			}
+
+			wp_set_post_terms( $pratica_id, $data['tax'], 'tema', true );
+			// update_field('video',$att['url'],'https://www.youtube.com/watch?v=I38EcMJX8A8');
+			if (isset($data['imagem_destacada'])){
+				set_post_thumbnail( $pratica_id, $data['imagem_destacada'] ); 
+			}
+				echo '<h3>Obrigado, sua prática será ser analisada e publicada futuramente.</h3>';
+
+			wp_die();
+
+		}
+		else {
+			echo '<p>'.$cadastra_usuario.'</p>';
+			wp_die();
+		
+		}
 	}
 
 	print_r($data);
@@ -186,12 +200,12 @@ add_action( 'wp_ajax_nopriv_cadastra_pratica', 'cadastra_pratica_func' );
 
 
 // cadastro de usuario
-function ajax_cadastra_usuario($nome, $email, $senha, $site){
+function ajax_cadastra_usuario($nome, $email, $senha, $edicao){
 	$user_email = get_user_by( 'email', $email);
 	
 	if ( $user_email !== false && wp_check_password(  $senha, $user_email->data->user_pass, $user_email->ID ) ){
 		 return $user_email->ID;
-	wp_die();
+		wp_die();
 
 	}
 	else if (email_exists($email) !== false  || username_exists( $nome )){
@@ -545,7 +559,7 @@ function edita_pratica_pega_func(){
 	$pratica = get_post($_POST['id']);
 	$id=$_POST['id'];
 	$resposta=array();
-	$resposta['nome-projeto']=get_the_title( $pratica );
+	$resposta['nomeProjeto']=get_the_title( $pratica );
 	$resposta['estado']=get_post_meta( $id, 'uf', 1 );
 	$resposta['cidade']=get_post_meta( $id, 'cidade', 1 );
 	$temas=wp_get_post_terms( $id, 'tema');
@@ -561,18 +575,27 @@ function edita_pratica_pega_func(){
 	$resposta['telefone_da_entidade']=get_field('telefone_da_entidade', $_POST['id']);
 	$resposta['endereco_da_entidade']=get_field('endereco_da_entidade', $_POST['id']);
 	$resposta['site_da_entidade']=get_field('site_da_entidade', $_POST['id']);
-	$resposta['e-mail_de_contato']=get_field('e-mail_de_contato', $_POST['id']);
+	$resposta['email_de_contato']=get_field('e-mail_de_contato', $_POST['id']);
 	$resposta['resumo_da_pratica']=get_field('resumo_da_pratica', $_POST['id']);
 	$resposta['objetivo']=get_field('objetivo', $_POST['id']);
-	$resposta['publico-alvo']=get_field('nome_da_entidade', $_POST['id']);
+	$resposta['publicoAlvo']=get_field('nome_da_entidade', $_POST['id']);
 	$iframe = get_field('video', $_POST['id']);
-	preg_match('/src="(.+?)"/', $iframe, $matches);
-	$url=explode('?', $matches[1]);
-	$resposta['video']=$url[0];
+	if (isset($iframe)) {
+		preg_match('/src="(.+?)"/', $iframe, $matches);
+		if (isset($matches[1])) {
+			$url=explode('?', $matches[1]);
+			$resposta['video']=$url[0];
+
+		}
+	}
+	
 	$resposta['local_de_implementacao']=get_field('local_de_implementacao', $_POST['id']);
 	$resposta['descricao_das_acoes']=get_field('descricao_das_acoes', $_POST['id']);
 	$resposta['resultados']=get_field('resultados', $_POST['id']);
 	$resposta['imagem_destacada'] = wp_get_attachment_url( get_post_thumbnail_id($id) );
+	$resposta['imagem_destacada_id'] = get_post_thumbnail_id($id);
+	$resposta['postId'] = $id;
+
 	$anexos= $attachments = get_posts( array(
          'post_type' => 'attachment',
          'posts_per_page' => -1,
@@ -589,11 +612,9 @@ function edita_pratica_pega_func(){
 		else{
 			$resposta['anexos'] .= '<p>'.$anexo->guid.'</p>';
 		}
-			// print_r( $anexo->ID);
-	
 	}
-	$resposta['anexos'] =
-	print_r($resposta);
+	echo json_encode($resposta);
+
 	wp_die();
 
 

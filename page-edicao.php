@@ -94,11 +94,7 @@ get_header('banco'); ?>
 						echo '<option value="'.$key->cod_cidades.'">'.$key->nome.'</option>';	
 					}?>	
 					</select>
-					<h4 class="subtitulo-cadastro">Cadastro do usuário</h4>
-					<input class="acf" name="login" placeholder="Nome de usuário *" type="text">
-					<input class="acf" name="e-mail_de_cadastro" placeholder="E-mail de cadastro *" type="email">
-					<input class="acf" name="senha" placeholder="Cadastre uma senha *" type="password">
-					<input class="acf" name="senha-repetir" placeholder="Repita a senha *" type="password">
+					
 					<h4 class="subtitulo-cadastro">Responsável pela prática</h4>
 					<input class="acf" name="nome_da_entidade" placeholder="Nome da Entidade ou pessoa *" type="text">
 					<input class="acf" name="telefone_da_entidade" placeholder="Telefone" type="text">
@@ -141,7 +137,12 @@ get_header('banco'); ?>
   						  <?php _e( 'Delete', 'ibenic_upload' ); ?>
   						</button>
 					</div>
-
+					<div id="anexosExistentes">
+						<h3>Imagens anexas</h3>
+						<div class="imagensAnexas"></div>
+						<h3>Arquivos anexos</h3>
+						<div class="arquivosAnexos"></div>
+					</div>
 					<div class = "anexos">
       			 	 	<input type = "file" name = "files[]" id="anexosUp"  class = "files-data form-control" multiple />
    					    <label>Selecione os arquivos para anexo e clique em enviar</label>
@@ -150,8 +151,21 @@ get_header('banco'); ?>
    					    <input type = "submit" value = "Enviar" id="anexos" class = "btn btn-primary btn-upload" />
 						<input type="hidden" id="ids-anexos" name="ids_anexos">
 
-   					 </div>
-   					 <div class = "galeria">
+   					</div>
+   					<?php 
+   						$usuario= get_user_by( 'id', $user_ID );
+			// echo '<pre>';
+			// print_r($usuario);
+			// echo '</pre>';
+
+   					 ?>
+   					<input value="1" id="edicao" class="" name="edicao"  type="hidden" >
+   					<input value="<?php  ?>" id="postId" class="" name="postId"  type="hidden" >
+   					<input value="<?php echo $usuario->user_login; ?>" class="acf" name="login" placeholder="Nome de usuário *" type="hidden" >
+					<input value="<?php echo $usuario->user_email; ?>" class="acf" name="e-mail_de_cadastro" placeholder="E-mail de cadastro *" type="hidden">
+					<input value="<?php echo $usuario->user_pass; ?>" class="acf" name="senha" placeholder="Cadastre uma senha *" type="hidden">
+					<input value="<?php echo $usuario->user_pass; ?>" class="acf" name="senha-repetir" placeholder="Repita a senha *" type="hidden">
+   					 <!-- <div class = "galeria">
       			 	 	<input type = "file" name = "files_gal[]" id="anexosUpGal" accept = "image/*" class = "files-data form-control" multiple />
        					<label>Selecione as fotos para a galeria e clique em enviar</label>
        					<div class="ajax-loader"></div>
@@ -161,7 +175,7 @@ get_header('banco'); ?>
 
    					    <input type="hidden" id="ids-anexos-gal" name="ids_anexos_gal">
 
-   					 </div>
+   					 </div> -->
 					
 				<div class="clearfix"></div>
 				<div id="resultado"></div>

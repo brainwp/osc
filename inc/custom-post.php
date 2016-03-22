@@ -33,7 +33,7 @@ function pratica_cpt() {
 		'hierarchical'       => false,
 		'menu_position'      => null,
 		'menu_icon' => 'dashicons-store',
-		'supports'           => array( 'title', 'thumbnail')
+		'supports'           => array( 'title', 'thumbnail', 'author')
 	);
 
 	register_post_type( 'pratica', $args );

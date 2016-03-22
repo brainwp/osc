@@ -152,6 +152,9 @@ jQuery(document).ready(function($) {
 		data.attachments=$('#attachments').val();
 		data.anexos=$('#ids-anexos').val();
 		data.galeria=$('#ids-anexos-gal').val();
+		data.edicao = $("#edicao").val();
+		data.postId = $("#postId").val();
+
 
 		console.log(data);
 		$.post(odin_main.ajaxurl, data, function(response) {
@@ -389,6 +392,70 @@ $("#anexos").click(function(e){
 		};
 		$.post(odin_main.ajaxurl, data, function(response) {
 			console.log(response);
+           	response=jQuery.parseJSON(response);
+
+			$('.title.nome').val(response.nomeProjeto);
+			$('.uf').val(response.estado);
+			$('.cidade').val(response.cidade);
+			$('#tema-continua-cadastro').val(response.tema);
+
+			$('input[name="nome_da_entidade"]').val(response.nome_da_entidade);
+			$('input[name=""]').val(response.nome_da_entidade);
+			$('input[name="nome_da_entidade"]').val(response.nome_da_entidade);
+			$('input[name="telefone_da_entidade"]').val(response.telefone_da_entidade);
+			$('input[name="endereco_da_entidade"]').val(response.endereco_da_entidade);
+			$('input[name="site_da_entidade"]').val(response.site_da_entidade);
+			$('input[name="e-mail_de_contato"]').val(response.email_de_contato);
+
+			$('textarea[name="resumo_da_pratica"]').val(response.resumo_da_pratica);
+			$('textarea[name="objetivo"]').val(response.objetivo);
+
+			$('input[name="video"]').val(response.video);
+			$('input[name="local_de_implementacao"]').val(response.local_de_implementacao);
+			$('textarea[name="descricao_das_acoes"]').val(response.descricao_das_acoes);
+			$('textarea[name="resultados"]').val(response.resultados);
+			$('input[name="publico-alvo"]').val(response.publicoAlvo);
+			$('input[name="nome_da_entidade"]').val(response.nome_da_entidade);
+			$('input[name="nome_da_entidade"]').val(response.nome_da_entidade);
+			$('input[name="nome_da_entidade"]').val(response.nome_da_entidade);
+			$('input[name="nome_da_entidade"]').val(response.nome_da_entidade);
+			$('input[name="nome_da_entidade"]').val(response.nome_da_entidade);
+			$('input[name="nome_da_entidade"]').val(response.nome_da_entidade);
+			$('input[name="postId"]').val(response.postId);
+
+			var preview = "";
+			var parent= $("#ibenic_file_upload");
+		    preview = "<img src='" + response.imagem_destacada + "' />";
+		    var previewID = parent.attr("id") + "_preview";
+		    var previewParent = $("#"+previewID);
+		    previewParent.show();
+		    previewParent.children(".ibenic_file_preview").empty().append( preview );
+		    previewParent.children( "button" ).attr("data-fileurl",data.url );
+		    parent.children("input").val("");
+		    parent.hide();
+		    $('#imagem_destacada').attr('data-id', response.imagem_destacada_id);
+		   	$('.ibenic_file_delete').attr('data-fileurl', response.imagem_destacada);
+		   	$('.imagensAnexas').html(response.galeria);
+		   	$('.arquivosAnexos').html(response.anexos);
+
+
+
+
+			$('.nome').val(response.nomeProjeto);
+			$('.nome').val(response.nomeProjeto);
+			$('.nome').val(response.nomeProjeto);
+			$('.nome').val(response.nomeProjeto);
+			$('.nome').val(response.nomeProjeto);
+			$('.nome').val(response.nomeProjeto);
+			$('.nome').val(response.nomeProjeto);
+			$('.nome').val(response.nomeProjeto);
+			$('.nome').val(response.nomeProjeto);
+			$('.nome').val(response.nomeProjeto);
+			$('.nome').val(response.nomeProjeto);
+			$('.nome').val(response.nomeProjeto);
+			$('.nome').val(response.nomeProjeto);
+			$('.nome').val(response.nomeProjeto);
+			$('#continua-cadastro').fadeIn();
 		});
 
 

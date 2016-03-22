@@ -198,7 +198,7 @@ get_header('banco'); ?>
   						  <?php _e( 'Delete', 'ibenic_upload' ); ?>
   						</button>
 					</div>
-
+					
 					<div class = "anexos">
       			 	 	<input type = "file" name = "files[]" id="anexosUp"  class = "files-data form-control" multiple />
    					    <label>Selecione os arquivos para anexo e clique em enviar</label>
@@ -206,7 +206,7 @@ get_header('banco'); ?>
 						<div class="upload-response"></div>
    					    <input type = "submit" value = "Enviar" id="anexos" class = "btn btn-primary btn-upload" />
 						<input type="hidden" id="ids-anexos" name="ids_anexos">
-
+						
    					 </div>
    					 <!-- <div class = "galeria">
       			 	 	<input type = "file" name = "files_gal[]" id="anexosUpGal" accept = "image/*" class = "files-data form-control" multiple />
@@ -222,6 +222,8 @@ get_header('banco'); ?>
 					
 				<div class="clearfix"></div>
 				<div id="resultado"></div>
+				<input id="edicao" value="0" class="" name="edicao"  type="hidden" >
+
 				<a class="enviar" id="enviar-cadastro" href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/cadastrar-banco.png">Cadastrar</a>			</form>
 				</div>
 			</form>
