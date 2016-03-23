@@ -204,7 +204,7 @@ get_header('banco'); ?>
    					    <label>Selecione os arquivos para anexo e clique em enviar</label>
   						<div class="ajax-loader"></div>
 						<div class="upload-response"></div>
-   					    <input type = "submit" value = "Enviar" id="anexos" class = "btn btn-primary btn-upload" />
+   					    <input type = "submit" value = "Enviar arquivo" id="anexos" class = "btn btn-primary btn-upload" />
 						<input type="hidden" id="ids-anexos" name="ids_anexos">
 						
    					 </div>

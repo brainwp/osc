@@ -159,11 +159,24 @@ jQuery(document).ready(function($) {
 		console.log(data);
 		$.post(odin_main.ajaxurl, data, function(response) {
 			console.log(response);
-			if (response == "<h3>Obrigado, sua prática será ser analisada e publicada futuramente.</h3>"){
-				$('#continua-cadastro').html(response);
+           	response=jQuery.parseJSON(response);
+
+			if (response.erro == ""){
+				$('#continua-cadastro #resultado').html(response.mensagem);
+				$('html, body').animate({
+       				 scrollTop: $("#busca-cadastro").offset().top
+       				}, 2000);
+				$('#continua-cadastro').fadeOut(2010);
+				// $('input[type="text"], input[type="email"], input[type="password"]').val("");
+				// $('textarea').val("");
+				// $('select ').val('0');
+				// $('select #uf').val("");
+
+
+
 			}
 			else{
-				$('#continua-cadastro #resultado').html(response);
+				$('#continua-cadastro #resultado').html(response.erro);
 
 			}
 		});	
@@ -366,7 +379,7 @@ $("#anexos").click(function(e){
     
     $(window).scroll(function () {
     	var scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
-    	console.log(scrollBottom);
+    	// console.log(scrollBottom);
         if ($(this).scrollTop() > 275 && scrollBottom > 500){
 	        $('#sidebar').addClass("fixo");
         } 

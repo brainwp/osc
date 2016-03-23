@@ -54,80 +54,64 @@ function pega_sub_func2(){
 }
 add_action( 'wp_ajax_pega_sub2', 'pega_sub_func2' );
 add_action( 'wp_ajax_nopriv_pega_sub2', 'pega_sub_func2' );
+
+
+
 // cadastro de pratica
 function cadastra_pratica_func(){
+	$resposta=array('erro'=>"");
+
 	$data= $_POST;
 	if ($data['title']=="") {
-		echo '<p>Preencha o campo Nome da prática</p>';
-		wp_die();	
+		$resposta['erro'].= '<p>Preencha o campo Nome da prática</p>';
 	}
-	elseif ($data['uf']==0) {
-		echo '<p>Preencha o campo UF</p>';
-		wp_die();	
+	if ($data['uf']==0) {
+		$resposta['erro'].= '<p>Preencha o campo UF</p>';
 	}
-	elseif ($data['login']=="") {
-		echo '<p>Preencha o campo nome de usuário</p>';
-		wp_die();	
+	if ($data['login']=="") {
+		$resposta['erro'].= '<p>Preencha o campo nome de usuário</p>';
 	}
-	elseif ($data['e-mail_de_cadastro']=="") {
-		echo '<p>Preencha o campo email de cadastro</p>';
-		wp_die();	
+	if ($data['e-mail_de_cadastro']=="") {
+		$resposta['erro'].= '<p>Preencha o campo email de cadastro</p>';
 	}
 	
-	elseif ($data['senha']=="") {
-		echo '<p>Preencha o campo senha</p>';
-		wp_die();	
+	if ($data['senha']=="") {
+		$resposta['erro'].= '<p>Preencha o campo senha</p>';
 	}
-	elseif ($data['senha']!=$data['senha-repetir']) {
-		echo '<p>A confirmação é diferente da senha</p>';
-		wp_die();	
+	if ($data['senha']!=$data['senha-repetir']) {
+		$resposta['erro'].= '<p>A confirmação é diferente da senha</p>';
 	}
 	
-	elseif ($data['nome_da_entidade']=="") {
-		echo '<p>Preencha o campo Nome da entidade ou pessoa</p>';
+	if ($data['nome_da_entidade']=="") {
+		$resposta['erro'].= '<p>Preencha o campo Nome da entidade ou pessoa</p>';
+	}
+	if ($data['e-mail_de_contato']=="") {
+		$resposta['erro'].= '<p>Preencha o campo email de contato</p>';
+	}
+	if ($data['tax']==',0') {
+		$resposta['erro'].= '<p>Preencha o campo tema</p>';
+	}
+	if ($data['resumo_da_pratica']=="") {
+		$resposta['erro'].= '<p>Preencha o campo resumo</p>';
+	}
+	if ($data['objetivo']=="") {
+		$resposta['erro'].= '<p>Preencha o campo objetivo</p>';
+	}
+	if ($data['publico-alvo']=="") {
+		$resposta['erro'].= '<p>Preencha o campo público alvo</p>';
+	}
+	if ($data['descricao_das_acoes']=="") {
+		$resposta['erro'].= '<p>Preencha o campo descrição das ações</p>';
+	}
+	if ($data['resultados']=="") {
+		$resposta['erro'].= '<p>Preencha o campo resultados</p>';
+	}
+	if ($resposta['erro']!="") {
+		echo json_encode($resposta);
 		wp_die();	
 	}
-	elseif ($data['e-mail_de_contato']=="") {
-		echo '<p>Preencha o campo email de contato</p>';
-		wp_die();	
-	}
-	elseif ($data['tax']==',0') {
-		echo '<p>Preencha o campo tema</p>';
-		wp_die();	
-	}
-	elseif ($data['resumo_da_pratica']=="") {
-		echo '<p>Preencha o campo resumo</p>';
-		wp_die();	
-	}
-	elseif ($data['objetivo']=="") {
-		echo '<p>Preencha o campo objetivo</p>';
-		wp_die();	
-	}
-	elseif ($data['publico-alvo']=="") {
-		echo '<p>Preencha o campo público alvo</p>';
-		wp_die();	
-	}
-	elseif ($data['descricao_das_acoes']=="") {
-		echo '<p>Preencha o campo descrição das ações</p>';
-		wp_die();	
-	}
-	elseif ($data['resultados']=="") {
-		echo '<p>Preencha o campo resultados</p>';
-		wp_die();	
-	}
-	if ($edicao=1){
-		$postID=$_POST['postId'];
+	if ($_POST['edicao']!=1){
 
-		foreach ($data as $key => $value) {
-			if ($key!=='action' && $key !== 'title' && $key!=='tax') {
-				update_field($key, $value,$postID );
-			}
-		}
-		echo '<h3>Obrigado, sua prática será ser analisada e publicada futuramente.</h3>';
-		wp_die();
-
-	}
-	else{
 		$cadastra_usuario = ajax_cadastra_usuario($data['login'], $data['e-mail_de_cadastro'], $data['senha'], $data['edicao']);
 		if (is_int($cadastra_usuario)){
 			$pratica = array(
@@ -137,60 +121,72 @@ function cadastra_pratica_func(){
 	    		'post_author' => $cadastra_usuario
 	    	);
 			$pratica_id =  wp_insert_post( $pratica );
-			$anexos = $data['anexos'];
-			$galeria = $data['galeria'];
-			$anexosvetor = explode(",", $anexos);
-			$galeriavetor = explode(",", $galeria);
-			foreach ($galeriavetor as $id) {
-				// Update post 37
-	 			 $my_post = array(
-	   				 'ID'           => $id,
-	     			'post_parent'   =>$pratica_id
-	 			 );
-
-				// Update the post into the database
-	 			 wp_update_post( $my_post );
-			}
-			foreach ($anexosvetor as $id) {
-				// Update post 37
-	 			 $my_post = array(
-	   				 'ID'           => $id,
-	     			'post_parent'   =>$pratica_id
-	 			 );
-
-				// Update the post into the database
-	 			 wp_update_post( $my_post );
-			}
-
-			foreach ($data as $key => $value) {
-				if ($key!=='action' && $key !== 'title' && $key!=='tax') {
-					update_field($key, $value,$pratica_id );
-				}
-
-			}
-
-			wp_set_post_terms( $pratica_id, $data['tax'], 'tema', true );
-			// update_field('video',$att['url'],'https://www.youtube.com/watch?v=I38EcMJX8A8');
-			if (isset($data['imagem_destacada'])){
-				set_post_thumbnail( $pratica_id, $data['imagem_destacada'] ); 
-			}
-				echo '<h3>Obrigado, sua prática será ser analisada e publicada futuramente.</h3>';
-
-			wp_die();
-
-		}
+		}	
 		else {
-			echo '<p>'.$cadastra_usuario.'</p>';
+			$resposta['erro']='<p>'.$cadastra_usuario.'</p>';
+			echo json_encode($resposta);
 			wp_die();
 		
 		}
+
+		// $postID=$_POST['postId'];
+		// $anexos = $data['anexos'];
+		// $anexosvetor = explode(",", $anexos);
+		
+		// foreach ($anexosvetor as $id) {
+		// 	// Update post 37
+	 // 		 $my_post = array(
+	 //   			 'ID'           => $id,
+	 //     		'post_parent'   =>$postID
+	 // 		 );
+
+		// 	// Update the post into the database
+	 // 		 wp_update_post( $my_post );
+		// }
+		// foreach ($data as $key => $value) {
+		// 	if ($key!=='action' && $key !== 'title' && $key!=='tax') {
+		// 		update_field($key, $value,$postID );
+		// 	}
+		// }
+		// wp_set_post_terms( $postID, $data['tax'], 'tema', true );
+		// 	if (isset($data['imagem_destacada'])){
+		// 		set_post_thumbnail( $postID, $data['imagem_destacada'] ); 
+		// 	}
+		// 	$my_post = array(
+	 //   				 'ID'           => $postID,
+	 //     			'post_status'   => 'draft'
+	 // 			 );
+		// 	wp_update_post( $my_post );
+
+		// echo '<h2>Obrigado, sua prática será ser analisada e publicada futuramente.</h2>';
+		// wp_die();
+
+	}
+	else{
+		$pratica_id=$_POST['postId'];
+	}
+	$anexos = $data['anexos'];
+	$anexosvetor = explode(",", $anexos);
+	foreach ($anexosvetor as $id) {
+	 	 $my_post = array(
+	 		 'ID'           => $id,
+	 		'post_parent'   =>$pratica_id
+	 	 );
+	 	 wp_update_post( $my_post );
+	}
+	foreach ($data as $key => $value) {
+		if ($key!=='action' && $key !== 'title' && $key!=='tax') {
+			update_field($key, $value,$pratica_id );
+		}
 	}
 
-	print_r($data);
+	wp_set_post_terms( $pratica_id, $data['tax'], 'tema', true );
+	if (isset($data['imagem_destacada'])){
+		set_post_thumbnail( $pratica_id, $data['imagem_destacada'] ); 
+	}
+	echo json_encode($resposta);
 	
-		wp_die();
-
-
+	wp_die();
 }
 add_action( 'wp_ajax_cadastra_pratica', 'cadastra_pratica_func' );
 add_action( 'wp_ajax_nopriv_cadastra_pratica', 'cadastra_pratica_func' );
@@ -208,8 +204,13 @@ function ajax_cadastra_usuario($nome, $email, $senha, $edicao){
 		wp_die();
 
 	}
-	else if (email_exists($email) !== false  || username_exists( $nome )){
-		return 'E-mail ja cadastrado e senha não confere';
+	else if (email_exists($email) !== false ){
+		return 'E-mail ja cadastrado e senha não confere ou nome de usuario existente';
+			wp_die();
+
+	}
+	else if ( username_exists( $nome )){
+		return 'Nome de usuário já existe';
 			wp_die();
 
 	}
@@ -217,7 +218,6 @@ function ajax_cadastra_usuario($nome, $email, $senha, $edicao){
 		$userdata = array(
  		   'user_login'  =>  $nome,
  		   'user_email'  =>  $email,
- 		   'user_url'    =>  $site,
  		   'user_pass'   =>  $senha, // When creating an user, `user_pass` is expected.
  		   'role'		 =>  'entidade'
 	);
