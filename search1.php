@@ -6,8 +6,6 @@
  * @since 2.2.0
  */
 get_header('banco'); 
-
-
 $post_type = get_query_var('post_type'); 
 if (isset($_GET['tema'])) {
 	$tema=$_GET["tema"];
@@ -29,37 +27,19 @@ else{
 }
 if (isset($_GET['s'])&&$_GET['s']!="") {
 	$nome=$_GET["s"];
-	// add_filter( 'posts_where', 'cf_search_where' );
-	// add_filter('posts_join', 'cf_search_join' );
-	// add_filter( 'posts_distinct', 'cf_search_distinct' );
+	add_filter( 'posts_where', 'cf_search_where' );
+	add_filter('posts_join', 'cf_search_join' );
+	add_filter( 'posts_distinct', 'cf_search_distinct' );
 }
 else{
 	$nome="";
 }
 if( $post_type == 'pratica'){
-global $wpdb;
-// If you use default WordPress search form
-$keyword = get_search_query();
-$keyword ='%'. $wpdb->esc_like( $keyword ).'%';// Thanks Manny Fleurmond
-// Search in all custom fields
-$post_ids_meta = $wpdb->get_col( $wpdb->prepare("
-SELECT DISTINCT post_id FROM {$wpdb->postmeta}
-WHERE meta_value LIKE '%s'
-", $keyword ));
-// Search in post_title and post_content
-$post_ids_post = $wpdb->get_col( $wpdb->prepare("
-SELECT DISTINCT ID FROM {$wpdb->posts}
-WHERE post_title LIKE '%s'
-OR post_content LIKE '%s'
-", $keyword, $keyword ));
-$post_ids = array_merge( $post_ids_meta, $post_ids_post );
-// Query arguments
 $args = array(
-'post_type'=>'post',
-'post_status'=>'publish',
-'post__in'=> $post_ids,
-'post_type' => 'pratica',
-'paged' =>get_query_var( 'paged' ),
+	's'			=> $nome,
+	'post_type' => 'pratica',
+	'paged' =>get_query_var( 'paged' ),
+
 );
 if ($cidade != 0 && $uf !=0){
 	$args['meta_query']=array(
@@ -106,9 +86,9 @@ if ($tema !=0){
 }
 
 $query = new WP_Query( $args );
-// echo '<pre>';
-// print_r($query);
-// echo '</pre>';
+echo '<pre>';
+print_r($query);
+echo '</pre>';
 
 ?>
 
