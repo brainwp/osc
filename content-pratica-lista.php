@@ -23,7 +23,7 @@
 				echo get_the_post_thumbnail( $post->ID, 'pratica-lista');	
 			} 
 			else{
-				echo '<img width="200" height="200" src="'. get_template_directory_uri().'/assets/images/sem_foto.png" class="attachment-pratica-lista size-pratica-lista wp-post-image" alt="Sem Imagem" >';
+				echo '<img width="200" height="200" src="'. get_template_directory_uri().'/assets/images/sem-foto.jpg" class="attachment-pratica-lista size-pratica-lista wp-post-image" alt="Sem Imagem" >';
 			}?>
 		</div>
 		<div id="resumo" class="col-sm-9 entry-content">

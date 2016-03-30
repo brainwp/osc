@@ -19,7 +19,7 @@ var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
 get_header('banco'); ?>
 
 	<main id="content" class="home-banco banco <?php echo odin_classes_page_full(); ?>" tabindex="-1" role="main">
-		<h1>Edição de práticas existentes</h1>
+		<h1 id="busca-cadastro">Edição de práticas existentes</h1>
 		<?php if (!is_user_logged_in()){
 			?>
 
@@ -41,7 +41,7 @@ get_header('banco'); ?>
 		else{
 			global $user_ID;
 			$user_id = $user_ID;
-			$args = array( 'author' => $user_id, 'post_type'=>'pratica' );
+			$args = array( 'author' => $user_id, 'post_type'=>'pratica', 'posts_per_page'=>-1 );
 			$query = new WP_Query(  $args);
 			// echo '<pre>';
 			// print_r($user_ID);
@@ -53,15 +53,23 @@ get_header('banco'); ?>
 	
 		<div  <?php if (is_user_logged_in()){echo "style='display:block;'"; }?> class="row" id="praticas-usuario">
 			<h4>Selecione a prática que quer editar.</h4>
-			<?php if ( $query->have_posts() ) { 
-					while ( $query->have_posts() ) : $query->the_post();
-						echo '<a class="praticaEdit" href="#" data-id="'.get_the_id().'" > <h5>'.get_the_title( ).'</h5></a>';
-					endwhile;
-				 }
-			else{
-				echo "<h3>Você não tem práticas cadastradas</h3";
+			<div class="listaPraticasEdit">
+				<?php if ( $query->have_posts() ) { 
+						while ( $query->have_posts() ) : $query->the_post();
+							echo '<a class="praticaEdit" href="#" data-id="'.get_the_id().'" > <h5>'.get_the_title( ).'</h5></a>';
+						endwhile;
+					 }
+				else{
+					echo "<h3>Você não tem práticas cadastradas</h3";
+				} ?>
+			</div>
+			<h3><?php 
+			if ( ! is_admin() && current_user_can('activate_plugins')) {
+     			echo "<a href=http://beta.brasa.art.br/osc/wp-admin/>Entrar no painel</a>";
 			} ?>
 		</div>
+		<div id="resultado"></div>
+
 		<div id="continua-cadastro" class="row">
 			<h2>Cadastro de Práticas</h2>
 			<form>
@@ -178,7 +186,6 @@ get_header('banco'); ?>
    					 </div> -->
 					
 				<div class="clearfix"></div>
-				<div id="resultado"></div>
 				<a class="enviar" id="enviar-cadastro" href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/cadastrar-banco.png">Cadastrar</a>			</form>
 				</div>
 			</form>

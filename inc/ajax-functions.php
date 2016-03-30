@@ -164,7 +164,19 @@ function cadastra_pratica_func(){
 	}
 	else{
 		$pratica_id=$_POST['postId'];
+		$my_post = array(
+			 'ID'           => $pratica_id,
+			'post_title'   => $data['title']
+		 );
+		wp_update_post( $my_post );
+		$terms = wp_get_post_terms( $pratica_id, 'tema');
+		foreach ($terms as $term) {
+			wp_remove_object_terms( $pratica_id, $term->term_id , 'tema');
+		}
+
 	}
+
+
 	$anexos = $data['anexos'];
 	$anexosvetor = explode(",", $anexos);
 	foreach ($anexosvetor as $id) {
@@ -179,10 +191,21 @@ function cadastra_pratica_func(){
 			update_field($key, $value,$pratica_id );
 		}
 	}
-
 	wp_set_post_terms( $pratica_id, $data['tax'], 'tema', true );
 	if (isset($data['imagem_destacada'])){
 		set_post_thumbnail( $pratica_id, $data['imagem_destacada'] ); 
+	}
+	$my_post = array(
+			 'ID'           => $pratica_id,
+			'post_status'   => 'draft'
+		 );
+	wp_update_post( $my_post );
+	$resposta['mensagem']= '<h2>Obrigado, sua prática será ser analisada e publicada futuramente.</h2>';
+	if ($_POST['edicao']==1) {
+		$resposta['praticasEdits']= $pratica_id;
+		$resposta['edicao']= 1;
+
+		
 	}
 	echo json_encode($resposta);
 	
@@ -205,7 +228,7 @@ function ajax_cadastra_usuario($nome, $email, $senha, $edicao){
 
 	}
 	else if (email_exists($email) !== false ){
-		return 'E-mail ja cadastrado e senha não confere ou nome de usuario existente';
+		return 'E-mail ja cadastrado e senha não confere.';
 			wp_die();
 
 	}
@@ -571,29 +594,32 @@ function edita_pratica_pega_func(){
 		
 		}
 	}
-	$resposta['nome_da_entidade']=get_field('nome_da_entidade', $_POST['id']);
-	$resposta['telefone_da_entidade']=get_field('telefone_da_entidade', $_POST['id']);
-	$resposta['endereco_da_entidade']=get_field('endereco_da_entidade', $_POST['id']);
-	$resposta['site_da_entidade']=get_field('site_da_entidade', $_POST['id']);
-	$resposta['email_de_contato']=get_field('e-mail_de_contato', $_POST['id']);
-	$resposta['resumo_da_pratica']=get_field('resumo_da_pratica', $_POST['id']);
-	$resposta['objetivo']=get_field('objetivo', $_POST['id']);
-	$resposta['publicoAlvo']=get_field('nome_da_entidade', $_POST['id']);
-	$iframe = get_field('video', $_POST['id']);
-	if (isset($iframe)) {
-		preg_match('/src="(.+?)"/', $iframe, $matches);
-		if (isset($matches[1])) {
-			$url=explode('?', $matches[1]);
-			$resposta['video']=$url[0];
+	$resposta['nome_da_entidade']=get_post_meta( $id, 'nome_da_entidade', 1);
+	$resposta['telefone_da_entidade']=get_post_meta($id, 'telefone_da_entidade', 1);
+	$resposta['endereco_da_entidade']=get_post_meta($id, 'endereco_da_entidade', 1);
+	$resposta['site_da_entidade']=get_post_meta($id, 'site_da_entidade',1);
+	$resposta['email_de_contato']=get_post_meta($id, 'e-mail_de_contato',1);
+	$resposta['resumo_da_pratica']=get_post_meta($id, 'resumo_da_pratica', 1);
+	$resposta['objetivo']=get_post_meta($id, 'objetivo', 1);
+	$resposta['publicoAlvo']=get_post_meta($id, 'publico-alvo', 1);
+	$resposta['video']	 = get_post_meta($id, 'video', 1);
+	// if (isset($iframe)) {
+	// 	preg_match('/src="(.+?)"/', $iframe, $matches);
+	// 	if (isset($matches[1])) {
+	// 		$url=explode('?', $matches[1]);
+	// 		$resposta['video']=$url[0];
 
-		}
+	// 	}
+	// }
+	
+	$resposta['local_de_implementacao']=get_post_meta($id, 'local_de_implementacao', 1);
+	$resposta['descricao_das_acoes']=get_post_meta($id, 'descricao_das_acoes', 1);
+	$resposta['resultados']=get_post_meta($id, 'resultados', 1);
+	if (has_post_thumbnail($id )) {
+		$resposta['imagem_destacada'] = wp_get_attachment_url( get_post_thumbnail_id($id) );
+		$resposta['imagem_destacada_id'] = get_post_thumbnail_id($id);			
 	}
 	
-	$resposta['local_de_implementacao']=get_field('local_de_implementacao', $_POST['id']);
-	$resposta['descricao_das_acoes']=get_field('descricao_das_acoes', $_POST['id']);
-	$resposta['resultados']=get_field('resultados', $_POST['id']);
-	$resposta['imagem_destacada'] = wp_get_attachment_url( get_post_thumbnail_id($id) );
-	$resposta['imagem_destacada_id'] = get_post_thumbnail_id($id);
 	$resposta['postId'] = $id;
 
 	$anexos= $attachments = get_posts( array(

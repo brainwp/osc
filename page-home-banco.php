@@ -46,7 +46,7 @@ get_header('banco'); ?>
 					<input id="filtro-palavra" placeholder="Palavra-chave" type="text">
 					<?php drop_tags('Tema', 'tema', 1,"tema-busca", 1)?>
 					<select name="uf-busca" class="uf" id="uf-busca">
-						<option value="">UF</option>
+						<option value="0">UF</option>
 						<?php
 						global $wpdb;
 						$results = $wpdb->get_results( 'SELECT cod_estados, sigla
@@ -83,7 +83,7 @@ get_header('banco'); ?>
 					<?php 
 					drop_tags('Tema', 'tema', 0, "tema-cadastro")?>
 					<select class='uf inline-block' name="uf" id="uf-cadastro">
-						<option value="">UF</option>
+						<option value="0">UF</option>
 						<?php
 						global $wpdb;
 						$results = $wpdb->get_results( 'SELECT cod_estados, sigla
@@ -114,11 +114,15 @@ get_header('banco'); ?>
 			</div>
 		</div>
 		<div class="clearfix"></div>
-		<!-- <div id="modificar" class='col-sm-12'>
-			<h3>Já cadastrou e quer modificar sua prática? <a href="#">Clique aqui</a></h3>
-		</div> -->
+		<div id="modificar" class='col-sm-12'>
+			<h3>Já cadastrou e quer modificar sua prática? <a href="
+				<?php 
+					$page=get_page_by_title( 'editar praticas' );
+			 		echo get_permalink($page);
+			 		?>">Clique aqui</a></h3>
+		</div>
 		<div id="resultados-busca" class="row"></div>
-
+		<div id="resultado"></div>
 		<div id="continua-cadastro" class="row">
 			<h2>Cadastro de Práticas</h2>
 			<form>
@@ -126,7 +130,7 @@ get_header('banco'); ?>
 					<h3>Identificação da prática</h3>
 					<input class="title nome" name="nome-projeto" placeholder="Nome da prática *" type="text">
 					<select class='uf inline-block acf' name="uf" id="uf-continua-cadastro">
-						<option value="">UF *</option>
+						<option value="0">UF *</option>
 						<?php
 						global $wpdb;
 						$results = $wpdb->get_results( 'SELECT cod_estados, sigla
@@ -171,7 +175,9 @@ get_header('banco'); ?>
 					<input class="acf" name="nome_do_responsavel" placeholder="Nome" type="text">
 					<input class="acf" name="e-mail_do_responsavel" placeholder="E-mail" type="text">
 					<input class="telefone acf " name="telefone_do_responsavel" placeholder="Telefone do responsável" type="text"> -->
+				<div id="erro"></div>
 				</div>
+
 				<div class="col-cadastro col-sm-6">
 					<h3>Descrição das Ações</h3>
 					<?php drop_tags('Tema *', 'tema', 0, "tema-continua-cadastro")?>
@@ -221,10 +227,10 @@ get_header('banco'); ?>
    					 </div> -->
 					
 				<div class="clearfix"></div>
-				<div id="resultado"></div>
 				<input id="edicao" value="0" class="" name="edicao"  type="hidden" >
-
+		
 				<a class="enviar" id="enviar-cadastro" href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/cadastrar-banco.png">Cadastrar</a>			</form>
+				<div class="ajax-loader enviarCadastro"></div>
 				</div>
 			</form>
 		</div>

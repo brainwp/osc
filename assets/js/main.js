@@ -157,7 +157,9 @@ jQuery(document).ready(function($) {
 
 
 		console.log(data);
-		$.post(odin_main.ajaxurl, data, function(response) {
+			$('.enviarCadastro').fadeIn();
+			$('#enviar-cadastro').fadeOut();		
+			$.post(odin_main.ajaxurl, data, function(response) {
 			console.log(response);
            	response=jQuery.parseJSON(response);
 
@@ -167,18 +169,30 @@ jQuery(document).ready(function($) {
        				 scrollTop: $("#busca-cadastro").offset().top
        				}, 2000);
 				$('#continua-cadastro').fadeOut(2010);
-				// $('input[type="text"], input[type="email"], input[type="password"]').val("");
-				// $('textarea').val("");
-				// $('select ').val('0');
-				// $('select #uf').val("");
+				$('#resultado').html(response.mensagem);
 
+				$('input[type="text"], input[type="email"], input[type="password"]').val("");
+				$('textarea').val("");
+				$('select').val('0');
+				// $('select #uf').val("");
+				$('#cadastro .nome').prop('disabled', false);
+				$('#cadastro .uf').prop('disabled', false);
+				$('#cadastro .cidade').prop('disabled', false);
+				$('#cadastro #tema-cadastro').prop('disabled', false);
+				$('.enviarCadastro').fadeOut();
+				$('#enviar-cadastro').fadeIn();
 
 
 			}
 			else{
-				$('#continua-cadastro #resultado').html(response.erro);
+				$('#continua-cadastro #erro').html(response.erro);
+				$('.enviarCadastro').fadeOut();
+				$('#enviar-cadastro').fadeIn();
 
 			}
+			if (response.edicao==1) {
+				$('.listaPraticasEdit a[data-id="'+response.praticasEdits+'"]').fadeOut();
+			};
 		});	
 	});
 	// envia cadastro
@@ -403,6 +417,7 @@ $("#anexos").click(function(e){
 				'action': 'edita_pratica_pega',
 				'id':id,
 		};
+		console.log(data)
 		$.post(odin_main.ajaxurl, data, function(response) {
 			console.log(response);
            	response=jQuery.parseJSON(response);
@@ -435,39 +450,25 @@ $("#anexos").click(function(e){
 			$('input[name="nome_da_entidade"]').val(response.nome_da_entidade);
 			$('input[name="nome_da_entidade"]').val(response.nome_da_entidade);
 			$('input[name="postId"]').val(response.postId);
-
-			var preview = "";
-			var parent= $("#ibenic_file_upload");
-		    preview = "<img src='" + response.imagem_destacada + "' />";
-		    var previewID = parent.attr("id") + "_preview";
-		    var previewParent = $("#"+previewID);
-		    previewParent.show();
-		    previewParent.children(".ibenic_file_preview").empty().append( preview );
-		    previewParent.children( "button" ).attr("data-fileurl",data.url );
-		    parent.children("input").val("");
-		    parent.hide();
-		    $('#imagem_destacada').attr('data-id', response.imagem_destacada_id);
-		   	$('.ibenic_file_delete').attr('data-fileurl', response.imagem_destacada);
+			console.log(response.imagem_destacada);
+			if (response.imagem_destacada!=undefined) {
+				var preview = "";
+				var parent= $("#ibenic_file_upload");
+		  		preview = "<img src='" + response.imagem_destacada + "' />";
+		    	var previewID = parent.attr("id") + "_preview";
+		    	var previewParent = $("#"+previewID);
+		    	previewParent.show();
+		    	previewParent.children(".ibenic_file_preview").empty().append( preview );
+		    	previewParent.children( "button" ).attr("data-fileurl",data.url );
+		    	parent.children("input").val("");
+		    	parent.hide();
+			    $('#imagem_destacada').attr('data-id', response.imagem_destacada_id);
+			   	$('.ibenic_file_delete').attr('data-fileurl', response.imagem_destacada);
+			};
+			
 		   	$('.imagensAnexas').html(response.galeria);
 		   	$('.arquivosAnexos').html(response.anexos);
 
-
-
-
-			$('.nome').val(response.nomeProjeto);
-			$('.nome').val(response.nomeProjeto);
-			$('.nome').val(response.nomeProjeto);
-			$('.nome').val(response.nomeProjeto);
-			$('.nome').val(response.nomeProjeto);
-			$('.nome').val(response.nomeProjeto);
-			$('.nome').val(response.nomeProjeto);
-			$('.nome').val(response.nomeProjeto);
-			$('.nome').val(response.nomeProjeto);
-			$('.nome').val(response.nomeProjeto);
-			$('.nome').val(response.nomeProjeto);
-			$('.nome').val(response.nomeProjeto);
-			$('.nome').val(response.nomeProjeto);
-			$('.nome').val(response.nomeProjeto);
 			$('#continua-cadastro').fadeIn();
 		});
 

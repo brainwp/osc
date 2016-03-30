@@ -5,13 +5,35 @@
  * @package Odin
  * @since 2.2.0
  */
-
 get_header('banco'); 
 $post_type = get_query_var('post_type'); 
-$tema=$_GET["tema"];
-$uf=$_GET["uf"];
-$cidade=$_GET["cidade"];
-$nome=$_GET["s"];
+if (isset($_GET['tema'])) {
+	$tema=$_GET["tema"];
+}
+else{
+	$tema=0;
+}
+if (isset($_GET['uf'])) {
+	$uf=$_GET["uf"];
+}
+else{
+	$uf=0;
+}
+if (isset($_GET['cidade'])) {
+	$cidade=$_GET["cidade"];
+}
+else{
+	$cidade=0;
+}
+if (isset($_GET['s'])&&$_GET['s']!="") {
+	$nome=$_GET["s"];
+	add_filter( 'posts_where', 'cf_search_where' );
+	add_filter('posts_join', 'cf_search_join' );
+	add_filter( 'posts_distinct', 'cf_search_distinct' );
+}
+else{
+	$nome="";
+}
 if( $post_type == 'pratica'){
 $args = array(
 	's'			=> $nome,
@@ -19,7 +41,7 @@ $args = array(
 	'paged' =>get_query_var( 'paged' ),
 
 );
-if ($cidade != 0 && $uf !=''){
+if ($cidade != 0 && $uf !=0){
 	$args['meta_query']=array(
 		array(
 			'key'     => 'uf',
@@ -42,7 +64,7 @@ elseif($cidade!=0){
 		),
 	);
 }
-else if ($uf!=""){
+else if ($uf!="0"){
 	$args['meta_query']=array(
 		array(
 			'key'     => 'uf',

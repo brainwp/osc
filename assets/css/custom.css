@@ -519,7 +519,7 @@ ul.page-numbers>li>span.current, ul.page-numbers>li>span.current:hover, ul.page-
 	color:white;
 	background-color:#9ab87a;
 }
-#resultado p{
+#erro p{
 	color:red;
 }
 main#content{
