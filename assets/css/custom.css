@@ -658,3 +658,18 @@ label.cabinet input.file
 #praticas-usuario{
 	margin-top: 20px;
 }
+.deletaGaleria{
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 9px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.48);
+    font-size: 16px;
+    border-radius: 503px;
+    transform: translate(-50%, -50%);
+}
+.cadaGaleria{
+	position: relative;
+	display: inline-block;
+}

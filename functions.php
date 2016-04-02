@@ -451,97 +451,42 @@ add_filter('authenticate', function($user, $email, $password){
 add_filter('login_redirect', '_catch_login_error', 10, 3);
  
 function _catch_login_error($redir1, $redir2, $wperr_user)
-{
+{	
     if(!is_wp_error($wperr_user) || !$wperr_user->get_error_code()) return $redir1;
- 	$url=parse_url(($_SERVER["HTTP_REFERER"]));
-	if ($url['host'].$url['path']=='http://beta.brasa.art.br/osc/editar-praticas/') {
+    if (isset($_SERVER["HTTP_REFERER"])) {
+	 	$url=parse_url(($_SERVER["HTTP_REFERER"]));
+		if ($url['host'].$url['path']=='http://rede.com.br/osc/edicao-de-praticas-existentes/') {
 
-	    switch($wperr_user->get_error_code())
-	    {   
-	    	case 'invalid':
-	        	$erro=urlencode("Senha não confere ou e-mail incorreto.");
-	            wp_redirect($url['host'].$url['path'].'/?erro='.$erro); 
-	        
-	    }
-	 }
+		    switch($wperr_user->get_error_code())
+		    {   
+		    	case 'invalid':
+		        	$erro=urlencode("Senha não confere ou e-mail incorreto.");
+		            wp_redirect($url['host'].$url['path'].'/?erro='.$erro); 
+		        
+		    }
+		 }
+    }
 	    return $redir1;
 
 }
 add_action( 'wp_authenticate', '_catch_empty_user', 1, 2 );
 
 function _catch_empty_user( $username, $pwd ) {
+	if (isset($_SERVER["HTTP_REFERER"])) {
 	 	$url=parse_url(($_SERVER["HTTP_REFERER"]));
-	if ($_SERVER["HTTP_REFERER"]=='http://beta.brasa.art.br/osc/editar-praticas/') {
-		if ( empty( $username ) ) {
-		  	    $erro= urlencode("E-mail em branco");
+		if ($_SERVER["HTTP_REFERER"]=='http://rede.com.br/osc/edicao-de-praticas-existentes/') {
+			if ( empty( $username ) ) {
+			  	    $erro= urlencode("E-mail em branco");
 
-		        wp_redirect($url['host'].$url['path'].'/?erro='.$erro); 
-		    exit();
-		  }
-		  elseif( empty($pwd)){
-		  		$erro= urlencode("Senha em branco");
+			        wp_redirect($url['host'].$url['path'].'/?erro='.$erro); 
+			    exit();
+			  }
+			  elseif( empty($pwd)){
+			  		$erro= urlencode("Senha em branco");
 
-		        wp_redirect($url['host'].$url['path'].'/?erro='.$erro); 
-		  }
+			        wp_redirect($url['host'].$url['path'].'/?erro='.$erro); 
+			  }
+		}
 	}
   
 }
-
-
-
-
-/**
- * Extend WordPress search to include custom fields
- *
- * http://adambalee.com
- */
-
-/**
- * Join posts and postmeta tables
- *
- * http://codex.wordpress.org/Plugin_API/Filter_Reference/posts_join
- */
-function cf_search_join( $join ) {
-    global $wpdb;
-
-    if ( is_search() ) {    
-        $join .=' LEFT JOIN '.$wpdb->postmeta. ' ON '. $wpdb->posts . '.ID = ' . $wpdb->postmeta . '.post_id ';
-    }
-    
-    return $join;
-}
-
-/**
- * Modify the search query with posts_where
- *
- * http://codex.wordpress.org/Plugin_API/Filter_Reference/posts_where
- */
-function cf_search_where( $where ) {
-    global $pagenow, $wpdb;
-   
-    if ( is_search() ) {
-        $where = preg_replace(
-            "/\(\s*".$wpdb->posts.".post_title\s+LIKE\s*(\'[^\']+\')\s*\)/",
-            "(".$wpdb->posts.".post_title LIKE $1) OR (".$wpdb->postmeta.".meta_value LIKE $1)", $where );
-    }
-
-    return $where;
-}
-
-
-/**
- * Prevent duplicates
- *
- * http://codex.wordpress.org/Plugin_API/Filter_Reference/posts_distinct
- */
-function cf_search_distinct( $where ) {
-    global $wpdb;
-
-    if ( is_search() ) {
-        return "DISTINCT";
-    }
-
-    return $where;
-}
-
-?>

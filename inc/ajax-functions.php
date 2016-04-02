@@ -633,7 +633,7 @@ function edita_pratica_pega_func(){
 	$resposta['anexos'] = "";
 	foreach ($anexos as $anexo ) {
 		if (wp_attachment_is_image( $anexo->ID )) {
-			$resposta['galeria'] .= '<img class="thumb-gal" src="'.wp_get_attachment_thumb_url( $anexo->ID ).'">';
+			$resposta['galeria'] .= '<div class="cadaGaleria"><a class="deletaGaleria" data-id="'.$anexo->ID.'" href="#"> X</a><img class="thumb-gal" src="'.wp_get_attachment_thumb_url( $anexo->ID ).'"></div>';
 		}
 		else{
 			$resposta['anexos'] .= '<p>'.$anexo->guid.'</p>';
@@ -666,3 +666,10 @@ function edita_pratica_pega_func(){
 	// <textarea class='acf' rows="5"name='descricao_das_acoes' placeholder="Descrição da Ação *"></textarea>
 	// <textarea class='acf' rows="5"name='resultados' placeholder="Resultados *"></textarea>
 }
+function deleta_galeria(){
+	
+	echo ;
+	wp_die( );
+}
+add_action('wp_ajax_deleta_galeria', 'deleta_galeria');
+add_action('wp_ajax_nopriv_deleta_galeria', 'deleta_galeria'); // Allow front-end submission 

@@ -34,7 +34,7 @@ if (isset($_GET['s'])&&$_GET['s']!="") {
 	// add_filter( 'posts_distinct', 'cf_search_distinct' );
 }
 else{
-	$nome="";
+	$nome=" ";
 }
 if( $post_type == 'pratica'){
 global $wpdb;
@@ -59,7 +59,7 @@ $args = array(
 'post_status'=>'publish',
 'post__in'=> $post_ids,
 'post_type' => 'pratica',
-'paged' =>get_query_var( 'paged' ),
+'posts_per_page' =>10,
 );
 if ($cidade != 0 && $uf !=0){
 	$args['meta_query']=array(
@@ -104,7 +104,8 @@ if ($tema !=0){
 		),
 	);
 }
-
+$paged=(get_query_var('paged')) ? get_query_var('paged') : 1;
+$args['paged']=$paged;
 $query = new WP_Query( $args );
 // echo '<pre>';
 // print_r($query);

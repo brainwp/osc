@@ -46,7 +46,7 @@ jQuery(document).ready(function($) {
 				'cod_estado':$(this).val()
 		};
 		select_cidade=$(this).siblings('select.cidade');
-		console.log(data);
+		// console.log(data);
 			$.post(odin_main.ajaxurl, data, function(response) {
 			// console.log(response);
 			$(select_cidade).html(response);
@@ -156,11 +156,11 @@ jQuery(document).ready(function($) {
 		data.postId = $("#postId").val();
 
 
-		console.log(data);
+		// console.log(data);
 			$('.enviarCadastro').fadeIn();
 			$('#enviar-cadastro').fadeOut();		
 			$.post(odin_main.ajaxurl, data, function(response) {
-			console.log(response);
+			// console.log(response);
            	response=jQuery.parseJSON(response);
 
 			if (response.erro == ""){
@@ -208,10 +208,10 @@ jQuery(document).ready(function($) {
 	cidade=$("#pesquisa .cidade").val();
 	tema=$("#tema-busca").val();
 	nome=$("#filtro-palavra").val();
-	console.log('uf'+uf);
-	console.log('cidade'+cidade);
-	console.log('tema'+tema);
-	console.log('nome'+nome);
+	// console.log('uf'+uf);
+	// console.log('cidade'+cidade);
+	// console.log('tema'+tema);
+	// console.log('nome'+nome);
 
 	window.location.href = "http://beta.brasa.art.br/osc/pratica/?s="+nome+"&tema="+tema+"&cidade="+cidade+"&uf="+uf;
 	});
@@ -299,7 +299,7 @@ $(".ibenic_file_delete").on("click", function(e){
 	  	if( data.response == "SUCCESS" ){
 	  		$("#ibenic_file_upload_preview").hide();
 	  		$("#ibenic_file_upload").show();
-	  		console.log( "File successfully deleted", "success");
+	  		// console.log( "File successfully deleted", "success");
             $('#imagem_destacada').attr('data-id', '');
   	}
 
@@ -343,7 +343,7 @@ $("#anexos").click(function(e){
             contentType: false,
             processData: false,
             success: function(response){
-            	console.log(response);
+            	// console.log(response);
             	response=jQuery.parseJSON(response);
 
                 $('.upload-response').html(response.msg); // Append Server Response
@@ -417,9 +417,9 @@ $("#anexos").click(function(e){
 				'action': 'edita_pratica_pega',
 				'id':id,
 		};
-		console.log(data)
+		// console.log(data)
 		$.post(odin_main.ajaxurl, data, function(response) {
-			console.log(response);
+			// console.log(response);
            	response=jQuery.parseJSON(response);
 
 			$('.title.nome').val(response.nomeProjeto);
@@ -450,7 +450,7 @@ $("#anexos").click(function(e){
 			$('input[name="nome_da_entidade"]').val(response.nome_da_entidade);
 			$('input[name="nome_da_entidade"]').val(response.nome_da_entidade);
 			$('input[name="postId"]').val(response.postId);
-			console.log(response.imagem_destacada);
+			// console.log(response.imagem_destacada);
 			if (response.imagem_destacada!=undefined) {
 				var preview = "";
 				var parent= $("#ibenic_file_upload");
@@ -474,5 +474,18 @@ $("#anexos").click(function(e){
 
 
 	});
-    
+	$(document).on('click',".deletaGaleria",function(e){
+		e.preventDefault(); 
+		id=$(this).attr('data-id');
+		var data = {
+				'action': 'deleta_galeria',
+				'id':id,
+		};
+		console.log(data);
+		$.post(odin_main.ajaxurl, data, function(response) {
+			console.log(response);
+		});
+
+
+	});
 });
