@@ -35,7 +35,7 @@ body{
 	padding-right: 32px;
 }
 #header.header-todos input, #header.header-todos .form-group {
-	background-color: rgba(216, 216, 216, 0.62)f;
+	background-color: rgba(216, 216, 216, 0.62);
 	border:none;
 	width: 100%;
     box-shadow: none;
@@ -55,7 +55,7 @@ body{
     right: 0;
 }
 #header.header-todos form {
-	    width: 37%;
+	    width: 33%;
 	    margin-top: 0;
 
 }
