@@ -668,8 +668,51 @@ function edita_pratica_pega_func(){
 }
 function deleta_galeria(){
 	
-	echo ;
+	echo '';
 	wp_die( );
 }
 add_action('wp_ajax_deleta_galeria', 'deleta_galeria');
 add_action('wp_ajax_nopriv_deleta_galeria', 'deleta_galeria'); // Allow front-end submission 
+
+
+function transfere_pratica(){
+	$id=$_POST['id'];
+	$userId=$_POST['userId'];
+	$my_post = array(
+      'ID'           => $id,
+      'post_author'   => $userId
+  );
+
+  $resultado=wp_update_post( $my_post );
+	$resposta['html']=$resultado;
+	echo json_encode($resposta);
+	wp_die( );
+}
+add_action('wp_ajax_transfere_pratica', 'transfere_pratica');
+add_action('wp_ajax_nopriv_transfere_pratica', 'transfere_pratica'); // Allow front-end submission 
+
+function transfere_pratica_cria(){
+	$nome=$_POST['nome'];
+	$email=$_POST['email'];
+	$senha=$_POST['senha'];
+	$user_id = username_exists( $nome );
+	if ( !$user_id and email_exists($email) == false and $senha !="" ) {
+		$user_id = wp_create_user( $nome, $senha, $email );
+		if ($user_id->errors ==""){
+			$resposta['html'] = 1;
+
+
+		}
+		else{
+			$resposta['html'] = 'preenchimento indevido';
+
+		}		
+	} else {
+		$resposta['html'] = 'Usuário já existe ou senha em branco';
+	}
+	echo json_encode($resposta);
+	wp_die( );
+}
+add_action('wp_ajax_transfere_pratica_cria', 'transfere_pratica_cria');
+add_action('wp_ajax_nopriv_transfere_pratica_cria', 'transfere_pratica_cria'); // Allow front-end submission 
+

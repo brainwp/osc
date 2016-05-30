@@ -30,7 +30,7 @@
 		</div>
 	</a>
 
-	<header id="header" role="banner">
+	<header id="header" class='header-banco' role="banner">
 		<div class="container">
 
 			<div id="main-navigation" class="navbar navbar-default">

@@ -1,8 +1,8 @@
 <?php
 /**
- * Template Name: Edição
+ * Template Name: Transferência
  *
- * Template para a Edição de práticas existentes
+ * Template para a tramsferência de práticas existentes
  *
  * @package Odin
  * @since 2.2.0
@@ -19,7 +19,7 @@ var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
 get_header('banco'); ?>
 
 	<main id="content" class="home-banco banco <?php echo odin_classes_page_full(); ?>" tabindex="-1" role="main">
-		<h1 id="busca-cadastro">Edição de práticas existentes</h1>
+		<h1 id="busca-cadastro">Transferência de práticas existentes</h1>
 		<?php if (!is_user_logged_in()){
 			?>
 
@@ -38,10 +38,10 @@ get_header('banco'); ?>
 				</div>
 
 		<?php }
-		else{
-			global $user_ID;
+		elseif ( ! is_admin() && current_user_can('activate_plugins')) {
+     		global $user_ID;
 			$user_id = $user_ID;
-			$args = array( 'author' => $user_id, 'post_type'=>'pratica', 'posts_per_page'=>-1 );
+			$args = array( 'post_type'=>'pratica', 'posts_per_page'=>-1 );
 			$query = new WP_Query(  $args);
 			// echo '<pre>';
 			// print_r($user_ID);
@@ -53,16 +53,36 @@ get_header('banco'); ?>
 	
 		<div  <?php if (is_user_logged_in()){echo "style='display:block;'"; }?> class="row" id="praticas-usuario">
 			<h4>Selecione a prática que quer editar.</h4>
-			<div class="listaPraticasEdit">
+			<div class="listaPraticasEdit col-md-6">
+				<div class="resposta"></div>
 				<?php if ( $query->have_posts() ) { 
 						while ( $query->have_posts() ) : $query->the_post();
-							echo '<a class="praticaEdit" href="#" data-id="'.get_the_id().'" > <h5>'.get_the_title( ).'</h5></a>';
+							$user=get_user_by( 'id',$post->post_author );
+							$userId=$post->post_author;
+							// print_r($user->user_nicename);
+							echo '<a class="transferencia-pratica" href="#" data-id="'.get_the_id().'" > <h5>'.get_the_title( ).'</h5></a><input data-id="'.get_the_id().'" class="transfere" name="transfere" type="submit" value="transferir">';
+							 wp_dropdown_users( array('selected' =>$userId, 'class'=>get_the_id())); 
 						endwhile;
+						?>
+						<div class="clearfix"></div>
+						<br>
+						
+						<?php 
+
 					 }
 				else{
 					echo "<h3>Você não tem práticas cadastradas</h3";
 				} ?>
 			</div>
+			<div class="col-md-6">
+				<h4>Criar usuário</h4>
+				<label>Nome de usuário: </label><input type="text"name="nome"><br>
+				<label>Senha: </label><input type="password"name="senha"><br>
+				<label>E-mail: </label><input type="email"name="email"><br>
+				<input class="criaUser" type="submit"name="enviar"><br>
+				<div class="erro"></div>
+			</div>
+			<div class="clearfix"></div>
 			<h3><?php 
 			if ( ! is_admin() && current_user_can('activate_plugins')) {
      			echo "<a href='http://observatoriosc.org.br/wp-admin'>Entrar no painel</a>";

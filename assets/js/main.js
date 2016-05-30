@@ -213,7 +213,7 @@ jQuery(document).ready(function($) {
 	// console.log('tema'+tema);
 	// console.log('nome'+nome);
 
-	window.location.href = "http://beta.brasa.art.br/osc/pratica/?s="+nome+"&tema="+tema+"&cidade="+cidade+"&uf="+uf;
+	window.location.href = "/pratica/?s="+nome+"&tema="+tema+"&cidade="+cidade+"&uf="+uf;
 	});
 
 
@@ -474,6 +474,55 @@ $("#anexos").click(function(e){
 
 
 	});
+	$("input.transfere").click(function(e){
+		e.preventDefault();
+		var id = $(this).attr('data-id');
+
+		var userId = $('.'+id).val();
+		var data = {
+				'action': 'transfere_pratica',
+				'id':id,
+				'userId':userId
+		};
+
+		$.post(odin_main.ajaxurl, data, function(response) {
+			console.log(response);
+           	response=jQuery.parseJSON(response);
+           	           		window.location.reload(false); 
+
+        });
+
+    });     	
+	$("input.criaUser").click(function(e){
+		e.preventDefault();
+		var nome = $('input[name="nome"]').val();
+		var senha = $('input[name="senha"]').val();
+		var email = $('input[name="email"]').val();
+		var data = {
+				'action': 'transfere_pratica_cria',
+				'nome':nome,
+				'senha':senha,
+				'email':email,
+		};
+		console.log(data);
+
+		$.post(odin_main.ajaxurl, data, function(response) {
+			console.log(response);
+           	response=jQuery.parseJSON(response);
+           	if (response.html!=1){
+           		$('.erro').html(response.html);
+
+           	}
+           	else{
+           		window.location.reload(false); 
+
+           	}
+
+
+        });
+
+    });     	
+
 	$(document).on('click',".deletaGaleria",function(e){
 		e.preventDefault(); 
 		id=$(this).attr('data-id');
@@ -488,4 +537,5 @@ $("#anexos").click(function(e){
 
 
 	});
+
 });

@@ -30,74 +30,54 @@
 		</div>
 	</a>
 
-	<header id="header" role="banner">
-		<div class="container">
-			<div class="page-header hidden-xs">
-				<?php if ( is_home() ) : ?>
-					<h1 class="site-title">
-						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-							<?php bloginfo( 'name' ); ?>
-						</a>
-					</h1>
-					<h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
-				<?php else : ?>
-					<div class="site-title h1">
-						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
+	<header id="header" class="header-todos"role="banner">
+		<div class="container row">
+			<div id="logo"class='col-sm-4'>
+				<img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-osc.png" alt="">
+			</div>
+			<div class='col-sm-8'>
+
+				<div id="main-navigation" class=" col-sm-12 navbar navbar-default">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-navigation">
+						<span class="sr-only"><?php _e( 'Toggle navigation', 'odin' ); ?></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand visible-xs-block" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
 							<?php bloginfo( 'name' ); ?>
 						</a>
 					</div>
-					<div class="site-description h2">
-						<?php bloginfo( 'description' ); ?>
-					</div>
-				<?php endif ?>
-
-				<?php
-					$header_image = get_header_image();
-					if ( ! empty( $header_image ) ) :
-				?>
-					<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-						<img src="<?php echo esc_url( $header_image ); ?>" height="<?php esc_attr_e( $header_image->height ); ?>" width="<?php esc_attr_e( $header_image->width ); ?>" alt="" />
-					</a>
-				<?php endif; ?>
-			</div><!-- .site-header-->
-
-			<div id="main-navigation" class="navbar navbar-default">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-navigation">
-					<span class="sr-only"><?php _e( 'Toggle navigation', 'odin' ); ?></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand visible-xs-block" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-						<?php bloginfo( 'name' ); ?>
-					</a>
+					<nav class="collapse navbar-collapse navbar-main-navigation" role="navigation">
+						<?php
+							wp_nav_menu(
+								array(
+									'theme_location' => 'main-menu',
+									'depth'          => 2,
+									'container'      => false,
+									'menu_class'     => 'nav navbar-nav',
+									'fallback_cb'    => 'Odin_Bootstrap_Nav_Walker::fallback',
+									'walker'         => new Odin_Bootstrap_Nav_Walker()
+								)
+							);
+						?>
+						
+					</nav><!-- .navbar-collapse -->
+				</div><!-- #main-navigation-->
+				<div class="col-sm-6 texto-header">
+					Modelo de descrição falanso rapidamente sobre o que é o site Observatório da Sociedade Civil. Use no máximo  três linhas para não comprometer o layout.
 				</div>
-				<nav class="collapse navbar-collapse navbar-main-navigation" role="navigation">
-					<?php
-						wp_nav_menu(
-							array(
-								'theme_location' => 'main-menu',
-								'depth'          => 2,
-								'container'      => false,
-								'menu_class'     => 'nav navbar-nav',
-								'fallback_cb'    => 'Odin_Bootstrap_Nav_Walker::fallback',
-								'walker'         => new Odin_Bootstrap_Nav_Walker()
-							)
-						);
-					?>
-					<form method="get" class="navbar-form navbar-right" action="<?php echo esc_url( home_url( '/' ) ); ?>" role="search">
-						<label for="navbar-search" class="sr-only">
-							<?php _e( 'Search:', 'odin' ); ?>
-						</label>
-						<div class="form-group">
-							<input type="search" value="<?php echo get_search_query(); ?>" class="form-control" name="s" id="navbar-search" />
-						</div>
-						<button type="submit" class="btn btn-default"><?php _e( 'Search', 'odin' ); ?></button>
-					</form>
-				</nav><!-- .navbar-collapse -->
-			</div><!-- #main-navigation-->
-
+				<form method="get" class="col-sm-6 navbar-form " action="<?php echo esc_url( home_url( '/' ) ); ?>" role="search">
+					<label for="navbar-search" class="sr-only">
+						<?php _e( 'Search:', 'odin' ); ?>
+					</label>
+					<div class="form-group">
+						<input type="search" value="<?php echo get_search_query(); ?>" class="form-control" name="s" id="navbar-search" />
+					</div>
+					<button type="submit" class="btn botao-busca"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/lupa.png" alt=""></button>
+				</form>
+			</div><!--col-sm-8-->
 		</div><!-- .container-->
 	</header><!-- #header -->
 
