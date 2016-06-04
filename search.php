@@ -59,7 +59,7 @@ $args = array(
 'post_status'=>'publish',
 'post__in'=> $post_ids,
 'post_type' => 'pratica',
-'posts_per_page' =>10,
+'posts_per_page' =>12,
 );
 if ($cidade != 0 && $uf !=0){
 	$args['meta_query']=array(

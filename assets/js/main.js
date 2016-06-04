@@ -3,6 +3,7 @@ jQuery(document).ready(function($) {
 // front-page
 // front-page
 // front-page
+if ($('body').hasClass("home")){
 	$('#slider-1').owlCarousel({
  
 	    // Most important owl features
@@ -48,6 +49,7 @@ $('#slider-2').owlCarousel({
     
  
 	});
+
 	var rect = $('.current-cat').offset();
 	html= $('html').width();
 	console.log('largurahtml'+html)
@@ -67,9 +69,10 @@ $('#slider-2').owlCarousel({
 		console.log(classe)
 		var str = $(this).attr('class');
 		var res = str.split("-");
+		var cat = res[res.length-1];
 		var data = {
 				'action': 'categorias_home',
-				'cat':res[res.length-1]
+				'cat':cat
 		};
 		           	console.log(data);
 		current=$(this);           	
@@ -79,11 +82,14 @@ $('#slider-2').owlCarousel({
 			$('#categorias-conteudo').html(response['html']);
 			$('#categorias-conteudo').css('opacity', '1')
 			$(current).addClass('current-cat');
-
+			console.log (response['slug']);
+			$('.cat-btn').attr('href', response['slug']);
 
 		});
 	});
 
+}
+	
 
 // front-page
 // front-page

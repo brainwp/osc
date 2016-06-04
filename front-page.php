@@ -152,7 +152,13 @@ get_header(); ?>
 						wp_reset_postdata(); // IMPORTANT - reset the $post object so the rest of the page works correctly
 		}
 		?>
-		<div class="clearfix"></div>
+			<div class="clearfix"></div>
+			<div class="ver-todos">
+				<?php 
+				echo '<a class="cat-btn" href="'.get_term_link(get_term($cat_home )).'"><button>Ver todas Desta categoria</button></a>';
+				echo '<a href="noticia"><button>Ver todas Notícias</button></a>';
+				?>
+			</div>	
 		</div><!--categorias-->
 		<div class="row destaques-contato">
 			<div class="destaques col-md-8">

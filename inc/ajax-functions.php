@@ -734,7 +734,9 @@ function categorias_home_func(){
 			),
 		),
 	);
-	$resposta= array('html'=>''
+	$term=get_term($cat);
+	$slug=get_term_link($term);
+	$resposta= array('html'=>'', 'slug'=>$slug
 		);
 	$WP_query_cat = new WP_Query( $args );
 	
