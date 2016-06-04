@@ -716,3 +716,53 @@ function transfere_pratica_cria(){
 add_action('wp_ajax_transfere_pratica_cria', 'transfere_pratica_cria');
 add_action('wp_ajax_nopriv_transfere_pratica_cria', 'transfere_pratica_cria'); // Allow front-end submission 
 
+// frontpage
+// frontpage
+// frontpage
+add_action('wp_ajax_categorias_home', 'categorias_home_func');
+add_action('wp_ajax_nopriv_categorias_home', 'categorias_home_func'); // Allow front-end submission 
+function categorias_home_func(){
+	$cat=$_POST['cat'];
+	$args = array(
+		'post_type' => 'noticia',
+		'posts_per_page' =>8,
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'category',
+				'field'    => 'ID',
+				'terms'    => $cat,
+			),
+		),
+	);
+	$resposta= array('html'=>''
+		);
+	$WP_query_cat = new WP_Query( $args );
+	
+	if( $WP_query_cat->have_posts()  )
+	{
+		while ( $WP_query_cat->have_posts() ) {
+			if (!has_post_thumbnail( )) {
+	 					$thumb= '<img class="img wp-post-image" src="'.get_template_directory_uri().'/assets/images/logo-quadrado.png" alt="">';
+
+					 } 
+					 else{
+					 	$thumb=get_the_post_thumbnail( get_the_id(), 'destaques-categoria');
+					 }
+					$WP_query_cat->the_post();
+			$resposta['html'] .= '
+			<div class="cada-noticia col-sm-3">
+				<div class="noticia-titulo">
+					<a href="'.get_permalink( ) .'">
+						<h4>'.get_the_title( ).'</h4>
+						<p>'.get_the_excerpt( ).'</p>
+					</a>
+				</div><!--box-titulo-->'.$thumb.'
+			</div>';
+		}
+		wp_reset_postdata(); // IMPORTANT - reset the $post object so the rest of the page works correctly
+	}
+	
+	
+	echo json_encode($resposta);
+	wp_die( );
+}

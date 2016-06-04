@@ -27,7 +27,9 @@ require_once get_template_directory() . '/core/classes/class-bootstrap-nav.php';
 require_once get_template_directory() . '/core/classes/class-shortcodes.php';
 //require_once get_template_directory() . '/core/classes/class-shortcodes-menu.php';
 require_once get_template_directory() . '/core/classes/class-thumbnail-resizer.php';
-// require_once get_template_directory() . '/core/classes/class-theme-options.php';
+require_once get_template_directory() . '/core/classes/class-theme-options.php';
+require_once get_template_directory() . '/inc/options.php';
+
 // require_once get_template_directory() . '/core/classes/class-options-helper.php';
 // require_once get_template_directory() . '/core/classes/class-post-type.php';
 // require_once get_template_directory() . '/core/classes/class-taxonomy.php';
@@ -214,7 +216,7 @@ function odin_enqueue_scripts() {
 	wp_enqueue_style( 'odin-style', get_stylesheet_uri(), array(), null, 'all' );
 	wp_enqueue_style( 'custom-style', $template_url . '/assets/css/custom.css', array(), null, 'all' );
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300|Ubuntu:400,300,300italic,400italic,500,500italic', array(), null, 'all' );
-	if( is_page_template('page-equipe.php')) { 
+	if( is_page_template('page-equipe.php') OR is_home()) { 
 		wp_enqueue_script( 'owl-js',$template_url .'/inc/owl-carousel/owl-carousel/owl.carousel.js', array(), null, true );
 		wp_enqueue_style( 'owl-style', $template_url .'/inc/owl-carousel/owl-carousel/owl.carousel.css', array(), null, 'all' );
 		wp_enqueue_style( 'owl-theme', $template_url .'/inc/owl-carousel/owl-carousel/owl.theme.css', array(), null, 'all' );
@@ -389,6 +391,9 @@ function colunas_praticas( $columns ) {
 }
 
 add_image_size('pratica-lista', 200, 200, 1 );
+add_image_size('destaques-categoria', 350, 350, 1 );
+add_image_size('slider-2', 660, 415, 1 );
+add_image_size('slider-1', 1280, 400, 1 );
 function kv_handle_attachment($file_handler,$post_id,$set_thu=true) {
 	// check to make sure its a successful upload
 	if ($_FILES[$file_handler]['error'] !== UPLOAD_ERR_OK) __return_false();
@@ -490,3 +495,13 @@ function _catch_empty_user( $username, $pwd ) {
 	}
   
 }
+function my_custom_admin_styles() {
+   ?>
+        <style type="text/css">
+          .post-type-slide #edit-slug-box {
+               display: none;
+           }
+         </style>
+    <?php
+}
+add_action('admin_head', 'my_custom_admin_styles');

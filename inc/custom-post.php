@@ -1,10 +1,138 @@
 <?php 
-/////////////CPT escola
+// slides
+// slides
+// slides
+// slides
+add_action( 'init', 'slide_cpt' );
+
+function slide_cpt() {
+	$labels = array(                        
+		'name'               => 'slides',
+		'singular_name'      => 'Slide',
+		'menu_name'          => 'Slides',
+		'name_admin_bar'     => 'Slide',
+		'add_new'            => 'Adicionar Novo',
+		'add_new_item'       => 'Adicionar Novo slide',
+		'new_item'           => 'Novo slide' ,
+		'edit_item'          => 'Editar slide',
+		'view_item'          => 'Ver todos' ,
+		'all_items'          => 'Todos' ,
+		'search_items'       => 'Buscar',
+		'parent_item_colon'  => 'Pai' ,
+		'not_found'          => 'Nenhum encontrado' ,
+		'not_found_in_trash' => 'Nenhum encontrado na lixeira' ,
+	);
+
+	$args = array(
+		'labels'             => $labels,
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'query_var'          => true,
+		'rewrite'            => array( 'slug' => 'slide' ),
+		'capability_type'    => 'post',
+		'has_archive'        => true,
+		'hierarchical'       => false,
+		'menu_position'      => null,
+		'menu_icon' => 'dashicons-images-alt2',
+		'supports'           => array( 'title', 'thumbnail')
+	);
+
+	register_post_type( 'slide', $args );
+}
+// slides
+// slides
+// slides
+// slides
+// slides
+
+
+
+/////////////CPT noticia
+/////////////CPT noticia
+/////////////CPT noticia
+/////////////CPT noticia
+add_action( 'init', 'noticia_cpt' );
+
+function noticia_cpt() {
+	$labels = array(                        
+		'name'               => 'Notícias',
+		'singular_name'      => 'Notícia',
+		'menu_name'          => 'Notícias',
+		'name_admin_bar'     => 'Notícias',
+		'add_new'            => 'Adicionar nova',
+		'add_new_item'       => 'Adicionar nova Notícia',
+		'new_item'           => 'Nova Notícias' ,
+		'edit_item'          => 'Editar Notícia',
+		'view_item'          => 'Ver todas' ,
+		'all_items'          => 'Todas' ,
+		'search_items'       => 'Buscar',
+		'parent_item_colon'  => 'Mãe' ,
+		'not_found'          => 'Nenhuma encontrada' ,
+		'not_found_in_trash' => 'Nenhuma encontrada na lixeira' ,
+	);
+
+	$args = array(
+		'labels'             => $labels,
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'query_var'          => true,
+		'rewrite'            => array( 'slug' => 'noticia' ),
+		'capability_type'    => 'post',
+		'has_archive'        => true,
+		'hierarchical'       => false,
+		'menu_position'      => null,
+		'menu_icon' => 'dashicons-rss',
+		'taxonomies' => array('post_tag', 'category'),
+		'supports'           => array( 'title', 'editor', 'thumbnail', 'author', 'excerpt')
+	);
+
+	register_post_type( 'noticia', $args );
+}
+function add_custom_taxonomies_noticia() {
+	  // Add new "Locations" taxonomy to Posts
+	  register_taxonomy('Categoria', 'noticia', array(
+	    // Hierarchical taxonomy (like categories)
+	    'hierarchical' => true,
+	    // This array of options controls the labels displayed in the WordPress Admin UI
+	    'labels' => array(
+	      'name' => _x( 'Categoria', 'taxonomy general name' ),
+	      'singular_name' => _x( 'Categoria', 'taxonomy singular name' ),
+	      'search_items' =>  __( 'Buscar Categorias' ),
+	      'all_items' => __( 'Todas Categorias' ),
+	      'edit_item' => __( 'Editar Categoria' ),
+	      'update_item' => __( 'Atualizar' ),
+	      'add_new_item' => __( 'Adicionar nova categoria' ),
+	      'new_item_name' => __( 'Nova categoria ' ),
+	      'menu_name' => __( 'Categoria' ),
+		  'separate_items_with_commas' => __('Separe os itens com virgulas'),
+		  'choose_from_most_used' => __('Escolha dentre os mais utilizados')
+		
+	
+	    ),
+	    // Control the slugs used for this taxonomy
+	    'rewrite' => array(
+	      'slug' => 'tema', // This controls the base slug that will display before each term
+	      'with_front' => false, // Don't display the category base before "/locations/"
+	      'hierarchical' => true // This will allow URL's like "/locations/boston/cambridge/"
+	    ),
+	  ));
+	}
+
+	// add_action( 'init', 'add_custom_taxonomies_noticia', 0 );
+/////////////////////////////////////////
+
+
+
+/////////////CPT prática
 add_action( 'init', 'pratica_cpt' );
 
 function pratica_cpt() {
 	$labels = array(                        
-		'name'               => 'praticas Alternativas',
+		'name'               => 'Ppraticas Alternativas',
 		'singular_name'      => 'Pratica alternativa',
 		'menu_name'          => 'Praticas Alternativas',
 		'name_admin_bar'     => 'Pratica alternativa',
@@ -16,8 +144,8 @@ function pratica_cpt() {
 		'all_items'          => 'Todas' ,
 		'search_items'       => 'Buscar',
 		'parent_item_colon'  => 'Pai' ,
-		'not_found'          => 'Nenhuma encontrado' ,
-		'not_found_in_trash' => 'Nenhuma encontrado na lixeira' ,
+		'not_found'          => 'Nenhuma encontrada' ,
+		'not_found_in_trash' => 'Nenhuma encontrada na lixeira' ,
 	);
 
 	$args = array(

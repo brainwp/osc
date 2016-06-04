@@ -1,4 +1,96 @@
 jQuery(document).ready(function($) {
+// front-page
+// front-page
+// front-page
+// front-page
+	$('#slider-1').owlCarousel({
+ 
+	    // Most important owl features
+	    items : 1,
+   	    autoPlay:6000, 
+
+	    itemsDesktop : [1200,1], //5 items between 1000px and 901px
+	    itemsDesktopSmall : [900,1], // betweem 900px and 601px
+	    itemsMobile : [800,1], //5 items between 1000px and 901px
+
+	    navigation : false,
+	    pagination:false
+
+    
+ 
+	});
+$('#slider-2').owlCarousel({
+ 
+	    // Most important owl features
+	    items : 1,
+	     itemsDesktop : [1200,1], //5 items between 1000px and 901px
+	    itemsDesktopSmall : [900,1], // betweem 900px and 601px
+
+   	    autoPlay:6000, 
+	    navigation : false,
+	    pagination:true
+
+    
+ 
+	});
+	$('#categorias-nav').owlCarousel({
+ 
+	    // Most important owl features
+	    items : 5,
+   	    autoPlay:false, 
+	    navigationText : ["<div class='prev-slider-cat nav-slider'></div>","<div class='prox-slider-cat nav-slider'></div>"],
+	    itemsMobile : [992,3], //5 items between 1000px and 901px
+
+	    itemsDesktop : [1100,4], //5 items between 1000px and 901px
+	    navigation : true,
+	    pagination:false
+
+    
+ 
+	});
+	var rect = $('.current-cat').offset();
+	html= $('html').width();
+	console.log('largurahtml'+html)
+
+	rect=rect.left-html/2
+	console.log('offset'+rect)
+
+	$('#categorias-nav .owl-wrapper').css('transform','translate(-'+rect+'px)')
+	console.log(rect);
+
+
+	$(".cat-item").click(function(e){
+		$("#categorias-nav .cat-item.current-cat").removeClass('current-cat');
+		e.preventDefault();
+		classe=$(this);
+		$('#categorias-conteudo').css('opacity', '0')
+		console.log(classe)
+		var str = $(this).attr('class');
+		var res = str.split("-");
+		var data = {
+				'action': 'categorias_home',
+				'cat':res[res.length-1]
+		};
+		           	console.log(data);
+		current=$(this);           	
+		$.post(odin_main.ajaxurl, data, function(response) {
+           	response=jQuery.parseJSON(response)
+           	console.log(response);
+			$('#categorias-conteudo').html(response['html']);
+			$('#categorias-conteudo').css('opacity', '1')
+			$(current).addClass('current-cat');
+
+
+		});
+	});
+
+
+// front-page
+// front-page
+// front-page
+// front-page
+// front-page
+
 	// fitVids.
 	$( '.entry-content' ).fitVids();
 
