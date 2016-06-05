@@ -20,9 +20,17 @@ function opcoes_tema() {
     );
     $categorias=get_categories( array('orderby' => 'name', 'order'   => 'ASC', 'exclude'=>'213' ) );
     $lista_cat=array(""=>"");
-    foreach ($categorias as $category) {
-         $lista_cat[$category->term_id]=$category->name;
-     } 
+    $terms = get_terms( 'categoria_noticias' );
+                // print_r($terms);
+                if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
+                    foreach ( $terms as $term ) {
+                       $lista_cat[$term->term_id]=$term->name;
+                    }
+                }
+
+    // foreach ($categorias as $category) {
+    //      $lista_cat[$category->term_id]=$category->name;
+    //  } 
     // print_r($lista_cat);
     $settings->set_fields(
         array(

@@ -33,7 +33,9 @@
 	<header id="header" class="header-todos"role="banner">
 		<div class="container row">
 			<div id="logo"class='col-sm-4'>
-				<img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-osc.png" alt="">
+				<a href="<?php echo get_home_url( ); ?>">
+					<img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-osc.png" alt="">
+				</a>
 			</div>
 			<div class='col-sm-8'>
 
@@ -45,9 +47,7 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand visible-xs-block" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-							<?php bloginfo( 'name' ); ?>
-						</a>
+						
 					</div>
 					<nav class="collapse navbar-collapse navbar-main-navigation" role="navigation">
 						<?php

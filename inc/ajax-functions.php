@@ -728,7 +728,7 @@ function categorias_home_func(){
 		'posts_per_page' =>8,
 		'tax_query' => array(
 			array(
-				'taxonomy' => 'category',
+				'taxonomy' => 'categoria_noticias',
 				'field'    => 'ID',
 				'terms'    => $cat,
 			),

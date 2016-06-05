@@ -86,7 +86,7 @@ function noticia_cpt() {
 		'hierarchical'       => false,
 		'menu_position'      => null,
 		'menu_icon' => 'dashicons-rss',
-		'taxonomies' => array('post_tag', 'category'),
+		'taxonomies' => array('post_tag'),
 		'supports'           => array( 'title', 'editor', 'thumbnail', 'author', 'excerpt')
 	);
 
@@ -94,7 +94,7 @@ function noticia_cpt() {
 }
 function add_custom_taxonomies_noticia() {
 	  // Add new "Locations" taxonomy to Posts
-	  register_taxonomy('Categoria', 'noticia', array(
+	  register_taxonomy('categoria_noticias', 'noticia', array(
 	    // Hierarchical taxonomy (like categories)
 	    'hierarchical' => true,
 	    // This array of options controls the labels displayed in the WordPress Admin UI
@@ -115,14 +115,14 @@ function add_custom_taxonomies_noticia() {
 	    ),
 	    // Control the slugs used for this taxonomy
 	    'rewrite' => array(
-	      'slug' => 'tema', // This controls the base slug that will display before each term
+	      'slug' => 'categoria', // This controls the base slug that will display before each term
 	      'with_front' => false, // Don't display the category base before "/locations/"
 	      'hierarchical' => true // This will allow URL's like "/locations/boston/cambridge/"
 	    ),
 	  ));
 	}
 
-	// add_action( 'init', 'add_custom_taxonomies_noticia', 0 );
+	add_action( 'init', 'add_custom_taxonomies_noticia', 0 );
 /////////////////////////////////////////
 
 

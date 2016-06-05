@@ -21,7 +21,7 @@ get_header(); ?>
 					'posts_per_page' =>4,
 					'tax_query' => array(
 						array(
-							'taxonomy' => 'category',
+							'taxonomy' => 'categoria_noticias',
 							'field'    => 'slug',
 							'terms'    => 'destaque',
 						),
@@ -81,12 +81,25 @@ get_header(); ?>
 				
 					$args_cat=array(
 							'hide_empty'=>0,
-							'title_li' =>'',
-							// 'exclude' =>'213',
-							'current_category'=>$cat_home
+							'exclude' =>'219',
 						);
-					wp_list_categories( $args_cat ); 
-
+					// wp_list_categories( $args_cat );
+				$terms = get_terms( 'categoria_noticias', $args_cat );
+				// print_r($terms);
+				if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
+				    foreach ( $terms as $term ) {
+				    	// print_r();
+				    	$selecionado="";
+				    	if ($term->term_id==$cat_home){
+				    		$selecionado =' current-cat';
+				    	}
+				        echo '<li class="cat-item '.str_replace(' ', '', 'cat-item-'.$term->term_id).$selecionado.'"
+				        ><a href="'.get_term_link( $term->term_id, "categoria_noticias" ).'
+				        ">
+				        ' . $term->name . '
+				        </a></li>';
+				    }
+				}
 				?>	
 				<div class="clearfix"></div>
 
@@ -104,7 +117,7 @@ get_header(); ?>
 					'posts_per_page' =>8,
 					'tax_query' => array(
 						array(
-							'taxonomy' => 'category',
+							'taxonomy' => 'categoria_noticias',
 							'field'    => 'id',
 							'terms'    =>$cat_home,
 						),

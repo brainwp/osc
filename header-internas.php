@@ -33,7 +33,9 @@
 	<header id="header" class=" header-interna"role="banner">
 		<div class="container row">
 			<div id="logo"class='col-sm-4'>
-				<img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-osc-internas.png" alt="">
+				<a href="<?php echo get_home_url( ); ?>">
+					<img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-osc-internas.png" alt="">
+				</a>
 			</div>
 
 			<div id="main-navigation" class=" col-sm-3	 navbar navbar-default">
