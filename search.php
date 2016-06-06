@@ -5,10 +5,18 @@
  * @package Odin
  * @since 2.2.0
  */
-get_header('banco'); 
 
 
 $post_type = get_query_var('post_type'); 
+if ($post_type == 'pratica') {
+		get_header('banco'); 
+	}
+	else{
+		get_header('internas'); 
+
+	}
+
+
 if (isset($_GET['tema'])) {
 	$tema=$_GET["tema"];
 }
@@ -154,14 +162,41 @@ $query = new WP_Query( $args );
 else{
 	?>
 
-	<main id="content" class="<?php echo odin_classes_page_sidebar(); ?>" tabindex="-1" role="main">
+	<main id="content" class="row" tabindex="-1" role="main">
 			<?php if ( have_posts() ) : ?>
-
-				<header class="page-header">
-					<h1 class="page-title"><?php printf( __( 'Search Results for: %s', 'odin' ), get_search_query() ); ?></h1>
-				</header><!-- .page-header -->
-
+				<h2 class="titulo">Resultado de busca</b></h2>
+				<h4 class='resultados-cont'><b><?php echo get_search_query();?></b> retornou <b><?php echo $wp_query->found_posts; ?></b> itens</h4>
+				<div class="barra-busca">
+					<h6>Faça uma nova busca</h6>
+				<form method="get" class="form-busca" action="<?php echo esc_url( home_url( '/' ) ); ?>" role="search">
+					<label for="navbar-search" class="sr-only">
+						<?php _e( 'Search:', 'odin' ); ?>
+					</label>
+					<div class="form-group">
+						<input type="search" value="<?php echo get_search_query(); ?>" class="form-control" name="s" id="navbar-search" />
+					</div>
+					<button type="submit" class="btn botao-busca"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/lupa.png" alt=""></button>
+				</form>
+					<h6>Alguns atalhos: </h6>
 					<?php
+						wp_nav_menu(
+							array(
+								'theme_location' => 'busca-menu',
+								'depth'          => 2,
+								'container'      => false,
+								'menu_class'     => 'menu-busca',
+								'fallback_cb'    => 'Odin_Bootstrap_Nav_Walker::fallback',
+								'walker'         => new Odin_Bootstrap_Nav_Walker()
+							)
+						);
+					?>
+					<div class="clearfix"></div>
+				</div>
+
+				<?php
+					// echo '<pre>';
+					// print_r(;
+					// echo '</pre>';
 						// Start the Loop.
 						while ( have_posts() ) : the_post();
 
@@ -170,7 +205,7 @@ else{
 							 * use this in a child theme, then include a file called called content-___.php
 							 * (where ___ is the post format) and that will be used instead.
 							 */
-							get_template_part( 'content', get_post_format() );
+							get_template_part( 'content', 'noticia' );
 
 						endwhile;
 

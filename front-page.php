@@ -93,11 +93,14 @@ get_header(); ?>
 				    	if ($term->term_id==$cat_home){
 				    		$selecionado =' current-cat';
 				    	}
-				        echo '<li class="cat-item '.str_replace(' ', '', 'cat-item-'.$term->term_id).$selecionado.'"
-				        ><a href="'.get_term_link( $term->term_id, "categoria_noticias" ).'
-				        ">
-				        ' . $term->name . '
-				        </a></li>';
+				    	if ($term->count > 0) {
+ 							echo '<li class="cat-item '.str_replace(' ', '', 'cat-item-'.$term->term_id).$selecionado.'"
+					        ><a href="'.get_term_link( $term->term_id, "categoria_noticias" ).'
+					        ">
+					        ' . $term->name . '
+				       		</a></li>';	
+				    	}
+				       
 				    }
 				}
 				?>	

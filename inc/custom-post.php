@@ -1,4 +1,107 @@
 <?php 
+
+// publicacoes
+// publicacoes
+// publicacoes
+// publicacoes
+// publicacoes
+add_action( 'init', 'publicacao_cpt' );
+
+function publicacao_cpt() {
+	$labels = array(                        
+		'name'               => 'Publicações',
+		'singular_name'      => 'Publicação',
+		'menu_name'          => 'Publicações',
+		'name_admin_bar'     => 'Publicações',
+		'add_new'            => 'Adicionar nova',
+		'add_new_item'       => 'Adicionar nova Publicação',
+		'new_item'           => 'Nova Publicações' ,
+		'edit_item'          => 'Editar Publicação',
+		'view_item'          => 'Ver todas' ,
+		'all_items'          => 'Todas' ,
+		'search_items'       => 'Buscar',
+		'parent_item_colon'  => 'Mãe' ,
+		'not_found'          => 'Nenhuma encontrada' ,
+		'not_found_in_trash' => 'Nenhuma encontrada na lixeira' ,
+	);
+
+	$args = array(
+		'labels'             => $labels,
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'query_var'          => true,
+		'rewrite'            => array( 'slug' => 'publicacao' ),
+		'capability_type'    => 'post',
+		'has_archive'        => true,
+		'hierarchical'       => false,
+		'menu_position'      => null,
+		'menu_icon' => 'dashicons-rss',
+		'taxonomies' => array('post_tag'),
+		'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt')
+	);
+
+	register_post_type( 'publicacao', $args );
+}
+// publicacoes
+// publicacoes
+// publicacoes
+// publicacoes
+// publicacoes
+// publicacoes
+// publicacoes
+
+// videos
+// videos
+// videos
+// videos
+add_action( 'init', 'video_cpt' );
+
+function video_cpt() {
+	$labels = array(                        
+		'name'               => 'videos',
+		'singular_name'      => 'video',
+		'menu_name'          => 'videos',
+		'name_admin_bar'     => 'video',
+		'add_new'            => 'Adicionar Novo',
+		'add_new_item'       => 'Adicionar Novo video',
+		'new_item'           => 'Novo video' ,
+		'edit_item'          => 'Editar video',
+		'view_item'          => 'Ver todos' ,
+		'all_items'          => 'Todos' ,
+		'search_items'       => 'Buscar',
+		'parent_item_colon'  => 'Pai' ,
+		'not_found'          => 'Nenhum encontrado' ,
+		'not_found_in_trash' => 'Nenhum encontrado na lixeira' ,
+	);
+
+	$args = array(
+		'labels'             => $labels,
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'query_var'          => true,
+		'rewrite'            => array( 'slug' => 'video' ),
+		'capability_type'    => 'post',
+		'has_archive'        => true,
+		'hierarchical'       => false,
+		'menu_position'      => null,
+		'menu_icon' => 'dashicons-format-video',
+		'supports'           => array( 'title')
+	);
+
+	register_post_type( 'video', $args );
+}
+
+
+// videos
+// videos
+// videos
+// videos
+// videos
+
 // slides
 // slides
 // slides

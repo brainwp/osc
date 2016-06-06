@@ -67,6 +67,7 @@ if ( ! function_exists( 'odin_setup_features' ) ) {
 			array(
 				'main-menu' => __( 'Main Menu', 'odin' ),
 				'footer-menu' => __( 'Rodapé Menu', 'odin' ),
+				'busca-menu' => __( 'Busca Menu', 'odin' ),
 				'banco-menu' => __( 'Banco Menu', 'odin' )
 			)
 		);
@@ -391,6 +392,7 @@ function colunas_praticas( $columns ) {
 }
 
 add_image_size('pratica-lista', 200, 200, 1 );
+add_image_size('thumb-page', 996, 330, 1 );
 add_image_size('destaques-categoria', 350, 350, 1 );
 add_image_size('slider-2', 660, 415, 1 );
 add_image_size('slider-1', 1280, 400, 1 );
