@@ -579,11 +579,11 @@ color: #fff;
 .page #header.header-interna a{
 	color: #ff764c;
 }
-.page .pagination>li>a,.search ul.page-numbers>li>a,.search .pagination>li>span, .search ul.page-numbers>li>span{
+.page .pagination>li>a,.search ul.page-numbers>li>a,.page .pagination>li>span, .page ul.page-numbers>li>span{
 	color:#ff764c;
 
 }
-.page ul.page-numbers>li>span.current,.search ul.page-numbers>li>span.current:hover, .search ul.page-numbers>li>span.current:focus,
+.page ul.page-numbers>li>span.current,.page ul.page-numbers>li>span.current:hover, .page ul.page-numbers>li>span.current:focus,
 {
 	background-color:#ff764c;
     border-color: #ff764c;
@@ -596,6 +596,56 @@ color: #fff;
 /*page*/
 /*page*/
 
+/*404*/
+/*404*/
+/*404*/
+/*404*/
+/*404*/
+/*404*/
+.error404 .header-interna .navbar-form input[type="search"]{
+	background-color: #fc5833;
+
+}
+
+.error404 #footer {
+    border-top: solid 15px  #ff764c!important;
+}
+.error404  #header.header-interna{
+	background: #ff764c!important;
+
+}
+.error404 #header.header-interna a{
+	color: #ff764c;
+}
+.error404 .pagination>li>a,.search ul.page-numbers>li>a,.search .pagination>li>span, .error404 ul.page-numbers>li>span{
+	color:#ff764c;
+
+}
+.error404 ul.page-numbers>li>span.current,.error404 ul.page-numbers>li>span.current:hover, .error404 ul.page-numbers>li>span.current:focus,
+{
+	background-color:#ff764c;
+    border-color: #ff764c;
+    color: #fff;
+}
+.error404 h1{
+    margin: 50px 0 0;
+	font-size: 76px;
+    text-align: center;
+
+	font-weight: 100;
+}
+.error404 h2{
+    text-align: center;
+    margin: 0px 0 50px;
+
+	font-size: 40px;
+	font-weight: 200;
+}
+/*404*/
+/*404*/
+/*404*/
+/*404*/
+/*404*/
 
 /*video*/
 /*video*/
