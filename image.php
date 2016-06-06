@@ -8,9 +8,9 @@
  * @since 2.2.0
  */
 
-get_header(); ?>
+get_header('internas'); ?>
 
-	<main id="content" class="<?php echo odin_classes_page_sidebar(); ?>" tabindex="-1" role="main">
+	<main id="content" class="" tabindex="-1" role="main">
 
 			<?php while ( have_posts() ) : the_post(); ?>
 				<article <?php post_class(); ?>>
@@ -34,11 +34,7 @@ get_header(); ?>
 							<li class="next"><?php next_image_link( false, __( 'Next image &rarr;', 'odin' ) ); ?></li>
 						</ul><!-- .pager -->
 
-						<?php if ( ! empty( $post->post_parent ) ) : ?>
-							<ul class="pager page-title">
-								<li class="previous"><a href="<?php echo get_permalink( $post->post_parent ); ?>" title="<?php echo esc_attr( sprintf( __( 'Back to %s', 'odin' ), strip_tags( get_the_title( $post->post_parent ) ) ) ); ?>" rel="gallery"><?php printf( __( '<span class="meta-nav">&larr;</span> %s', 'odin' ), get_the_title( $post->post_parent ) ); ?></a></li>
-							</ul><!-- .pager -->
-						<?php endif; ?>
+						
 					</div><!-- .entry-content -->
 				</article>
 			<?php endwhile; ?>
@@ -46,5 +42,4 @@ get_header(); ?>
 	</main><!-- #main -->
 
 <?php
-get_sidebar();
 get_footer();

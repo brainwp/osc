@@ -1,4 +1,8 @@
 /*reset*/
+p{
+	color: #333;
+	font-size: 16px;
+}
 .page-numbers{
 	border-radius: 4px;
 	border:0;
@@ -493,7 +497,8 @@ html .owl-theme .owl-controls .owl-buttons div{
 .archive.post-type-archive-noticia .titulo,
 .archive.post-type-archive-video .titulo,
 .search .titulo,
-.page .titulo{
+.page .titulo,
+.single .titulo{
 	width: 100%;
     text-align: center;
     text-transform: uppercase;
@@ -565,26 +570,25 @@ color: #fff;
 	margin:0 auto;
 	display: block;
 }
-.page .header-interna .navbar-form input[type="search"]{
+.single .header-interna .navbar-form input[type="search"],.page .header-interna .navbar-form input[type="search"]{
 	background-color: #fc5833;
 
 }
-.page #footer {
+.single #footer ,.page #footer {
     border-top: solid 15px  #ff764c!important;
 }
-.page  #header.header-interna{
+.single  #header.header-interna,.page  #header.header-interna{
 	background: #ff764c!important;
 
 }
-.page #header.header-interna a{
-	color: #ff764c;
+.single #header.header-interna a,.page #header.header-interna a, .post-type-archive-video #header.header-interna a{
+	color: #fff;
 }
-.page .pagination>li>a,.search ul.page-numbers>li>a,.page .pagination>li>span, .page ul.page-numbers>li>span{
+.single .pagination>li>a,.single ul.page-numbers>li>a,.single .pagination>li>span, .single ul.page-numbers>li>span,.page .pagination>li>a,.page ul.page-numbers>li>a,.page .pagination>li>span, .page ul.page-numbers>li>span{
 	color:#ff764c;
 
 }
-.page ul.page-numbers>li>span.current,.page ul.page-numbers>li>span.current:hover, .page ul.page-numbers>li>span.current:focus,
-{
+.single ul.page-numbers>li>span.current,.single ul.page-numbers>li>span.current:hover, .single ul.page-numbers>li>span.current:focus,.page ul.page-numbers>li>span.current,.page ul.page-numbers>li>span.current:hover, .page ul.page-numbers>li>span.current:focus{
 	background-color:#ff764c;
     border-color: #ff764c;
     color: #fff;
@@ -595,6 +599,26 @@ color: #fff;
 /*page*/
 /*page*/
 /*page*/
+/*contato*/
+.contato{
+	max-width:350px;
+	margin:0 auto;
+
+}
+.contato input, .contato textarea{
+	width: 100%;
+    box-shadow: none;
+    border: solid 1px #ff764c;
+    padding: 9px;
+    background: #ff764c;
+    color: #fff;
+
+}
+.contato input[type="submit"]{
+	background: #ff764c;
+	border-color: #ff764c;
+	color: #fff;
+}
 
 /*404*/
 /*404*/
@@ -742,7 +766,20 @@ ul.menu-busca {
 
 
 
+/*single publicacao*/
+/*single publicacao*/
+/*single publicacao*/
+/*single publicacao*/
+/*single publicacao*/
+.single-publicacao .download-btn{
+	position: relative;
+}
 
+/*single publicacao*/
+/*single publicacao*/
+/*single publicacao*/
+/*single publicacao*/
+/*single publicacao*/
 /*archive-publicacoes category.php*/
 /*archive-publicacoes category.php*/
 /*archive-publicacoes category.php*/
