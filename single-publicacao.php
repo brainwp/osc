@@ -34,6 +34,7 @@ get_header('internas'); ?>
 					// 	comments_template();
 					// endif;
 				endwhile;
+			get_template_part( 'content', 'pre-footer') ;
 			?>
 
 	</main><!-- #main -->

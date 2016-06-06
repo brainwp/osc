@@ -41,6 +41,8 @@ get_header('internas'); ?>
 					get_template_part( 'content', 'none' );
 
 				endif;
+				get_template_part( 'content', 'pre-footer') ;
+
 			?>
 
 	</main><!-- #main -->

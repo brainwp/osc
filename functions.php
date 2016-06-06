@@ -503,6 +503,9 @@ function my_custom_admin_styles() {
           .post-type-slide #edit-slug-box {
                display: none;
            }
+           .add-category {
+           	display: none;
+           }
          </style>
     <?php
 }

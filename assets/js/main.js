@@ -67,6 +67,7 @@ $('#slider-2').owlCarousel({
 		$("#categorias-nav .cat-item.current-cat").removeClass('current-cat');
 		e.preventDefault();
 		classe=$(this);
+		$('.home .loader').fadeIn();
 		$('#categorias-conteudo').css('opacity', '0')
 		console.log(classe)
 		var str = $(this).attr('class');
@@ -81,6 +82,8 @@ $('#slider-2').owlCarousel({
 		$.post(odin_main.ajaxurl, data, function(response) {
            	response=jQuery.parseJSON(response)
            	console.log(response);
+   			$('.home .loader').fadeOut();
+
 			$('#categorias-conteudo').html(response['html']);
 			$('#categorias-conteudo').css('opacity', '1')
 			$(current).addClass('current-cat');

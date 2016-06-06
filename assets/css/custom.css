@@ -1,5 +1,5 @@
 /*reset*/
-p{
+p, .zilla-one-half{
 	color: #333;
 	font-size: 16px;
 }
@@ -34,7 +34,17 @@ a {
 .row.slider .owl-wrapper-outer{
 
 }
+.cat-links a{
+	color:#ff764c;
+}
 
+.cat-links{
+	margin:0 0 20px;
+	display: block;
+	font-size: 18px;
+	font-weight: 200;
+
+}
 /*reset*/
 body{
 }
@@ -160,8 +170,11 @@ body{
 	max-width: 1280px;
 	margin:0 auto;
 }
-#slider-1 .owl-item:nth-child(2) .box-titulo{
+#slider-1 .owl-item:nth-child(3n) .box-titulo{
 	background-color: #9ab87a;
+}
+#slider-1 .owl-item:nth-child(2n) .box-titulo{
+	background-color: rgb(22,122,192)!important;
 }
 .box-titulo h3{
 	margin-top:0;
@@ -178,11 +191,22 @@ body{
 }
 .cada-slide-1{
 	position:relative;
+    max-height: 400px;
+
+}
+.home .loader{
+	display: none;
+}
+.cada-slide-1 img{
+	width:100%;
 }
 .cada-noticia:hover .noticia-titulo{
 
 	opacity:1 ;
 }
+.cada-noticia .noticia-titulo p{
+		color: #fff;
+	}
 .noticia-titulo a, .box-titulo a{
 	color: #fff;
 }
@@ -228,24 +252,24 @@ body{
 .row.destaques-contato{
 	margin-top: 55px;
 }
-.destaques-contato .contato> div{
+.destaques-contato .contato> div, .pre-footer .box-footer{
 	background-color: #ff754c;
     padding: 23px 0;
 	position: relative;
 	margin-bottom: 20px
 
 }
-.destaques-contato .contato> div h4{
+.destaques-contato .contato> div h4, .destaques-contato .contato> div, .pre-footer .box-footer, .pre-footer .box-footer h4{
     font-weight: 300;
 	font-size: 20px;
 
 }
-.destaques-contato .contato >div img.img-contato{
+.destaques-contato .contato >div img.img-contato, .pre-footer .box-footer img.img-contato{
 	position: absolute;
 	left:20px;
 	top: 20px;
 }
-.destaques-contato .contato input, .destaques-contato .contato input:active, .destaques-contato .contato input:focus{
+.destaques-contato .contato input, .destaques-contato .contato input:active, .destaques-contato .contato input:focus, .pre-footer .box-footer input, .pre-footer .box-footer input:active, .pre-footer .box-footer finput:focus{
 	background-color: #fd5734;
 	color:#fff;
 	border:none;
@@ -255,10 +279,11 @@ body{
 	margin-top: 5px;
     padding: 12px 20px;
 	font-weight: 100;
-	opacity: 
+	font-size:14px; 
 
 
 }
+
 ::-webkit-input-placeholder { color: #333333; opacity: 1 !important; }
 :-moz-placeholder { color: #333333;}
 ::-moz-placeholder {color: #333333;}
@@ -360,7 +385,7 @@ html .owl-theme .owl-controls .owl-buttons div{
 	box-shadow: none;
 }
 
-.destaques-contato .contato input[type="submit"]{
+.destaques-contato .contato input[type="submit"], .pre-footer .box-footer input[type="submit"] {
 	background-color: transparent;
 	position: absolute;
     background-image: url('../images/enviar-newsletter.png');
@@ -374,14 +399,39 @@ html .owl-theme .owl-controls .owl-buttons div{
 
 
 }
-.destaques-contato .contato >div  h4{
+.pre-footer{
+	clear:both;
+}
+.box-footer{
+    min-height: 223px;
+   margin-top: 30px;
+
+}
+
+.box-footer:nth-child(1){
+	border-right: 10px solid #fff; 
+}
+.box-footer:nth-child(2){
+	border-left: 5px solid #fff;
+	border-right:5px solid #fff;
+}
+.box-footer:nth-child(3){
+	border-left: 10px solid #fff;
+}
+.destaques-contato .contato >div  h4, .pre-footer .box-footer h4{
 	color: #fff;
 	text-transform: none;
     margin: 0 20px 8px 80px;
 }
-.destaques-contato .link-banco p{
-	margin: 0 20px;
-	color: #fff;
+.destaques-contato .link-banco p {
+	margin: 1px 20px;
+    color: #fff;
+    font-size: 14px;
+}
+.pre-footer .box-footer.link-banco p{
+	 margin: 24px 20px;
+    color: #fff;
+    font-size: 16px;
 }
 .destaques{
 	padding-right: 15px!important;
@@ -392,6 +442,10 @@ html .owl-theme .owl-controls .owl-buttons div{
 .home #footer{
 	border-top: solid 15px #ff764d;
 
+}
+.box-footer{
+	padding-top:20px!important;
+	padding-bottom: 20px!important;
 }
 
 /*frontpage*/
@@ -407,7 +461,9 @@ html .owl-theme .owl-controls .owl-buttons div{
 /*archive-noticias category.php*/
 .header-interna .navbar-main-navigation{
 	position: relative;
-	width: 500px;
+	width: 700px;
+	    left: -200px;
+
 
 }
 .header-interna .navbar-default .navbar-toggle:hover, .header-interna .navbar-default .navbar-toggle:focus{
@@ -503,8 +559,10 @@ html .owl-theme .owl-controls .owl-buttons div{
     text-align: center;
     text-transform: uppercase;
     font-weight: 200;
-    margin: 0;
+    margin: 0 auto;
     padding: 35px 0;
+    display: block;
+    max-width: 980px;
 }
 .archive.tax-categoria_noticias .cada-noticia-archive,
 .archive.post-type-archive-publicacao .cada-noticia-archive,
@@ -554,7 +612,9 @@ color: #fff;
 .archive.post-type-archive-noticia .pagination>li>a,.archive.post-type-archive-noticia ul.page-numbers>li>a,.archive.post-type-archive-noticia .pagination>li>span, .archive.post-type-archive-noticia ul.page-numbers>li>span{
 	color:rgb(22,122,192);
 }
-
+.pagination-wrap {
+   clear: both;
+}
 /*archive-noticias category.php*/
 /*archive-noticias category.php*/
 /*archive-noticias category.php*/
@@ -641,7 +701,7 @@ color: #fff;
 .error404 #header.header-interna a{
 	color: #ff764c;
 }
-.error404 .pagination>li>a,.search ul.page-numbers>li>a,.search .pagination>li>span, .error404 ul.page-numbers>li>span{
+.error404 .pagination>li>a,.error404 ul.page-numbers>li>a,.error404 .pagination>li>span, .error404 ul.page-numbers>li>span{
 	color:#ff764c;
 
 }
@@ -679,6 +739,9 @@ color: #fff;
 .archive.post-type-archive-video .cada-noticia-archive {
 	width: 366px;
 	padding:0!important;
+}
+.post-type-archive-video .seta-noticia{
+	display: none;
 }
 .post-type-archive-video .cada-noticia-archive .titulo-materia-archive{
 	width:100%;
@@ -833,7 +896,10 @@ ul.menu-busca {
 /*archive-publicacoes category.php*/
 /*archive-publicacoes category.php*/
 
+.page-template-page-home-banco.page #footer{
+	border-top: solid 15px #9ab87a!important;
 
+}
 main{
 	background-color: #fff;
 }
@@ -1236,6 +1302,11 @@ ul.page-numbers>li>span.current, ul.page-numbers>li>span.current:hover, ul.page-
 		    margin-bottom: -10px;
 
 	}
+	.home .nav>li>a {
+   
+    	padding: 10px 5px;
+    	font-size: 12px;
+	}
 	.destaques {
 	    padding-right: 0!important;
         text-align: center;
@@ -1315,6 +1386,7 @@ ul.page-numbers>li>span.current, ul.page-numbers>li>span.current:hover, ul.page-
 		position: relative;
 		opacity: 1;
 	}
+
 	.cada-noticia img {
 	    margin: 0 auto;
 	    display: block;

@@ -37,7 +37,7 @@ function publicacao_cpt() {
 		'has_archive'        => true,
 		'hierarchical'       => false,
 		'menu_position'      => null,
-		'menu_icon' => 'dashicons-rss',
+		'menu_icon' => 'dashicons-book',
 		'taxonomies' => array('post_tag'),
 		'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt')
 	);

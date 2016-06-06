@@ -21,7 +21,7 @@
 	</div>	
 	<?php if (get_field('publicacao_arquivo')) {?>
 	 	<button class="download-btn">
-	 		<a href="href="<?php echo get_field('publicacao_arquivo'); ?>"">
+	 		<a href="<?php echo get_field('publicacao_arquivo'); ?>" download>
 	 			<img  src="<?php echo get_template_directory_uri()?>/assets/images/download-btn.png">
 	 		</a>
 	 	</button>
