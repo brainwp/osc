@@ -1,4 +1,12 @@
 /*reset*/
+#header.header-interna{
+	position: fixed;
+	z-index: 9999;
+	width: 100%;
+}
+#wrapper > *:first-child{
+	margin-top:50px;
+}
 p, .zilla-one-half{
 	color: #333;
 	font-size: 16px;
