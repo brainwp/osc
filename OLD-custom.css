@@ -1,0 +1,731 @@
+/*reset*/
+a {
+	text-decoration: none!important;
+}
+.inline-block{
+	display: inline-block;
+}
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{
+	padding: 0!important
+}
+.container{
+	width: 100%!important;
+	padding: 0!important;
+	margin: 0!important;
+}
+.row{
+	padding:0!important;
+}
+
+/*reset*/
+body{
+}
+.direita{
+	float:right;
+}
+.esquerda{
+	float: left;
+}
+/*HEADER*//*HEADER*/
+#header.header-todos{
+	margin-top:50px;
+	margin-bottom: 50px;
+}
+#header.header-todos input{
+	padding-right: 32px;
+}
+#header.header-todos input, #header.header-todos .form-group {
+	background-color: rgba(216, 216, 216, 0.62)f;
+	border:none;
+	width: 100%;
+    box-shadow: none;
+
+
+}
+.texto-header{
+    opacity: 0.6;
+    padding-right: 20px!important;
+    font-size: 12px;
+    }
+#header.header-todos form button.botao-busca{
+	position: absolute;
+	    position: absolute;
+    background: transparent;
+    top: 0;
+    right: 0;
+}
+#header.header-todos form {
+	    width: 37%;
+	    margin-top: 0;
+
+}
+#logo{
+	text-align: center;
+}
+#logo img{
+	max-width: 160px;
+}
+#header.header-todos form button.botao-busca img{
+	width: 16px;
+}
+#header.header-banco{
+	position: relative;
+	width:100%;
+	z-index: 999;
+	background-color: #9ab87a;
+	font-family: 'Ubuntu', sans-serif;
+	font-style:italic;
+	font-weight:200;
+	-webkit-box-shadow: 0px 5px 11px 0px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    0px 5px 11px 0px rgba(50, 50, 50, 0.75);
+	box-shadow:         0px 5px 11px 0px rgba(50, 50, 50, 0.75);}
+#header.header-banco a{
+	color: #fff;
+
+
+}
+.home #header{
+	background-color: transparent;
+}
+#header .container{
+	width:980px!important;
+	margin:0 auto!important;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus{
+	background-color: transparent;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form{
+	border:none;
+	background-color: transparent;
+	display:inline-block!important;
+}
+.navbar-default {
+ 	background-color: transparent;
+   	border:none;
+   	text-align: center;
+}
+.navbar-default ul li{
+    margin: 0 12px;
+}
+#main-navigation nav{
+	padding-left: 0;
+	float: left;
+}
+#main-navigation nav li:first-child, #main-navigation nav li:first-child a{
+	margin-left: 0;
+	padding-left: 0;
+}
+#header #main-navigation{
+	margin:0;
+}
+/*HEADER*//*HEADER*/
+main{
+	background-color: #fff;
+}
+#resumo-fundo{
+	padding: 65px 0 20px;
+	background-image:url('../images/fundo-header-banco.png'); 
+	background-color: #f8f8f8;
+	background-size: cover;
+}
+#resumo>div{
+	text-align: right;
+}
+#resumo p:nth-child(5){
+	max-height:0;
+	overflow: hidden;
+	-webkit-transition: max-height 1;
+	-moz-transition: max-height 1s;
+	transition: max-height 1s;
+}
+#resumo a, #resumo a:active, #resumo a:hover{
+	color:#7E7878;
+}
+#novos-logo{
+	width: 263px;
+	margin-top:20px;
+}
+#resumo h1{
+	text-transform: uppercase;
+	font-size: 50px;
+	color: #ff754c;
+}
+#resumo p, .cada-pratica-lista p{
+	font-size: 16.5px;
+	font-family: 'Source Sans pro', sans-serif;
+	text-align: center;
+	font-weight: 300;
+	color: #7E7878;
+	margin-top: 20px
+}
+#resumo #continue{
+	font-weight: 400;
+	font-style: italic;
+}
+#busca-cadastro{
+	background-color: #fff;
+}
+.row{
+    width: 980px;
+    margin:0 auto;
+
+}
+#busca-cadastro {
+	padding: 50px 0!important;
+}
+.banco h1{
+	font-size: 36px;
+	font-family: 'Ubuntu', sans-serif;
+	text-align: center;
+	color: #7E7878;
+	font-weight: 100;
+
+}
+.banco h2{
+	font-size: 30px;
+	font-family: 'Ubuntu', sans-serif;
+	text-align: center;
+	color: #7E7878;
+	font-weight: 100;
+
+}
+.banco h3{
+	font-size: 21px;
+	font-style: italic;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 100;
+	width: 250px;
+	display: block;
+	margin:0 auto;
+	text-align: center;
+	color: #7E7878;
+	margin-bottom: 25px
+
+}
+.banco h4{
+	font-size: 18px;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 200;
+	color: #7E7878;
+
+}
+#busca-cadastro >div:first-child {
+	padding-right: 18px!important;
+}
+#busca-cadastro >div:nth-child(2) {
+	padding-left: 18px!important;
+}
+.form-control { border-radius: 0; }
+
+#busca-cadastro form>input,#continua-cadastro form input,#continua-cadastro form select,#busca-cadastro form>select, #busca-cadastro form option{
+	height:40px;
+	color:#fff;
+	background-color: #9ab87a;
+	font-size: 16.5px;
+	border-radius: 0!important;
+   border: 1px solid #ccc;
+   margin-bottom: 15px;
+   padding-left:10px;
+   font-weight: 100;
+
+	font-family: 'Source Sans pro', sans-serif;
+
+
+}
+#busca-cadastro form>select, #busca-cadastro form option, #continua-cadastro form select, #continua-cadastro form option{
+	-webkit-appearance: none;
+   background-position: right 50%;
+    background-repeat: no-repeat;
+    background-image: url('../images/seta-box.png');
+    padding: .5em;
+    padding-right: 1.5em
+}
+#busca-cadastro form option:first-child{
+    font-weight: 100;
+
+}
+.home-banco  input::-webkit-input-placeholder {
+    color:    #fff;
+    font-weight: 100
+}
+.home-banco input:-moz-placeholder {
+    color:    #fff;
+    font-weight: 100;
+}
+.home-banco  input::-moz-placeholder {
+    color:    #fff;
+    font-weight: 100;
+}
+.home-banco  input:-ms-input-placeholder {
+    color:    #fff;
+    font-weight: 100;
+}
+#busca-cadastro input{
+	width: 100%;
+}
+#busca-cadastro select, #continua-cadastro select{
+	width: 100%;
+}
+#busca-cadastro select.uf{
+	width:33%;
+}
+#busca-cadastro select.cidade{
+	width:63%;
+	float:right;
+	-webkit-transition: opacity 1s;
+	-moz-transition: opacity 1s;
+	transition: opacity 1s;
+	}
+	.cidade-carregando{
+		position: absolute;
+		opacity: 0;
+		-webkit-transition: opacity 1s;
+	-moz-transition: opacity 1s;
+	transition: opacity 1s;
+	}
+select:disabled, input:disabled{
+	opacity: 0.7;
+}	
+#pesquisa a span{
+	font-size: 20px;
+	color: #9ab87a;
+	font-size:40px;
+	font-style: normal;
+	margin-right: 10px;
+	padding-top:5px;
+}
+#pesquisa a, #cadastro a, #enviar-cadastro {
+	font-family: 'Ubuntu', sans-serif;
+	font-style: italic;
+	font-weight: 100;
+	color: #7E7878;
+	font-size: 15px;
+}
+ #enviar-cadastro:hover {
+ 	color:#000;
+ }
+#busca-cadastro .enviar{
+	font-size:22px;
+	float: right;
+}
+#busca-cadastro .enviar img{
+	margin-left: 17px;
+	vertical-align: bottom;
+}
+#modificar h3{
+	text-align: center;
+	width: 100%
+}
+#modificar a{
+	color: #9ab87a;
+}
+#continua-cadastro{
+	display: none;
+}
+#continua-cadastro input, #continua-cadastro textarea {
+	width:100%;
+}
+#continua-cadastro h3{
+	font-weight: 300;
+	margin: 18px 0;
+	width: 100%;
+    font-size: 33px;
+
+
+}
+.col-cadastro:first-child{
+	padding-right: 20px!important;
+	float: left;
+}
+.col-cadastro:nth-child(2){
+	padding-left: 20px!important;
+	float: left
+}
+#subtema{
+	display: none;
+}
+#enviar-cadastro{
+	display:block;	
+	text-align: center;
+	margin:20px auto 0;
+	float: none;
+	clear: both;
+    width: 70px;
+
+}
+#footer{
+	font-size: 16px;
+	font-weight: 100;
+	position: relative;
+	height: initial;
+	background-color: #605f65;
+	text-align: left;
+	color: #fff;
+	border-top:solid 15px #9ab87a;
+	padding: 45px 0;
+	font-family: 'Source Sans pro', sans-serif!important;
+}
+#form-footer{
+	padding: 0 50px!important;
+}
+#footer ul{
+	list-style: none;
+	padding: 0;
+}
+#footer ul a{
+	color:#fff;
+}
+#footer input, #footer textarea{
+	width: 100%;
+	height:40px;
+	margin-top: 10px;
+	padding-left: 10px;
+}
+ #footer textarea{
+ 	height: 100px;
+ }
+#footer input[type="submit"]{
+	width:150px;
+
+}
+#footer h4{
+	font-size:24px;
+	text-transform: uppercase;
+}
+#info-footer p{
+	color: #F2EEEE;
+margin:5px 0 0;
+	}
+	.social-footer{
+		margin-top:15px;
+	}
+#info-footer img{
+	margin-bottom: 15px;
+}
+#rodape-baixo{
+    margin: 23px auto;
+    background-color: transparent;
+}
+/*busca de pratica*/
+/*busca de pratica*/
+.row.page-header{
+	border-bottom: 3px solid #9ab87a;
+
+}
+.cada-pratica-lista hr{
+	height: 2px;
+	color: #9ab87a;
+}
+.busca-banco #resumo p, .tax-tema #resumo p, .tax-tema #resumo p{
+	margin-top:0;
+	text-align: left;
+}
+.busca-banco .entry-meta, .tax-tema .entry-meta{
+	margin-top:20px;
+	
+}
+.busca-banco .entry-title, .tax-tema .entry-title{
+	text-align: left;
+}
+.busca-banco .entry-title a, .tax-tema .entry-title a{
+	color:  #9ab87a;
+
+	text-decoration: none;
+}
+.cada-pratica-lista span{
+	font-weight:100;
+	font-style:italic;
+	text-transform: uppercase;
+	color:  #9ab87a;
+	margin-right: 5px;
+}
+.cada-pratica-lista p{
+	text-align:left;
+	margin:10px 0;
+}
+.cada-pratica-lista img{
+	border: 3px solid #9ab87a;
+}
+.cada-pratica-lista hr{
+	border-top: 3px solid #9ab87a;
+
+}
+.saiba {
+text-align: right;
+text-transform: uppercase;
+font-weight: 200;
+font-size: 20px;
+	margin-top:20px;
+
+}
+.saiba a{
+	border:1px solid  #9ab87a;
+	padding:10px;
+	color:  #fff;
+	background-color:#9ab87a; 
+	font-weight: 200;
+
+}
+.saiba a:hover{
+	background-color:  #fff;
+	color:#9ab87a; 
+}
+.busca-banco  h4 , .tax-tema  h4 {
+    font-size: 21px;
+    margin-bottom: 19px;
+    text-align: center;
+    text-decoration: underline;
+}
+.busca-banco h2 span, .tax-tema h2 span{
+	font-size:28px;
+	margin-right: 5px;
+
+	color:#7E7878;
+	text-transform: inherit;
+}
+/*busca de pratica*/
+/*busca de pratica*/
+.pagination>li>a, ul.page-numbers>li>a, .pagination>li>span, ul.page-numbers>li>span{
+	color:#9ab87a;
+}
+ul.page-numbers>li>span.current, ul.page-numbers>li>span.current:hover, ul.page-numbers>li>span.current:focus{
+	background-color:#9ab87a;
+	border-color: #9ab87a;
+}
+@media (max-width: 1000px){
+.row {
+    width: 95%;
+    margin: 0 auto;
+    display: block;
+    float: none;
+	}
+	.busca-banco #resumo p{
+		padding-left:10px;
+	}
+}
+@media (max-width: 767px){
+	
+	.saiba {
+	text-align: center;
+	
+	}
+	.cada-pratica-lista img{
+    float: none;
+    margin: 0 auto;
+    display: block;
+	}
+}
+
+
+
+
+
+
+
+
+
+.file-upload {
+	margin-top: 15px;
+	position: relative;
+	display:block;	
+	width:150px;
+	height:150px;
+	border-radius: 3px;
+	background-color:transparent;
+	font-size: 14px;
+	color:#9ab87a;
+	text-align: center; 
+	line-height: 150px;
+	border:solid 1px #9ab87a;
+    margin-bottom: 50px;
+
+}
+
+.file-upload input {
+	opacity: 0;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: block;
+	cursor: pointer;
+}
+
+.file-preview img{
+	width:100%;
+	height: auto;
+}
+#ibenic_file_input{
+	height:150px!important;
+}
+.file-preview .ibenic_file_preview {
+	position: absolute;
+	width:100%;
+	height:100%;
+	overflow: hidden;
+}
+
+.ibenic_file_delete {
+	position: absolute;
+	width: 100%;
+	top:98%;
+	left:0;
+	padding:0.5em;
+	text-align: center;
+	color:white;
+	background-color:#9ab87a;
+}
+#erro p{
+	color:red;
+}
+main#content{
+	padding-bottom: 60px!important;
+}
+#continua-cadastro label{
+	margin-top: 0;
+	opacity: 0.8;
+	font-size:10px;
+	margin-bottom: 15px;
+}
+#continua-cadastro input[name="site_da_entidade"], #continua-cadastro input[name="e-mail_de_contato"], #continua-cadastro input[name="files_gal[]"], #continua-cadastro input[name="files[]"]{
+	margin-bottom: 0;
+}
+#anexosUp, #anexosUpGal{
+	width: 50%;
+}
+label.cabinet input.file
+{
+    position: relative;
+    height: 100%;
+    width: auto;
+    opacity: 0;
+    -moz-opacity: 0;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+}
+.ajax-loader{
+	background-image:url('../images/ajax-loading.gif');
+	width: 16px;
+	height: 16px;
+	left: 45%;
+	top:-15px;
+    position: relative;
+    display: none;
+
+}
+#ibenic_file_upload .ajax-loader{
+	top:27%;
+}
+.single-pratica h1{
+	text-transform: uppercase;
+	margin-bottom:10px;
+	margin-top:50px;
+}
+.single-pratica h4{
+	margin-top: 25px;
+	color:#000;
+	font-weight: 400;
+}
+.single-pratica #sidebar{
+	margin-top:25px;
+	width:20%;
+	float:left;
+	position: absolute;
+}
+.single-pratica #sidebar ul{
+	list-style: none;
+}
+.single-pratica #sidebar ul a{
+	color: #333;
+    word-break: break-all;
+
+}
+.single-pratica #sidebar ul a:hover{
+	color:#000;
+}
+#single-pratica-conteudo{
+	float:right;
+	padding-left:40px!important;
+}
+.single-pratica #temas a{
+	padding:12px;
+	margin-right:20px;
+	display: block;
+	float:left;
+	background-color:#9ab87a;
+	color:#fff;
+}
+.single-pratica #descricao{
+	clear:left;
+}
+#sidebar.fixo{
+	position:fixed;
+	top: 20px;
+}
+#sidebar.fundo{
+	bottom:800px;
+}
+#sidebar p{
+	margin-top: 2px;
+    word-break: break-word;
+;
+
+}
+#sidebar h5{
+	margin-bottom: 2px;
+	margin-top:0;
+}
+#sidebar h4{
+	margin-top: 10px;
+	margin-bottom: 0;
+}
+.single-pratica #resumo-fundo{
+	padding-top:0;
+}
+#login{
+	/*padding-top: 50px!important;*/
+}
+#login{
+	text-align:center;
+}
+#login h3{
+	width: initial;
+}
+#login input{
+	color:#7E7878;
+	border-radius: 0;
+}	
+#login input[type="submit"]{
+	background-color: #9ab87a;
+	color: #fff;
+	display: inline-block;
+}
+#login .login-remember, .login-submit{
+	display: inline-block;
+}
+#login label{
+	color: #7E7878;
+	margin:0 10px;
+
+}
+#login #rememberme{
+	margin-right: 10px;
+	vertical-align: top;
+}
+#praticas-usuario{
+	margin-top: 20px;
+}
+.deletaGaleria{
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 9px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.48);
+    font-size: 16px;
+    border-radius: 503px;
+    transform: translate(-50%, -50%);
+}
+.cadaGaleria{
+	position: relative;
+	display: inline-block;
+}

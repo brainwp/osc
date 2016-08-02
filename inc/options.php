@@ -53,7 +53,7 @@ function opcoes_tema() {
                     
 					array(
                         'id'            => 'cat_home', // Obrigatório
-                        'label'         => __( 'Text Example', 'odin' ), // Obrigatório
+                        'label'         => __( 'Categoria de destaque', 'odin' ), // Obrigatório
                         'type'          => 'select', // Obrigatório
                         // 'attributes' => array(), // Opcional (atributos para input HTML/HTML5)
                         'description'   => __( 'Escolha a categoria selecionada na seção de destaque da home', 'odin' ), // Opcional

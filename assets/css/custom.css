@@ -7,6 +7,9 @@
 #wrapper > *:first-child{
 	margin-top:50px;
 }
+.home #wrapper>*:first-child{
+	margin-top: 0;
+}
 p, .zilla-one-half{
 	color: #333;
 	font-size: 16px;
@@ -201,6 +204,12 @@ body{
 	position:relative;
     max-height: 400px;
 
+}
+.home #content{
+    width: 94%;
+    margin: 0 auto;
+    display: block;
+    float: none;
 }
 .home .loader{
 	display: none;
@@ -455,6 +464,10 @@ html .owl-theme .owl-controls .owl-buttons div{
 	padding-top:20px!important;
 	padding-bottom: 20px!important;
 }
+#rodape-baixo #logos img{
+	width: 40px;
+	margin-left:3px;
+}
 
 /*frontpage*/
 /*frontpage*/
@@ -553,7 +566,7 @@ html .owl-theme .owl-controls .owl-buttons div{
 .page #wrapper{
 
 
-    background-image: url('../images/fundo-internas.png');
+    /*background-image: url('../images/fundo-internas.png');*/
     background-repeat: no-repeat;
 }
 .archive.tax-categoria_noticias .titulo,
@@ -565,12 +578,13 @@ html .owl-theme .owl-controls .owl-buttons div{
 .single .titulo{
 	width: 100%;
     text-align: center;
-    text-transform: uppercase;
-    font-weight: 200;
+    text-transform: none;
+    font-weight: 500;
     margin: 0 auto;
     padding: 35px 0;
     display: block;
     max-width: 980px;
+    font-size: 37px;
 }
 .archive.tax-categoria_noticias .cada-noticia-archive,
 .archive.post-type-archive-publicacao .cada-noticia-archive,
@@ -1190,6 +1204,9 @@ select:disabled, input:disabled{
 	color: #F2EEEE;
 margin:5px 0 0;
 	}
+#info-footer a:focus{
+    outline: none!important;
+}	
 	.social-footer{
 		margin-top:15px;
 	}
