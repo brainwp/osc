@@ -19,6 +19,7 @@
 get_header('internas'); ?>
 	<h2 class="titulo">Vídeos</b></h2>
 	<main id="content" class="row" tabindex="-1" role="main">
+		<div class="masonry-container">
 			<?php if ( have_posts() ) : ?>
 				<?php
 					// Start the Loop.
@@ -29,7 +30,14 @@ get_header('internas'); ?>
 						 * use this in a child theme, then include a file called called content-___.php
 						 * (where ___ is the post format) and that will be used instead.
 						 */
+						?>
+						<div class="item">
+						   	<div class="well"> <?php 	
 						get_template_part( 'content', 'video') ;
+						 ?>
+							</div>
+						</div>
+						<?php 
 
 					endwhile;
 
@@ -41,10 +49,13 @@ get_header('internas'); ?>
 					get_template_part( 'content', 'none' );
 
 				endif;
+				?>
+		</div>
+
+				<?php 
 				get_template_part( 'content', 'pre-footer') ;
 
 			?>
-
 	</main><!-- #main -->
 
 <?php

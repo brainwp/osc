@@ -50,6 +50,11 @@ function opcoes_tema() {
                         'label'      => __( 'Twitter', 'odin' ), // Required
                         'type'       => 'text', // Required
                     ),
+                    array(
+                        'id'         => 'youtube', // Required
+                        'label'      => __( 'Youtube', 'odin' ), // Required
+                        'type'       => 'text', // Required
+                    ),
                     
 					array(
                         'id'            => 'cat_home', // Obrigatório

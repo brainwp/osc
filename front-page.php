@@ -149,7 +149,11 @@ get_header(); ?>
 					</div><!--box-titulo-->
 					
 					<?php
-					if (!has_post_thumbnail( )) {
+					$quadrada=get_field('img_quadrada', $post->ID);
+					if (isset($quadrada) AND get_field('img_quadrada', $post->ID) != "") {
+	 					echo '<img 	class="img wp-post-image" src="'.get_field('img_quadrada', $post->ID).'" alt="">';
+					}
+					elseif (!has_post_thumbnail( )) {
 	 					echo '<img 	class="img wp-post-image" src="'.get_template_directory_uri().'/assets/images/logo-quadrado.png" alt="">';
 
 					 } 

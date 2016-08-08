@@ -743,14 +743,18 @@ function categorias_home_func(){
 	if( $WP_query_cat->have_posts()  )
 	{
 		while ( $WP_query_cat->have_posts() ) {
-			if (!has_post_thumbnail( )) {
-	 					$thumb= '<img class="img wp-post-image" src="'.get_template_directory_uri().'/assets/images/logo-quadrado.png" alt="">';
+			$WP_query_cat->the_post();
+			$quadrada=get_field('img_quadrada', get_the_id());
+			if (isset($quadrada) AND get_field('img_quadrada', get_the_id()) != "") {
+				$thumb= '<img 	class="img wp-post-image" src="'.get_field('img_quadrada', get_the_id()).'" alt="">';
+			}
+			elseif (!has_post_thumbnail( get_the_id())) {
+	 			$thumb= '<img class="img wp-post-image" src="'.get_template_directory_uri().'/assets/images/logo-quadrado.png" alt="">';
 
-					 } 
-					 else{
-					 	$thumb=get_the_post_thumbnail( get_the_id(), 'destaques-categoria');
-					 }
-					$WP_query_cat->the_post();
+			} 
+			else{
+				$thumb=get_the_post_thumbnail( get_the_id(), 'destaques-categoria');
+			}
 			$resposta['html'] .= '
 			<div class="cada-noticia col-sm-3">
 				<div class="noticia-titulo">

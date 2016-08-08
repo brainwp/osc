@@ -17,8 +17,8 @@
 		<div id='rodape-topo'class="row">
 			<div id='nav-footer' class="col-sm-2">
 				<h4>Navegação</h4>
-				      <?php wp_nav_menu( array('theme_location'  => 'footer-menu', 'container' => '', 'container_class' => '', 'items_wrap' => '<ul>%3$s</ul>' ) ); ?>           
-
+				<?php wp_nav_menu( array('theme_location'  => 'footer-menu', 'container' => '', 'container_class' => '', 'items_wrap' => '<ul>%3$s</ul>' ) ); ?>           
+				<img id="logo-abong" src="<?php echo get_template_directory_uri(); ?>/assets/images/abong-logo.png">
 			</div>
 			<div id='form-footer' class="col-sm-6">
 				<h4>Contato</h4>
@@ -34,6 +34,7 @@
 				<p>Segunda a sexta, das 9h às 19h</p>
 				<a target='_blank'  href="<?php echo $odin_footer_opts['facebook'];?>"><img  class="social-footer" class='inline-block' src="<?php echo get_template_directory_uri(); ?>/assets/images/face-footer.png"></a>
 				<a target='_blank'  href="<?php echo $odin_footer_opts['twitter'];?>"><img class="social-footer"  class='inline-block' src="<?php echo get_template_directory_uri(); ?>/assets/images/twitter-footer.png"></a>
+				<a target='_blank'  href="<?php echo $odin_footer_opts['youtube'];?>"><img class="social-footer"  class='inline-block' src="<?php echo get_template_directory_uri(); ?>/assets/images/youtube-footer.png"></a>
 			</div>
 		</div>
 		

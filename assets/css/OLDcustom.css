@@ -65,15 +65,8 @@ body{
 .esquerda{
 	float: left;
 }
-html .navbar-default .navbar-nav>li>a {
-    color: #777;
-    font-size: 16px;
-    padding: 10px 10px;
-}
 /*HEADER*//*HEADER*/
 #header.header-todos{
-	border-top: 15px solid #ff764d;
-    
 	padding-top:50px;
 	padding-bottom: 50px;
 	background-image: url('../images/fundo-header.png');
@@ -95,7 +88,7 @@ html .navbar-default .navbar-nav>li>a {
 .texto-header{
     opacity: 0.6;
     padding-right: 20px!important;
-    font-size: 14px;
+    font-size: 12px;
     }
 #header.header-todos form button.botao-busca{
 	position: absolute;
@@ -106,6 +99,7 @@ html .navbar-default .navbar-nav>li>a {
 }
 #header.header-todos form {
 	    width: 33%;
+	    margin-top: 0;
 
 }
 
@@ -113,7 +107,7 @@ html .navbar-default .navbar-nav>li>a {
 	text-align: center;
 }
 #logo img{
-	max-width: 195px;
+	max-width: 160px;
 }
 #header.header-todos form button.botao-busca img{
 	width: 16px;
@@ -274,13 +268,6 @@ html .navbar-default .navbar-nav>li>a {
 }
 .row.destaques-contato{
 	margin-top: 55px;
-}
-.pre-footer .box-footer .socials-pre{
-	width: 100%;
-	text-align: center;
-}
-#logo-abong{
-	max-width: 100%;
 }
 .destaques-contato .contato> div, .pre-footer .box-footer{
 	background-color: #ff754c;
@@ -448,17 +435,10 @@ html .owl-theme .owl-controls .owl-buttons div{
 .box-footer:nth-child(3){
 	border-left: 10px solid #fff;
 }
-
 .destaques-contato .contato >div  h4, .pre-footer .box-footer h4{
 	color: #fff;
 	text-transform: none;
     margin: 0 20px 8px 80px;
-}
-.pre-footer .box-footer.meio h4{
-	margin: 0 20px 20px 20px;	
-}
-.pre-footer .box-footer.meio img{
-	margin: 10px;	
 }
 .destaques-contato .link-banco p {
 	margin: 1px 20px;
@@ -493,12 +473,8 @@ html .owl-theme .owl-controls .owl-buttons div{
 /*frontpage*/
 /*frontpage*/
 /*frontpage*/
-.contato #news-contato input{
-	width: 30px;
-}
-.contato  div.wpcf7-validation-errors, .contato div.wpcf7-mail-sent-ok{
-	color:#333;
-}
+
+
 /*archive-noticias category.php*/
 /*archive-noticias category.php*/
 /*archive-noticias category.php*/
@@ -793,40 +769,6 @@ color: #fff;
 	width:100%;
 	position: relative;
 	bottom: 5px;	
-}
-
-.masonry-container {
- -moz-column-width: 18em;
- -webkit-column-width: 18em;
- -moz-column-gap: 1em;
- -webkit-column-gap:1em; 
-  
-}
-.masonry-container iframe{
-	width: 100%;
-	height: auto;
-}
-.item {
-    position: relative!important;
-
-     display: inline-block;
-     padding:  8px 0px;
-     width:  100%; 
-
-}
-
-.well {
-    padding: 2px 0 !important;
-    background-color: transparent!important;
-    padding: 0!important;
-    margin:0!important;
-     position:relative;
-     display: block;
-}
-.post-type-archive-video .titulo-materia-archive{
-	width: 100%;
-	position: relative;
-	max-width: 100%;
 }
 /*video*/
 /*video*/
@@ -1266,10 +1208,6 @@ margin:5px 0 0;
     outline: none!important;
 }	
 	.social-footer{
-		margin-top:15px;
-		max-width: 34px;
-	}
-	.header-todos .navbar-form{
 		margin-top:15px;
 	}
 #info-footer img{

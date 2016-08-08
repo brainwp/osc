@@ -15,7 +15,7 @@ if ($('body').hasClass("home")){
 	    itemsMobile : [800,1], //5 items between 1000px and 901px
 
 	    navigation : false,
-	    pagination:false
+	    pagination:true
 
     
  

@@ -66,10 +66,7 @@
 					</nav><!-- .navbar-collapse -->
 				</div><!-- #main-navigation-->
 				<div class="col-sm-6 texto-header">
-				<?php $odin_footer_opts = get_option( 'odin_general' );?>
-				<a target='_blank'  href="<?php echo $odin_footer_opts['facebook'];?>"><img  class="social-footer" class='inline-block' src="<?php echo get_template_directory_uri(); ?>/assets/images/face-footer.png"></a>
-				<a target='_blank'  href="<?php echo $odin_footer_opts['twitter'];?>"><img class="social-footer"  class='inline-block' src="<?php echo get_template_directory_uri(); ?>/assets/images/twitter-footer.png"></a>
-				<a target='_blank'  href="<?php echo $odin_footer_opts['youtube'];?>"><img class="social-footer"  class='inline-block' src="<?php echo get_template_directory_uri(); ?>/assets/images/youtube-footer.png"></a>
+					Modelo de descrição falanso rapidamente sobre o que é o site Observatório da Sociedade Civil. Use no máximo  três linhas para não comprometer o layout.
 				</div>
 				<form method="get" class="col-sm-6 navbar-form " action="<?php echo esc_url( home_url( '/' ) ); ?>" role="search">
 					<label for="navbar-search" class="sr-only">

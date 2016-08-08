@@ -1,4 +1,4 @@
-<div class="cada-noticia-archive col-sm-4">
+<div class="">
 	
 		<?php
 			echo get_field('video');
