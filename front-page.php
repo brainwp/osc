@@ -220,7 +220,13 @@ get_header(); ?>
 				<div class="newsletter">
 					<img class="img-contato"src="<?php echo get_template_directory_uri();?>/assets/images/mail.png"  alt="">
 					<h4><i>Assine e acompanhe o Observatório da Sociedade Civil</i></h4>
-					<?php echo do_shortcode('[contact-form-7 id="651" title="Formulario home"]' ); ?>
+					<?php 
+						// echo do_shortcode('[contact-form-7 id="651" title="Formulario home"]' ); 
+					?>
+					<?php 
+						echo do_shortcode('[contact-form-7 id="235" title="newsletter"]' ); 
+					?>
+
 					<!-- <input type="text">
 					<input type="email"> -->
 					<img id="enviar-newsletter" src="" alt="">

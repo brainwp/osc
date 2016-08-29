@@ -76,7 +76,7 @@ html .navbar-default .navbar-nav>li>a {
     
 	padding-top:50px;
 	padding-bottom: 50px;
-	background-image: url('../images/fundo-header.png');
+	/*background-image: url('../images/fundo-header.png');*/
 	background-size: cover;
 	background-repeat: no-repeat;
 
@@ -85,7 +85,7 @@ html .navbar-default .navbar-nav>li>a {
 	padding-right: 32px;
 }
 #header.header-todos input, #header.header-todos .form-group {
-	background-color: rgba(216, 216, 216, 0.62);
+	background-color: #ff764d;
 	border:none;
 	width: 100%;
     box-shadow: none;
@@ -93,7 +93,7 @@ html .navbar-default .navbar-nav>li>a {
 
 }
 .texto-header{
-    opacity: 0.6;
+    opacity: 1;
     padding-right: 20px!important;
     font-size: 14px;
     }
@@ -135,7 +135,7 @@ html .navbar-default .navbar-nav>li>a {
 
 }
 .home #header{
-	background-color: transparent;
+	background-color: #fff;
 }
 #header .container{
 	width:980px!important;
@@ -1265,13 +1265,14 @@ margin:5px 0 0;
 #info-footer a:focus{
     outline: none!important;
 }	
-	.social-footer{
-		margin-top:15px;
-		max-width: 34px;
-	}
-	.header-todos .navbar-form{
-		margin-top:15px;
-	}
+.social-footer{
+	border-radius: 11px;
+	margin-top:15px;
+	max-width: 34px;
+}
+.header-todos .navbar-form{
+	margin-top:15px;
+}
 #info-footer img{
 	margin-bottom: 15px;
 }
@@ -1621,6 +1622,9 @@ label.cabinet input.file
 	margin-top: 25px;
 	color:#000;
 	font-weight: 400;
+}
+.single-pratica #footer h4{
+	color:#fff;
 }
 .single-pratica #sidebar{
 	margin-top:25px;

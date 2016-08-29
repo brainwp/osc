@@ -55,6 +55,11 @@ function opcoes_tema() {
                         'label'      => __( 'Youtube', 'odin' ), // Required
                         'type'       => 'text', // Required
                     ),
+                     array(
+                        'id'         => 'logo_abong', // Required
+                        'label'      => __( 'Logo Abong', 'odin' ), // Required
+                        'type'       => 'image', // Required
+                    ),
                     
 					array(
                         'id'            => 'cat_home', // Obrigatório

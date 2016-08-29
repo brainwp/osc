@@ -18,7 +18,7 @@
 			<div id='nav-footer' class="col-sm-2">
 				<h4>Navegação</h4>
 				<?php wp_nav_menu( array('theme_location'  => 'footer-menu', 'container' => '', 'container_class' => '', 'items_wrap' => '<ul>%3$s</ul>' ) ); ?>           
-				<img id="logo-abong" src="<?php echo get_template_directory_uri(); ?>/assets/images/abong-logo.png">
+				<img id="logo-abong" src="<?php echo wp_get_attachment_image_src($odin_footer_opts['logo_abong'], 'full')[0];?>">
 			</div>
 			<div id='form-footer' class="col-sm-6">
 				<h4>Contato</h4>

@@ -40,17 +40,20 @@ get_header('internas'); ?>
 						<?php 
 
 					endwhile;
-
+					?>		
+		</div><!--masonry container-->
+					<?php 
 					// Page navigation.
 					odin_paging_nav();
 
 				else :
 					// If no content, include the "No posts found" template.
 					get_template_part( 'content', 'none' );
+					?>						
+		</div><!--masonry container--> <?php 
 
 				endif;
 				?>
-		</div>
 
 				<?php 
 				get_template_part( 'content', 'pre-footer') ;
