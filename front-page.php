@@ -21,7 +21,7 @@ get_header(); ?>
 					'posts_per_page' =>4,
 					'tax_query' => array(
 						array(
-							'taxonomy' => 'categoria_noticias',
+							'taxonomy' => 'category',
 							'field'    => 'slug',
 							'terms'    => 'destaque',
 						),
@@ -49,8 +49,18 @@ get_header(); ?>
 							echo '<h3>'.get_the_title( ).'</h3></a>';
 							?>
 						</div><!--box-titulo-->
-						<img src="<?php echo get_field( 'destaque' )['sizes']['slider-1'];?>" 
-						alt="<?php echo get_the_title( ); ?>">
+						<?php 
+							if (get_field( 'destaque' )) {
+								$img_src= get_field( 'destaque' )['sizes']['slider-1'];
+								?>
+								<img src="<?php echo $img_src;?>" alt="<?php echo get_the_title( ); ?>">
+								<?php 
+							}
+							else{
+								echo get_the_post_thumbnail( $post->ID, 'full');
+							}
+						 ?>
+						
 						<?php 
 						// echo get_field( 'destaque' )['sizes']['slider-1'];
 
@@ -84,7 +94,7 @@ get_header(); ?>
 							'exclude' =>'219',
 						);
 					// wp_list_categories( $args_cat );
-				$terms = get_terms( 'categoria_noticias', $args_cat );
+				$terms = get_terms( 'category', $args_cat );
 				// print_r($terms);
 				if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
 				    foreach ( $terms as $term ) {
@@ -95,7 +105,7 @@ get_header(); ?>
 				    	}
 				    	if ($term->count > 0) {
  							echo '<li class="cat-item '.str_replace(' ', '', 'cat-item-'.$term->term_id).$selecionado.'"
-					        ><a href="'.get_term_link( $term->term_id, "categoria_noticias" ).'
+					        ><a href="'.get_term_link( $term->term_id, "category" ).'
 					        ">
 					        ' . $term->name . '
 				       		</a></li>';	
@@ -120,7 +130,7 @@ get_header(); ?>
 					'posts_per_page' =>8,
 					'tax_query' => array(
 						array(
-							'taxonomy' => 'categoria_noticias',
+							'taxonomy' => 'category',
 							'field'    => 'id',
 							'terms'    =>$cat_home,
 						),
@@ -149,16 +159,17 @@ get_header(); ?>
 					</div><!--box-titulo-->
 					
 					<?php
+					// print_r(get_field('img_quadrada', $post->ID)['sizes']['quadrada']);
 					$quadrada=get_field('img_quadrada', $post->ID);
 					if (isset($quadrada) AND get_field('img_quadrada', $post->ID) != "") {
-	 					echo '<img 	class="img wp-post-image" src="'.get_field('img_quadrada', $post->ID).'" alt="">';
+	 					echo '<img 	class="img wp-post-image" src="'.get_field('img_quadrada', $post->ID)['sizes']['quadrada'].'" alt="">';
 					}
 					elseif (!has_post_thumbnail( )) {
 	 					echo '<img 	class="img wp-post-image" src="'.get_template_directory_uri().'/assets/images/logo-quadrado.png" alt="">';
 
 					 } 
 					 else{
-					 	the_post_thumbnail('destaques-categoria' );
+					 	the_post_thumbnail('quadrada' );
 
 					 }
 					?>

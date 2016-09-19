@@ -20,7 +20,7 @@ function opcoes_tema() {
     );
     $categorias=get_categories( array('orderby' => 'name', 'order'   => 'ASC', 'exclude'=>'213' ) );
     $lista_cat=array(""=>"");
-    $terms = get_terms( 'categoria_noticias' );
+    $terms = get_terms( 'category' );
                 // print_r($terms);
                 if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
                     foreach ( $terms as $term ) {

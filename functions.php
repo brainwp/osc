@@ -392,6 +392,7 @@ function colunas_praticas( $columns ) {
 }
 
 add_image_size('pratica-lista', 200, 200, 1 );
+add_image_size('quadrada', 400, 400, 1 );
 add_image_size('thumb-page', 996, 330, 1 );
 add_image_size('destaques-categoria', 350, 350, 1 );
 add_image_size('slider-2', 660, 415, 1 );

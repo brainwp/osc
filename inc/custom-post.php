@@ -189,44 +189,44 @@ function noticia_cpt() {
 		'hierarchical'       => false,
 		'menu_position'      => null,
 		'menu_icon' => 'dashicons-rss',
-		'taxonomies' => array('post_tag'),
+	    'taxonomies' => array('category', 'post_tag'), 
 		'supports'           => array( 'title', 'editor', 'thumbnail', 'author', 'excerpt')
 	);
 
 	register_post_type( 'noticia', $args );
 }
-function add_custom_taxonomies_noticia() {
-	  // Add new "Locations" taxonomy to Posts
-	  register_taxonomy('categoria_noticias', 'noticia', array(
-	    // Hierarchical taxonomy (like categories)
-	    'hierarchical' => true,
-	    // This array of options controls the labels displayed in the WordPress Admin UI
-	    'labels' => array(
-	      'name' => _x( 'Categoria', 'taxonomy general name' ),
-	      'singular_name' => _x( 'Categoria', 'taxonomy singular name' ),
-	      'search_items' =>  __( 'Buscar Categorias' ),
-	      'all_items' => __( 'Todas Categorias' ),
-	      'edit_item' => __( 'Editar Categoria' ),
-	      'update_item' => __( 'Atualizar' ),
-	      'add_new_item' => __( 'Adicionar nova categoria' ),
-	      'new_item_name' => __( 'Nova categoria ' ),
-	      'menu_name' => __( 'Categoria' ),
-		  'separate_items_with_commas' => __('Separe os itens com virgulas'),
-		  'choose_from_most_used' => __('Escolha dentre os mais utilizados')
+// function add_custom_taxonomies_noticia() {
+// 	  // Add new "Locations" taxonomy to Posts
+// 	  register_taxonomy('categoria_noticias', 'noticia', array(
+// 	    // Hierarchical taxonomy (like categories)
+// 	    'hierarchical' => true,
+// 	    // This array of options controls the labels displayed in the WordPress Admin UI
+// 	    'labels' => array(
+// 	      'name' => _x( 'Categoria', 'taxonomy general name' ),
+// 	      'singular_name' => _x( 'Categoria', 'taxonomy singular name' ),
+// 	      'search_items' =>  __( 'Buscar Categorias' ),
+// 	      'all_items' => __( 'Todas Categorias' ),
+// 	      'edit_item' => __( 'Editar Categoria' ),
+// 	      'update_item' => __( 'Atualizar' ),
+// 	      'add_new_item' => __( 'Adicionar nova categoria' ),
+// 	      'new_item_name' => __( 'Nova categoria ' ),
+// 	      'menu_name' => __( 'Categoria' ),
+// 		  'separate_items_with_commas' => __('Separe os itens com virgulas'),
+// 		  'choose_from_most_used' => __('Escolha dentre os mais utilizados')
 		
 	
-	    ),
-	    // Control the slugs used for this taxonomy
-	    'rewrite' => array(
-	      'slug' => 'categoria', // This controls the base slug that will display before each term
-	      'with_front' => false, // Don't display the category base before "/locations/"
-	      'hierarchical' => true // This will allow URL's like "/locations/boston/cambridge/"
-	    ),
-	  ));
-	}
+// 	    ),
+// 	    // Control the slugs used for this taxonomy
+// 	    'rewrite' => array(
+// 	      'slug' => 'categoria', // This controls the base slug that will display before each term
+// 	      'with_front' => false, // Don't display the category base before "/locations/"
+// 	      'hierarchical' => true // This will allow URL's like "/locations/boston/cambridge/"
+// 	    ),
+// 	  ));
+// 	}
 
-	add_action( 'init', 'add_custom_taxonomies_noticia', 0 );
-/////////////////////////////////////////
+// 	add_action( 'init', 'add_custom_taxonomies_noticia', 0 );
+// /////////////////////////////////////////
 
 
 

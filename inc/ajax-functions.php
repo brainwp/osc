@@ -728,7 +728,7 @@ function categorias_home_func(){
 		'posts_per_page' =>8,
 		'tax_query' => array(
 			array(
-				'taxonomy' => 'categoria_noticias',
+				'taxonomy' => 'category',
 				'field'    => 'ID',
 				'terms'    => $cat,
 			),
@@ -746,14 +746,14 @@ function categorias_home_func(){
 			$WP_query_cat->the_post();
 			$quadrada=get_field('img_quadrada', get_the_id());
 			if (isset($quadrada) AND get_field('img_quadrada', get_the_id()) != "") {
-				$thumb= '<img 	class="img wp-post-image" src="'.get_field('img_quadrada', get_the_id()).'" alt="">';
+				$thumb= '<img 	class="img wp-post-image" src="'.get_field('img_quadrada', get_the_id())['sizes']['quadrada'].'" alt="">';
 			}
 			elseif (!has_post_thumbnail( get_the_id())) {
 	 			$thumb= '<img class="img wp-post-image" src="'.get_template_directory_uri().'/assets/images/logo-quadrado.png" alt="">';
 
 			} 
 			else{
-				$thumb=get_the_post_thumbnail( get_the_id(), 'destaques-categoria');
+				$thumb=get_the_post_thumbnail( get_the_id(), 'quadrada');
 			}
 			$resposta['html'] .= '
 			<div class="cada-noticia col-sm-3">

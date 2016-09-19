@@ -128,7 +128,8 @@ html .navbar-default .navbar-nav>li>a {
 	font-weight:200;
 	-webkit-box-shadow: 0px 5px 11px 0px rgba(50, 50, 50, 0.75);
 	-moz-box-shadow:    0px 5px 11px 0px rgba(50, 50, 50, 0.75);
-	box-shadow:         0px 5px 11px 0px rgba(50, 50, 50, 0.75);}
+	box-shadow:         0px 5px 11px 0px rgba(50, 50, 50, 0.75);
+}
 #header.header-banco a{
 	color: #fff;
 
@@ -256,6 +257,9 @@ html .navbar-default .navbar-nav>li>a {
 	overflow: hidden;
 	background-color: #000;
 	position: relative;
+}
+div.cada-noticia:nth-of-type(4n+1), .cada-noticia-archive:nth-of-type(3n+1){
+	clear:both;
 }
 .cada-noticia:hover img{
 	opacity: 0.3;
@@ -570,19 +574,19 @@ html .owl-theme .owl-controls .owl-buttons div{
 }
 
 
-.archive.tax-categoria_noticias  #header.header-interna,
+.archive.category  #header.header-interna,
 .archive.post-type-archive-noticia  #header.header-interna, .search   #header.header-interna,
 .archive.post-type-archive-video  #header.header-interna, .search   #header.header-interna{
 	background: rgb(22,122,192)!important;
 }
-.archive.tax-categoria_noticias #header.header-interna a,
+.archive.category #header.header-interna a,
 .archive.post-type-archive-publicacao #header.header-interna a,
 .search #header.header-interna a,
 .post-type-archive-noticia #header.header-interna a,
 .archive.post-type-archive-noticia #header.header-interna a{
 	color:#fff;
 }
-.archive.tax-categoria_noticias #wrapper,
+.archive.category #wrapper,
 .archive.post-type-archive-publicacao #wrapper,
 .search #wrapper,
 .post-type-archive-noticia #wrapper,
@@ -593,7 +597,10 @@ html .owl-theme .owl-controls .owl-buttons div{
     /*background-image: url('../images/fundo-internas.png');*/
     background-repeat: no-repeat;
 }
-.archive.tax-categoria_noticias .titulo,
+.body-banco .wrapper{
+
+}
+.archive.category .titulo,
 .archive.post-type-archive-publicacao .titulo,
 .archive.post-type-archive-noticia .titulo,
 .archive.post-type-archive-video .titulo,
@@ -610,7 +617,7 @@ html .owl-theme .owl-controls .owl-buttons div{
     max-width: 980px;
     font-size: 37px;
 }
-.archive.tax-categoria_noticias .cada-noticia-archive,
+.archive.category .cada-noticia-archive,
 .archive.post-type-archive-publicacao .cada-noticia-archive,
 .archive.post-type-archive-video .cada-noticia-archive,
 .page .cada-noticia-archive,
@@ -642,7 +649,7 @@ color: #fff;
 	left:94%;
 	bottom:2%;
 }
-.archive.tax-categoria_noticias ul.page-numbers>li>span.current,.archive.tax-categoria_noticias ul.page-numbers>li>span.current:hover, .archive.tax-categoria_noticias ul.page-numbers>li>span.current:focus,
+.archive.category ul.page-numbers>li>span.current,.archive.category ul.page-numbers>li>span.current:hover, .archive.category ul.page-numbers>li>span.current:focus,
 .search ul.page-numbers>li>span.current,.search ul.page-numbers>li>span.current:hover, .search ul.page-numbers>li>span.current:focus,
 .post-type-archive-noticia ul.page-numbers>li>span.current,.post-type-archive-noticia ul.page-numbers>li>span.current:hover, .post-type-archive-noticia ul.page-numbers>li>span.current:focus,
 .post-type-archive-video ul.page-numbers>li>span.current,.post-type-archive-video ul.page-numbers>li>span.current:hover, .post-type-archive-video ul.page-numbers>li>span.current:focus,
@@ -654,7 +661,7 @@ color: #fff;
 .search .pagination>li>a,.search ul.page-numbers>li>a,.search .pagination>li>span, .search ul.page-numbers>li>span,
 .post-type-archive-noticia .pagination>li>a,.post-type-archive-noticia ul.page-numbers>li>a,.post-type-archive-noticia .pagination>li>span, .post-type-archive-noticia ul.page-numbers>li>span,
 .post-type-archive-video .pagination>li>a,.post-type-archive-video ul.page-numbers>li>a,.post-type-archive-video .pagination>li>span, .post-type-archive-video ul.page-numbers>li>span,
-.archive.tax-categoria_noticias .pagination>li>a,.archive.tax-categoria_noticias ul.page-numbers>li>a,.archive.tax-categoria_noticias .pagination>li>span, .archive.tax-categoria_noticias ul.page-numbers>li>span,
+.archive.category .pagination>li>a,.archive.category ul.page-numbers>li>a,.archive.category .pagination>li>span, .archive.category ul.page-numbers>li>span,
 .archive.post-type-archive-noticia .pagination>li>a,.archive.post-type-archive-noticia ul.page-numbers>li>a,.archive.post-type-archive-noticia .pagination>li>span, .archive.post-type-archive-noticia ul.page-numbers>li>span{
 	color:rgb(22,122,192);
 }
@@ -1011,12 +1018,13 @@ main{
 	font-size: 50px;
 	color: #ff754c;
 }
+
 #resumo p, .cada-pratica-lista p{
 	font-size: 16.5px;
 	font-family: 'Source Sans pro', sans-serif;
 	text-align: center;
-	font-weight: 300;
-	color: #7E7878;
+	font-weight: 400;
+	color: #6B6A6A;
 	margin-top: 20px
 }
 #resumo #continue{

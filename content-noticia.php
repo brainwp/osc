@@ -5,7 +5,7 @@
 
 								 } 
 								 else{
-								 	the_post_thumbnail('destaques-categoria' );
+								 	the_post_thumbnail('quadrada' );
 
 								 }
 								 ?>

@@ -25,7 +25,7 @@ get_header('internas'); ?>
 
 						'tax_query' => array(
 						array(
-							'taxonomy' => 'categoria_noticias',
+							'taxonomy' => 'category',
 							'field'    => 'id',
 							'terms'    =>$cat_home,
 
