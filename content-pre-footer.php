@@ -22,7 +22,7 @@
 	</div>
 	<div class="col-sm-4 link-banco box-footer">
 		<img class="img-contato"src="<?php echo get_template_directory_uri();?>/assets/images/banco-arquivo.png"  alt="">
-		<h4><i>Conheça o banco de práticas sustentáveis</i></h4>
+		<h4><i>Conheça o banco de práticas aternativas </i></h4>
 		<p>Lorem ipsum dolor sit amet, . Eos mundi iudicabit reformidans. ad, ut ius quem reformidans conclusionemque</p>
 		<a href="home-banco"> <div  id="link-banco"></div></a>
 	</div>
