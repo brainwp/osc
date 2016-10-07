@@ -511,3 +511,147 @@ function my_custom_admin_styles() {
     <?php
 }
 add_action('admin_head', 'my_custom_admin_styles');
+
+function custom_excerpt_length( $length ) {
+	return 25;
+}
+add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
+function fix_category_pagination($qs){
+    if(isset($qs['category_name']) && isset($qs['paged'])){
+        $qs['post_type'] = get_post_types($args = array(
+            'public'   => true,
+            '_builtin' => false
+        ));
+        array_push($qs['post_type'],'post');
+    }
+    return $qs;
+}
+add_filter('request', 'fix_category_pagination');
+
+// tag_pra_categoria();
+function tag_pra_categoria(){
+	$alteracoes = array(
+		"OSC" => array(	
+			'OSCs',
+			'Sociedade Civil',
+			'OSC',
+			'Financiamento',
+			'Edital',
+			'Editais',
+			'marco regulatório',
+			'MROSC',
+			'#MROSC',
+			'#VaiTerMROSC',
+			'Sociedade Civil',
+			'Sociedade Civil Organizada',
+			'Direitos e bens comuns',
+			'organizações não governamentais',
+			'abong'
+		),
+		"Direitos" => array(	
+			'Direitos',
+			'Direitos sociais',
+			'Feminismo',
+			'Juventude',
+			'Violência policial',
+			'Educação',
+			'#Educação',
+			'Indígenas',
+			'mulher',
+			'Saúde',
+			'#Saúde',
+			'PNE',
+			'FNDC',
+			'Democratização da comunicação',
+			'Direitos humanos',
+			'Violência',
+			'redução da maioridade penal',
+			'índios',
+			'direitos trabalhistas',
+			'gênero',
+			'lgbt',
+			'lei da mídia democrática',
+			'racismo',
+			'machismo',
+			'Mídia',
+			'Comunicação',
+		),
+		"Movimentos" => array(	
+			'Movimentos',
+			'Movimentos sociais',
+			'Manifestação',
+			'Movimento sindical',
+			'Mst',
+			'Manifestações',
+			'Protestos',
+		),
+		"Democracia" => array(	
+			'Democracia',
+			'Participação social',
+			'participação',
+			'Reforma política',
+			'Democracia participativa',
+			'Transparência',
+			'Câmara dos deputados',
+			'Senado',
+			'Dilma Rousseff',
+			'Michel Temer',
+			'Fora Temer',
+			'Congresso nacional',
+			'Políticas públicas',
+			'Polícia militar',
+			'Golpe',
+			'Impeachment',
+			'Eduardo Cunha',
+		),
+		"Democracia" => array(	
+			"Novos paradigmas de desenvolvimento",
+			"Novos modelos de desenvolvimento",
+			"Meio ambiente",
+			"Agricultura",
+			"Agroecologia",
+			"Agricultura familiar",
+			"Segurança alimentar",
+			"Água",
+			"ODS",
+		)
+
+
+	);
+// echo "<pre>";
+// print_r( $alteracoes);
+// 	echo "</pre>";
+	// get_term( $term, $taxonomy, $output, $filter );
+	foreach ($alteracoes as $tags ) {
+		echo "<pre>";
+		print_r( array_search($tags, $alteracoes));
+		echo "</pre>";
+		$postlist = get_posts( 
+		array(	
+			'posts_per_page'   => -1,
+			'post_type'=>'noticia',
+			'tax_query' => array(
+				array(
+					'taxonomy' => 'post_tag',
+					'field' => 'name',
+					'terms' => $tags
+				)
+			)
+		)
+		);
+		foreach ( $postlist as $post ) {
+			$category = get_term_by('name',array_search($tags, $alteracoes), 'category');
+			// print_r($post->ID);
+			echo " ";
+			wp_set_post_categories( $post->ID, $category, true ) ;
+		}
+	}
+	
+
+	// wp_update_post( array('ID'=>1929, 'post_category' => 'OSC'  ) );
+	
+	// echo "<pre>";
+	// print_r($posts);
+	// echo '</pre>';
+
+}

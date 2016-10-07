@@ -192,7 +192,7 @@ else{
 					?>
 					<div class="clearfix"></div>
 				</div>
-
+				<div>
 				<?php
 					// echo '<pre>';
 					// print_r(;
@@ -218,6 +218,7 @@ else{
 
 				endif;
 			?>
+			</div>
 
 	</main><!-- #main -->
 	<?php 

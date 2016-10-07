@@ -345,3 +345,46 @@ function pratica_cpt() {
 //     )
 // );
 // metaboxes//
+
+/////////////CPT contatos
+/////////////CPT contatos
+/////////////CPT contatos
+/////////////CPT contatos
+add_action( 'init', 'feedback_cpt' );
+
+function feedback_cpt() {
+	$labels = array(                        
+		'name'               => 'Feedback',
+		'singular_name'      => 'Feedback',
+		'menu_name'          => 'Feedback',
+		'name_admin_bar'     => 'Feedback',
+		'add_new'            => 'Adicionar novo',
+		'add_new_item'       => 'Adicionar novo Feedback',
+		'new_item'           => 'Novo Feedback' ,
+		'edit_item'          => 'Editar Feedback',
+		'view_item'          => 'Ver todos' ,
+		'all_items'          => 'Todos' ,
+		'search_items'       => 'Buscar',
+		'parent_item_colon'  => 'Mãe' ,
+		'not_found'          => 'Nenhum encontrado' ,
+		'not_found_in_trash' => 'Nenhum encontrado na lixeira' ,
+	);
+
+	$args = array(
+		'labels'             => $labels,
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'query_var'          => true,
+		'rewrite'            => array( 'slug' => 'feedback' ),
+		'capability_type'    => 'post',
+		'has_archive'        => true,
+		'hierarchical'       => false,
+		'menu_position'      => null,
+		'menu_icon' => 'dashicons-rss',
+		'supports'           => array( 'title', 'editor', 'thumbnail', 'author', 'excerpt')
+	);
+
+	register_post_type( 'feedback', $args );
+}

@@ -19,6 +19,7 @@ get_header('internas'); ?>
 				$cat_home=$wp_query->get_queried_object()->term_id;
 				$args = array(
 					'post_type' => 'noticia',
+					'paged' => $paged,
 					'posts_per_page' =>12,
 						'tax_query' => array(
 						array(
