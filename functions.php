@@ -29,6 +29,8 @@ require_once get_template_directory() . '/core/classes/class-shortcodes.php';
 require_once get_template_directory() . '/core/classes/class-thumbnail-resizer.php';
 require_once get_template_directory() . '/core/classes/class-theme-options.php';
 require_once get_template_directory() . '/inc/options.php';
+// require_once get_template_directory() . '/inc/imagemparathumb.php';
+
 
 // require_once get_template_directory() . '/core/classes/class-options-helper.php';
 // require_once get_template_directory() . '/core/classes/class-post-type.php';
@@ -528,7 +530,7 @@ function fix_category_pagination($qs){
 }
 add_filter('request', 'fix_category_pagination');
 
-// tag_pra_categoria();
+tag_pra_categoria();
 function tag_pra_categoria(){
 	$alteracoes = array(
 		"OSC" => array(	
@@ -545,6 +547,21 @@ function tag_pra_categoria(){
 			'Sociedade Civil',
 			'Sociedade Civil Organizada',
 			'Direitos e bens comuns',
+			'organizações não governamentais',
+			'abong',
+			'oscs',
+			'sociedade civil',
+			'osc',
+			'financiamento',
+			'edital',
+			'editais',
+			'marco regulatório',
+			'mrosc',
+			'#mrosc',
+			'#vaitermrosc',
+			'sociedade civil',
+			'sociedade civil organizada',
+			'direitos e bens comuns',
 			'organizações não governamentais',
 			'abong'
 		),
@@ -575,6 +592,32 @@ function tag_pra_categoria(){
 			'machismo',
 			'Mídia',
 			'Comunicação',
+			'direitos',
+			'direitos sociais',
+			'feminismo',
+			'juventude',
+			'violência policial',
+			'educação',
+			'#educação',
+			'indígenas',
+			'mulher',
+			'saúde',
+			'#saúde',
+			'pne',
+			'fndc',
+			'democratização da comunicação',
+			'direitos humanos',
+			'violência',
+			'redução da maioridade penal',
+			'índios',
+			'direitos trabalhistas',
+			'gênero',
+			'lgbt',
+			'lei da mídia democrática',
+			'racismo',
+			'machismo',
+			'mídia',
+			'comunicação',
 		),
 		"Movimentos" => array(	
 			'Movimentos',
@@ -584,6 +627,13 @@ function tag_pra_categoria(){
 			'Mst',
 			'Manifestações',
 			'Protestos',
+			'movimentos',
+			'movimentos sociais',
+			'manifestação',
+			'movimento sindical',
+			'mst',
+			'manifestações',
+			'protestos',
 		),
 		"Democracia" => array(	
 			'Democracia',
@@ -603,8 +653,25 @@ function tag_pra_categoria(){
 			'Golpe',
 			'Impeachment',
 			'Eduardo Cunha',
+			'democracia',
+			'participação social',
+			'participação',
+			'reforma política',
+			'democracia participativa',
+			'transparência',
+			'câmara dos deputados',
+			'senado',
+			'dilma rousseff',
+			'michel temer',
+			'fora temer',
+			'congresso nacional',
+			'políticas públicas',
+			'polícia militar',
+			'golpe',
+			'impeachment',
+			'eduardo cunha',
 		),
-		"Democracia" => array(	
+		"Novos paradigmas" => array(	
 			"Novos paradigmas de desenvolvimento",
 			"Novos modelos de desenvolvimento",
 			"Meio ambiente",
@@ -614,6 +681,15 @@ function tag_pra_categoria(){
 			"Segurança alimentar",
 			"Água",
 			"ODS",
+			"novos paradigmas de desenvolvimento",
+			"novos modelos de desenvolvimento",
+			"meio ambiente",
+			"agricultura",
+			"agroecologia",
+			"agricultura familiar",
+			"segurança alimentar",
+			"água",
+			"ods",
 		)
 
 
@@ -623,9 +699,9 @@ function tag_pra_categoria(){
 // 	echo "</pre>";
 	// get_term( $term, $taxonomy, $output, $filter );
 	foreach ($alteracoes as $tags ) {
-		echo "<pre>";
-		print_r( array_search($tags, $alteracoes));
-		echo "</pre>";
+		// echo "<pre>";
+		// print_r( array_search($tags, $alteracoes));
+		// echo "</pre>";
 		$postlist = get_posts( 
 		array(	
 			'posts_per_page'   => -1,
