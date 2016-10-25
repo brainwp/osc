@@ -52,6 +52,9 @@
 		<?php endif; ?>
 		<?php 
 		// the_tags( '<span class="cat-links">' . __( 'Tags:', 'odin' ) . ' ', ', ', '</span>' ); ?>
-		
+		<?php if ( comments_open() || get_comments_number() ) :
+						comments_template();
+				endif;
+		 ?>
 	</footer>
 </article><!-- #post-## -->

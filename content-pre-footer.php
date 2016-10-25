@@ -22,8 +22,8 @@
 	</div>
 	<div class="col-sm-4 link-banco box-footer">
 		<img class="img-contato"src="<?php echo get_template_directory_uri();?>/assets/images/banco-arquivo.png"  alt="">
-		<h4><i>Conheça o banco de práticas aternativas </i></h4>
-		<p>Lorem ipsum dolor sit amet, . Eos mundi iudicabit reformidans. ad, ut ius quem reformidans conclusionemque</p>
+		<h4><i>Acesse o Banco de Práticas Alternativas </i></h4>
+		<p>Conheça experiências reais que unem justiça social, radicalização da democracia e harmonia com o meio ambiente</p>
 		<a href="home-banco"> <div  id="link-banco"></div></a>
 	</div>
 </div>

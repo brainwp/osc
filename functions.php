@@ -509,6 +509,9 @@ function my_custom_admin_styles() {
            .add-category {
            	display: none;
            }
+           .add-category {
+    			display: block!important;
+			}
          </style>
     <?php
 }
@@ -715,10 +718,11 @@ function tag_pra_categoria(){
 			)
 		)
 		);
+		// print_r(count($postlist));
 		foreach ( $postlist as $post ) {
 			$category = get_term_by('name',array_search($tags, $alteracoes), 'category');
 			// print_r($post->ID);
-			echo " ";
+			// echo " ";
 			wp_set_post_categories( $post->ID, $category, true ) ;
 		}
 	}
@@ -731,3 +735,11 @@ function tag_pra_categoria(){
 	// echo '</pre>';
 
 }
+function SearchFilter($query) {
+	if ($query->is_search AND $query->post_type != 'pratica' ) {
+		$query->set('post_type', array('noticia','publicacao', 'video'));
+	}
+	return $query;
+}
+
+add_filter('pre_get_posts','SearchFilter');

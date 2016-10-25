@@ -7,6 +7,9 @@
 #wrapper > *:first-child{
 	margin-top:50px;
 }
+.page-template-page-home-banco #wrapper > *:first-child{
+	margin-top:0;
+}
 .home #wrapper>*:first-child{
 	margin-top: 0;
 }
@@ -174,7 +177,7 @@ html .navbar-default .navbar-nav>li>a {
 /*frontpage*/
 
 .box-titulo{
-	background-color: #f83d1d;
+	background-color: #f83d1d!important;
 	position: absolute;
 	padding:30px;
 	right: 0;
@@ -205,7 +208,16 @@ html .navbar-default .navbar-nav>li>a {
 .home div.wpcf7-validation-errors, html div.wpcf7-mail-sent-ok{
 	border-color:rgb(253, 87, 52);
 	color:#fff;
-	padding:0 20px;
+	padding:0 20px 1px;
+}
+#form-footer .wpcf7-response-output, .wpcf7-form.contato .wpcf7-response-output{
+	margin: 5px 0!important;
+
+}
+.wpcf7-form.contato img.ajax-loader {
+    border: none;
+    vertical-align: middle;
+    margin: 30px 4px 0 0;
 }
 .cada-slide-1{
 	position:relative;
@@ -243,6 +255,7 @@ html .navbar-default .navbar-nav>li>a {
 	opacity:0 ;
 	position: absolute;
     bottom: 0;
+    height:100%;
     color: #fff;
     padding:42px 40px; 
 }
@@ -1235,8 +1248,13 @@ select:disabled, input:disabled{
 	padding: 45px 0;
 	font-family: 'Source Sans pro', sans-serif!important;
 }
+
 .archive #footer, .search #footer{
 	border-top: solid 15px rgb(22,122,192)!important;
+
+}
+.post-type-archive-pratica.archive #footer{ 
+	border-top:solid 15px #9ab87a!important;
 
 }
 #form-footer{
@@ -1265,6 +1283,22 @@ select:disabled, input:disabled{
 #footer h4{
 	font-size:24px;
 	text-transform: uppercase;
+}
+.feito-por img {
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    -o-transition-property: -o-transform;
+    transition-property: transform;
+    width: 45px;
+}
+.feito-por img:hover {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
 }
 #info-footer p{
 	color: #F2EEEE;
@@ -1370,6 +1404,13 @@ font-size: 20px;
 .pagination>li>a, ul.page-numbers>li>a, .pagination>li>span, ul.page-numbers>li>span{
 	color:#9ab87a;
 }
+.post-type-archive-pratica.search ul.page-numbers>li>span.current{
+		background-color:#9ab87a;
+	border-color: #9ab87a;
+}
+.post-type-archive-pratica.search ul.page-numbers>li>a{
+	color: #9ab87a;
+}
 ul.page-numbers>li>span.current, ul.page-numbers>li>span.current:hover, ul.page-numbers>li>span.current:focus{
 	background-color:#9ab87a;
 	border-color: #9ab87a;
@@ -1393,6 +1434,13 @@ ul.page-numbers>li>span.current, ul.page-numbers>li>span.current:hover, ul.page-
 	
 }
 @media (max-width: 992px){
+	.noticia-titulo a >p{
+		display: none;
+	}
+	html #categorias-conteudo .cada-noticia .noticia-titulo {
+		background: rgba(0, 0, 0, 0.31);
+    	height: auto;
+	}
 	.titulo-materia-archive h4{
 		font-size:16px;
 		    margin-bottom: -10px;
@@ -1434,6 +1482,27 @@ ul.page-numbers>li>span.current, ul.page-numbers>li>span.current:hover, ul.page-
 	}
 }
 @media (max-width: 767px){
+	.box-titulo {
+	    right: 0;
+	    max-width: 435px;
+	    bottom: 0;
+	    position: relative;
+	    transform: translate(0%, 0%);
+	 
+	}
+	.thumb-page.wp-post-image{
+		margin-top: 141px!important;
+	}
+	#footer div{
+	    text-align: center;
+
+	}
+	.header-interna .navbar-main-navigation{
+		left: 0;
+	}
+	.destaques-contato .contato> div, .pre-footer .box-footer,  main#content div.box-footer, main#content .destaques-contato .contato> div{
+		background-color: #ff754c;
+	}
 	.header-interna #main-navigation h4{
 		display: none;	
 	}

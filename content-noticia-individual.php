@@ -10,22 +10,7 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<?php
-		
-			if ( is_single() ) :
-				the_title( '<h1 class="entry-title">', '</h1>' );
-			else :
-				the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-			endif;
-		?>
-
-		<?php if ( 'post' == get_post_type() ) : ?>
-			<div class="entry-meta">
-				<?php odin_posted_on(); ?>
-			</div><!-- .entry-meta -->
-		<?php endif; ?>
-	</header><!-- .entry-header -->
+	
 
 	<?php if ( is_search() ) : ?>
 		<div class="entry-summary">
@@ -72,8 +57,6 @@
 			<span class="cat-links"><?php echo 'Categorias: ' . $lista_cat; ?></span>
 		<?php endif; ?>
 		<?php the_tags( '<span class="tag-links">' . __( 'Tagged as:', 'odin' ) . ' ', ', ', '</span>' ); ?>
-		<?php if ( ! post_password_required() && ( comments_open() || get_comments_number() ) ) : ?>
-			<span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', 'odin' ), __( '1 Comment', 'odin' ), __( '% Comments', 'odin' ) ); ?></span>
-		<?php endif; ?>
+		<?php comments_template(); ?>  
 	</footer>
 </article><!-- #post-## -->

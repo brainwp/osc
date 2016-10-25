@@ -44,7 +44,7 @@
 				<img src="<?php echo get_template_directory_uri(); ?>/assets/images/cc.png">
 				Esse portal utiliza licença Creative Commons  3.0 Brasil Atribuição não comercial, sem derivados
 			</div>	
-			<div class='direita' id='logos'>
+			<div class='direita feito-por' id='logos'>
 				<a target="_blank" href="http://www.wordpress.org"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/wordpress.png"></a>
 				<a target="_blank" href="http://www.brasa.art.br"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/brasa.png"></a>
 			</div>

@@ -1,4 +1,8 @@
+<?php  
+// header( 'Location: https://observatoriosc.wordpress.com/' ) ;  ?>
+
 <?php
+
 /**
  * The template for displaying all pages.
  *
@@ -57,7 +61,7 @@ get_header(); ?>
 								<?php 
 							}
 							else{
-								echo get_the_post_thumbnail( $post->ID, 'full');
+								echo get_the_post_thumbnail( $post->ID, 'slider-1');
 							}
 						 ?>
 						
@@ -91,7 +95,7 @@ get_header(); ?>
 				
 					$args_cat=array(
 							'hide_empty'=>0,
-							'exclude' =>'219',
+							'exclude' =>'1787',
 						);
 					// wp_list_categories( $args_cat );
 				$terms = get_terms( 'category', $args_cat );
@@ -245,8 +249,8 @@ get_header(); ?>
 				<div class="link-banco">
 					<img class="img-contato"src="<?php echo get_template_directory_uri();?>/assets/images/banco-arquivo.png"  alt="">
 
-					<h4><i>Conheça o banco de práticas alternativ</i></h4>
-					<p>Lorem ipsum dolor sit amet, . Eos mundi iudicabit reformidans. ad, ut ius quem reformidans conclusionemque</p>
+					<h4><i>Acesse o Banco de Práticas Alternativas</i></h4>
+					<p>Conheça experiências reais que unem justiça social, radicalização da democracia e harmonia com o meio ambiente</p>
 					<a href="home-banco"> <div  id="link-banco"></div></a>
 				</div>
 
