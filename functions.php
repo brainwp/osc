@@ -533,7 +533,7 @@ function fix_category_pagination($qs){
 }
 add_filter('request', 'fix_category_pagination');
 
-tag_pra_categoria();
+// tag_pra_categoria();
 function tag_pra_categoria(){
 	$alteracoes = array(
 		"OSC" => array(	
@@ -736,7 +736,8 @@ function tag_pra_categoria(){
 
 }
 function SearchFilter($query) {
-	if ($query->is_search AND $query->post_type != 'pratica' ) {
+	// print_r($query->query['post_type']);
+	if ($query->is_search AND $query->query['post_type'] != 'pratica' ) {
 		$query->set('post_type', array('noticia','publicacao', 'video'));
 	}
 	return $query;

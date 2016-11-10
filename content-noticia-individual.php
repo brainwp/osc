@@ -56,7 +56,8 @@
 		 ?>
 			<span class="cat-links"><?php echo 'Categorias: ' . $lista_cat; ?></span>
 		<?php endif; ?>
-		<?php the_tags( '<span class="tag-links">' . __( 'Tagged as:', 'odin' ) . ' ', ', ', '</span>' ); ?>
+		<?php 
+		// the_tags( '<span class="tag-links">' . __( 'Tagged as:', 'odin' ) . ' ', ', ', '</span>' ); ?>
 		<?php comments_template(); ?>  
 	</footer>
 </article><!-- #post-## -->

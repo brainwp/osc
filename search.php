@@ -51,10 +51,17 @@ if( $post_type == 'pratica'){
 	$keyword = get_search_query();
 	$keyword ='%'. $wpdb->esc_like( $keyword ).'%';// Thanks Manny Fleurmond
 	// Search in all custom fields
+	$post_ids_praticas=$wpdb->get_col( $wpdb->prepare("
+	SELECT DISTINCT ID FROM {$wpdb->posts}
+	WHERE post_type LIKE '%s'
+	AND post_status LIKE '%s'
+	", 'pratica', 'publish' ));
+	echo 'praticas:'.count($post_ids_praticas).'<br>';
 	$post_ids_meta = $wpdb->get_col( $wpdb->prepare("
 	SELECT DISTINCT post_id FROM {$wpdb->postmeta}
-	WHERE meta_value LIKE '%s'
+	WHERE meta_value LIKE '%s AND post_id IN $post_ids_praticas'
 	", $keyword ));
+	echo 'contagem'.count($post_ids_meta).'<br>';
 	// Search in post_title and post_content
 	$post_ids_post = $wpdb->get_col( $wpdb->prepare("
 	SELECT DISTINCT ID FROM {$wpdb->posts}
@@ -70,6 +77,7 @@ if( $post_type == 'pratica'){
 	'post_type' => 'pratica',
 	'posts_per_page' =>12,
 	);
+	echo count( $post_ids);
 	if ($cidade != 0 && $uf !=0){
 		$args['meta_query']=array(
 			array(
@@ -115,6 +123,7 @@ if( $post_type == 'pratica'){
 	}
 	$paged=(get_query_var('paged')) ? get_query_var('paged') : 1;
 	$args['paged']=$paged;
+	echo 'paged: '.get_query_var('paged');
 	$query = new WP_Query( $args );
 	// echo '<pre>';
 	// print_r($query);
@@ -226,4 +235,11 @@ else{
 	<?php 
 }
 
-get_footer();
+
+if ($post_type == 'pratica') {
+	get_footer('banco'); 
+}
+else{
+	get_footer();
+
+}

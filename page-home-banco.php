@@ -241,4 +241,4 @@ get_header('banco'); ?>
 <?php 
 
 
-get_footer();
+get_footer('banco');
