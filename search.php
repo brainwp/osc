@@ -56,19 +56,30 @@ if( $post_type == 'pratica'){
 	WHERE post_type LIKE '%s'
 	AND post_status LIKE '%s'
 	", 'pratica', 'publish' ));
-	echo 'praticas:'.count($post_ids_praticas).'<br>';
+	// echo 'praticas: '.count($post_ids_praticas).'<br>';
+	$query_parts = array();
+	foreach ($post_ids_praticas as $val) {
+    	$query_parts[] = "'".mysql_real_escape_string($val)."%'";
+	}
+	// echo "key:".$keyword."<br>";
+	$string = implode(',', $post_ids_praticas);
+	// echo $string."<br>";
 	$post_ids_meta = $wpdb->get_col( $wpdb->prepare("
 	SELECT DISTINCT post_id FROM {$wpdb->postmeta}
-	WHERE meta_value LIKE '%s AND post_id IN $post_ids_praticas'
+	WHERE ( meta_value LIKE '%s' AND post_id IN ( $string ) )
 	", $keyword ));
-	echo 'contagem'.count($post_ids_meta).'<br>';
+	
+	// echo 'contagem metas: '.count($post_ids_meta).'<br>';
 	// Search in post_title and post_content
 	$post_ids_post = $wpdb->get_col( $wpdb->prepare("
 	SELECT DISTINCT ID FROM {$wpdb->posts}
-	WHERE post_title LIKE '%s'
-	OR post_content LIKE '%s'
+	WHERE   ( ( post_title LIKE '%s'
+	OR post_content LIKE '%s' )  AND  (  ID IN ( $string ) ) )
 	", $keyword, $keyword ));
+	// echo 'contagem titulo ou conteudo: '.count( $post_ids_post)."<br>";
 	$post_ids = array_merge( $post_ids_meta, $post_ids_post );
+	// echo 'contagem final: '.count( array_unique($post_ids))."<br>";
+	$post_ids = array_unique($post_ids);
 	// Query arguments
 	$args = array(
 	'post_type'=>'post',
@@ -77,7 +88,6 @@ if( $post_type == 'pratica'){
 	'post_type' => 'pratica',
 	'posts_per_page' =>12,
 	);
-	echo count( $post_ids);
 	if ($cidade != 0 && $uf !=0){
 		$args['meta_query']=array(
 			array(
@@ -123,16 +133,18 @@ if( $post_type == 'pratica'){
 	}
 	$paged=(get_query_var('paged')) ? get_query_var('paged') : 1;
 	$args['paged']=$paged;
-	echo 'paged: '.get_query_var('paged');
-	$query = new WP_Query( $args );
+	// echo 'paged: '.get_query_var('paged');
+	$wp_query = new WP_Query( $args );
 	// echo '<pre>';
-	// print_r($query);
+	// print_r($wp_query->found_posts);
+	// echo '<br>';
+	// print_r($wp_query->max_num_pages);
 	// echo '</pre>';
 
 	?>
 
 	<main id="content" class="busca-banco banco" tabindex="-1" role="main">
-				<?php if ( $query->have_posts() ) : ?>
+				<?php if ( $wp_query->have_posts() ) : ?>
 
 					<header class="row page-header">
 						<h1 class="page-title"><?php printf( __( 'Busca de Práticas', 'odin' ), get_search_query() ); ?></h1>
@@ -141,7 +153,7 @@ if( $post_type == 'pratica'){
 						<?php
 
 							// Start the Loop.
-							while ( $query->have_posts() ) : $query->the_post();
+							while ( $wp_query->have_posts() ) : $wp_query->the_post();
 
 								/*
 								 * Include the post format-specific template for the content. If you want to
@@ -157,7 +169,7 @@ if( $post_type == 'pratica'){
 
 						else :
 							// If no content, include the "No posts found" template.
-							get_template_part( 'content', 'none' );
+							get_template_part( 'content', 'none-banco' );
 
 					endif;
 				?>
@@ -225,7 +237,7 @@ else{
 
 					else :
 						// If no content, include the "No posts found" template.
-						get_template_part( 'content', 'none' );
+						get_template_part( 'content', 'none-banco' );
 
 				endif;
 			?>
