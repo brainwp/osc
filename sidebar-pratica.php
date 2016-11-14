@@ -18,7 +18,7 @@
 			} 
 			else{
 				echo '<img width="200" height="200" src="'. get_template_directory_uri().'/assets/images/sem_foto.png" class="attachment-pratica-lista size-pratica-lista wp-post-image" alt="Sem Imagem" >';
-			}?>			<h4>Navegação</h4>
+			}?>			<h4 id="nav_pratica_titulo">Navegação</h4>
 			<li class="item-menu"><a href="#resumo">Resumo</a></li> 
 			<li class="item-menu"><a href="#descricao">Descrição</a></li>
 			<li class="item-menu"><a href="#objetivos">Objetivos</a></li>

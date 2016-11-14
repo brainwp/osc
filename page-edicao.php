@@ -41,7 +41,12 @@ get_header('banco'); ?>
 		else{
 			global $user_ID;
 			$user_id = $user_ID;
-			$args = array( 'author' => $user_id, 'post_type'=>'pratica', 'posts_per_page'=>-1 );
+			if (current_user_can('edit_others_posts' )) {
+				$args = array( 'post_type'=>'pratica', 'posts_per_page'=>-1 );
+			}
+			else{
+				$args = array( 'author' => $user_id, 'post_type'=>'pratica', 'posts_per_page'=>-1 );
+			}
 			$query = new WP_Query(  $args);
 			// echo '<pre>';
 			// print_r($user_ID);
@@ -71,9 +76,12 @@ get_header('banco'); ?>
 		<div id="resultado"></div>
 
 		<div id="continua-cadastro" class="row">
-			<h2>Cadastro de Práticas</h2>
+			<h2>Edição de Práticas - <a target="_blank" id='url' href="">Visualizar</a>
+</h2>
+
 			<form>
 				<div class="col-cadastro col-sm-6">
+
 					<h3>Identificação da prática</h3>
 					<input class="title nome" name="nome-projeto" placeholder="Nome da prática *" type="text">
 					<select class='uf inline-block acf' name="uf" id="uf-continua-cadastro">
@@ -186,7 +194,7 @@ get_header('banco'); ?>
    					 </div> -->
 					
 				<div class="clearfix"></div>
-				<a class="enviar" id="enviar-cadastro" href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/cadastrar-banco.png">Cadastrar</a>			</form>
+				<a class="enviar" id="enviar-cadastro" href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/cadastrar-banco.png">Atualizar</a>			</form>
 				</div>
 			</form>
 		</div>

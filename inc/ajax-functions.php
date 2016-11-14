@@ -187,7 +187,7 @@ function cadastra_pratica_func(){
 	 	 wp_update_post( $my_post );
 	}
 	foreach ($data as $key => $value) {
-		if ($key!=='action' && $key !== 'title' && $key!=='tax') {
+		if ($key!=='action' && $key !== 'title' && $key!=='tax'&&$key!=='senha'&&$key!=='senha-repetir') {
 			update_field($key, $value,$pratica_id );
 		}
 	}
@@ -582,6 +582,8 @@ function edita_pratica_pega_func(){
 	$pratica = get_post($_POST['id']);
 	$id=$_POST['id'];
 	$resposta=array();
+	$resposta['url']=get_permalink($id );
+
 	$resposta['nomeProjeto']=get_the_title( $pratica );
 	$resposta['estado']=get_post_meta( $id, 'uf', 1 );
 	$resposta['cidade']=get_post_meta( $id, 'cidade', 1 );
@@ -636,7 +638,7 @@ function edita_pratica_pega_func(){
 			$resposta['galeria'] .= '<div class="cadaGaleria"><a class="deletaGaleria" data-id="'.$anexo->ID.'" href="#"> X</a><img class="thumb-gal" src="'.wp_get_attachment_thumb_url( $anexo->ID ).'"></div>';
 		}
 		else{
-			$resposta['anexos'] .= '<p>'.$anexo->guid.'</p>';
+			$resposta['anexos'] .= '<div class="cadaGaleria"><a class="deletaGaleria" data-id="'.$anexo->ID.'" href="#"> X</a>'.$anexo->post_title.'</div>';
 		}
 	}
 	echo json_encode($resposta);
@@ -667,8 +669,15 @@ function edita_pratica_pega_func(){
 	// <textarea class='acf' rows="5"name='resultados' placeholder="Resultados *"></textarea>
 }
 function deleta_galeria(){
-	
-	echo '';
+	$id=$_POST['id'];
+    $delete=wp_delete_post($id, true);
+	if (is_object($delete)) {
+		$resposta['resultado']=1;
+	}
+	else{
+		$resposta['resultado']=0;
+	}
+	echo json_encode($resposta);
 	wp_die( );
 }
 add_action('wp_ajax_deleta_galeria', 'deleta_galeria');

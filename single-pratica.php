@@ -63,14 +63,34 @@ get_header('banco'); ?>
 					); 
 					$attachments = get_posts($args);
 					if ($attachments) {
-					echo '<h4 id="galeria">Galeria de imagens</h4>';					
+					$arquivos ="";
+					$imagens ="";
 						foreach ($attachments as $attachment) {
+						if (wp_attachment_is_image( $attachment->ID )) {
+							if ($attachment->ID != get_post_thumbnail_id($post->ID)) {
+								$imagens .= "<div class='col-md-4'><a target='_blank' href='".wp_get_attachment_url($attachment->ID)."'><img src='".wp_get_attachment_image_src( $attachment->ID, 'thumbnail')[0]."'></a></div>";
+							}
+						}
+						else{
+							$arquivos .= "<div class='col-md-12'><a target='_blank' href='".wp_get_attachment_url($attachment->ID)."'>".$attachment->post_title."</a></div>";
+
+						}
+
 							// echo apply_filters('the_title', $attachment->post_title);
 							// wp_getthe_attachment_link($attachment->ID, false);
 							// print_r(wp_get_attachment_image_src( $attachment->ID, 'thumb'));
 							// echo'<br>';
-							echo "<div class='col-md-4'><a target='_blank' href='".wp_get_attachment_url($attachment->ID)."'><img src='".wp_get_attachment_image_src( $attachment->ID, 'thumbnail')[0]."'></a></div>";
 						}
+						if ($imagens!="") {
+							echo '<h4 class="col-sm-12" id="galeria">Galeria de imagens</h4>';
+							echo $imagens;
+						}
+						if ($arquivos!="") {
+							echo '<h4 class="col-sm-12" id="galeria">Arquivos</h4>';
+							echo $arquivos;
+						}
+						
+						
 					}
 				
 				endwhile;

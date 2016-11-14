@@ -235,7 +235,7 @@ add_action( 'init', 'pratica_cpt' );
 
 function pratica_cpt() {
 	$labels = array(                        
-		'name'               => 'Ppraticas Alternativas',
+		'name'               => 'Práticas Alternativas',
 		'singular_name'      => 'Pratica alternativa',
 		'menu_name'          => 'Praticas Alternativas',
 		'name_admin_bar'     => 'Pratica alternativa',

@@ -204,7 +204,7 @@ $('#slider-2').owlCarousel({
 	// continua cadastro
 	// continua cadastro
 	$("#continua-cadastro-btn").click(function(e){
-				e.preventDefault();
+		e.preventDefault();
 		nome=$('#cadastro .nome').val();
 		uf=$('#cadastro .uf').val();
 		cidade=$('#cidade-cadastro').val();
@@ -526,12 +526,12 @@ $("#anexos").click(function(e){
 		$.post(odin_main.ajaxurl, data, function(response) {
 			// console.log(response);
            	response=jQuery.parseJSON(response);
-
+			console.log(response);
 			$('.title.nome').val(response.nomeProjeto);
 			$('.uf').val(response.estado);
 			$('.cidade').val(response.cidade);
 			$('#tema-continua-cadastro').val(response.tema);
-
+			$('#url').attr('href',response.url);
 			$('input[name="nome_da_entidade"]').val(response.nome_da_entidade);
 			$('input[name=""]').val(response.nome_da_entidade);
 			$('input[name="nome_da_entidade"]').val(response.nome_da_entidade);
@@ -575,6 +575,9 @@ $("#anexos").click(function(e){
 		   	$('.arquivosAnexos').html(response.anexos);
 
 			$('#continua-cadastro').fadeIn();
+			$('html, body').animate({
+        scrollTop: $("#continua-cadastro").offset().top
+    }, 2000);
 		});
 
 
@@ -630,14 +633,24 @@ $("#anexos").click(function(e){
 
 	$(document).on('click',".deletaGaleria",function(e){
 		e.preventDefault(); 
+		esse=$(this);
 		id=$(this).attr('data-id');
+		post_id=$('#postId').attr('value');
 		var data = {
 				'action': 'deleta_galeria',
 				'id':id,
+				'post_id':post_id,
 		};
 		console.log(data);
 		$.post(odin_main.ajaxurl, data, function(response) {
-			console.log(response);
+          	response=jQuery.parseJSON(response);
+          	console.log(response.resultado);
+          	if ( response.resultado == 1 ) {
+          		esse.parent().remove();
+          		console.log('resposta:'+response.resultado);
+
+          	};
+
 		});
 
 
