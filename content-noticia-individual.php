@@ -10,7 +10,8 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	
+	<h5 class="data-single">Publicado em: <?php  ?><?php echo get_the_date(); ?></h5>
+
 
 	<?php if ( is_search() ) : ?>
 		<div class="entry-summary">

@@ -7,7 +7,31 @@
  * @package Odin
  * @since 2.2.0
  */
-?><!DOCTYPE html>
+?>
+<?php
+	$endereco=explode( "/",$_SERVER[REQUEST_URI]);
+ 	$parte1 = $endereco[1];
+  	$parte2 = $endereco[2];
+  	$parte4 = $endereco[4];
+  	// print_r($endereco);
+  	// 	echo $parte1."nt:˜".is_integer((int)$parte1);
+
+	// echo is_integer((int)$parte2);
+	// echo is_integer((int)$parte3);
+	// echo "<br>parte4:".$parte4;
+	if ($parte1 == "tag" OR $parte1 == "category"){
+		// echo site_url( "?s=".$parte2 );
+		header(	'Location: '.site_url( "?s=".$parte2 ));
+		
+	}
+	else if ((int)$parte1 != 0 AND (int)$parte2!=0) {
+		header('Location: '.site_url( "noticia/".$parte4 ));
+		// echo site_url( "noticia/".$parte4 );
+	}
+	?>
+
+<!DOCTYPE html>
+ 
 <html class="no-js" <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />

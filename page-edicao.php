@@ -195,6 +195,7 @@ get_header('banco'); ?>
 					
 				<div class="clearfix"></div>
 				<a class="enviar" id="enviar-cadastro" href="#"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/cadastrar-banco.png">Atualizar</a>			</form>
+				<div id="erro"></div>
 				</div>
 			</form>
 		</div>

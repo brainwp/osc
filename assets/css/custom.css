@@ -4,7 +4,7 @@
 	z-index: 9999;
 	width: 100%;
 }
-#wrapper > *:first-child{
+.page #wrapper > *:first-child, .archive #wrapper > *:first-child, .single-noticia #wrapper > *:first-child, .search #wrapper > *:first-child{
 	margin-top:50px;
 }
 .page-template-page-home-banco #wrapper > *:first-child{
@@ -695,6 +695,13 @@ color: #fff;
 .thumb-page, .attachment-thumb-page{
 	margin:0 auto;
 	display: block;
+}
+.data-single{
+	font-style: italic;
+	font-weight: 900;
+}
+.single-noticia .attachment-thumb-page{
+	margin-top:50px;
 }
 .single .header-interna .navbar-form input[type="search"],.page .header-interna .navbar-form input[type="search"]{
 	background-color: #fc5833;

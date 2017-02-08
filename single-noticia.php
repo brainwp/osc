@@ -22,7 +22,7 @@ get_header('internas'); ?>
 		the_post_thumbnail('thumb-page' );
 	}
 	else{
-		echo '<img 	class="thumb-page wp-post-image" src="'.get_template_directory_uri().'/assets/images/thumb-page.png" alt="">';
+		// echo '<img 	class="thumb-page wp-post-image" src="'.get_template_directory_uri().'/assets/images/thumb-page.png" alt="">';
 
 	} 
 ?>

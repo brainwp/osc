@@ -200,7 +200,7 @@ function cadastra_pratica_func(){
 			'post_status'   => 'draft'
 		 );
 	wp_update_post( $my_post );
-	$resposta['mensagem']= '<h2>Obrigado, sua prática será ser analisada e publicada futuramente.</h2>';
+	$resposta['mensagem']= '<h2>Obrigado, sua prática será analisada e publicada futuramente.</h2>';
 	if ($_POST['edicao']==1) {
 		$resposta['praticasEdits']= $pratica_id;
 		$resposta['edicao']= 1;

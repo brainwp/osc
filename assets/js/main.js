@@ -290,6 +290,8 @@ $('#slider-2').owlCarousel({
 
 			}
 			else{
+				console.log("aqui");
+				console.log(response);
 				$('#continua-cadastro #erro').html(response.erro);
 				$('.enviarCadastro').fadeOut();
 				$('#enviar-cadastro').fadeIn();
