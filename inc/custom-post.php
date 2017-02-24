@@ -39,7 +39,7 @@ function publicacao_cpt() {
 		'menu_position'      => null,
 		'menu_icon' => 'dashicons-book',
 		'taxonomies' => array('post_tag'),
-		'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt')
+		'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt','comments')
 	);
 
 	register_post_type( 'publicacao', $args );
@@ -190,7 +190,7 @@ function noticia_cpt() {
 		'menu_position'      => null,
 		'menu_icon' => 'dashicons-rss',
 	    'taxonomies' => array('category', 'post_tag'), 
-		'supports'           => array( 'title', 'editor', 'thumbnail', 'author', 'excerpt')
+		'supports'           => array( 'title', 'editor', 'thumbnail', 'author', 'excerpt','comments')
 	);
 
 	register_post_type( 'noticia', $args );

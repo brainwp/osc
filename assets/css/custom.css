@@ -1859,7 +1859,11 @@ label.cabinet input.file
 	}
 }
 
-
+@media (max-width: 700px){
+	.share-jetpack-whatsapp{
+		display: none;
+	}
+}
 
 
 

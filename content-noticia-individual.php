@@ -1,8 +1,6 @@
 <?php
 /**
- * The default template for displaying content.
- *
- * Used for both single and index/archive/author/catagory/search/tag.
+ * The template used for displaying page content.
  *
  * @package Odin
  * @since 2.2.0
@@ -10,55 +8,53 @@
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<h5 class="data-single">Publicado em: <?php  ?><?php echo get_the_date(); ?></h5>
-
-
-	<?php if ( is_search() ) : ?>
-		<div class="entry-summary">
-			<?php the_excerpt(); ?>
-		</div><!-- .entry-summary -->
-	<?php else : ?>
-		<div class="entry-content">
-			<?php
-				the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'odin' ) );
-				wp_link_pages( array(
-					'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'odin' ) . '</span>',
-					'after'       => '</div>',
-					'link_before' => '<span>',
-					'link_after'  => '</span>',
-				) );
-			?>
-		</div><!-- .entry-content -->
-	<?php endif; ?>
-
+	
+	<div class="entry-content">
+		<?php
+			the_content();
+			wp_link_pages( array(
+				'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'odin' ) . '</span>',
+				'after'       => '</div>',
+				'link_before' => '<span>',
+				'link_after'  => '</span>',
+			) );
+		?>
+	</div><!-- .entry-content -->
 	<footer class="entry-meta">
 		<?php if ( in_array( 'categoria_noticias', get_object_taxonomies( get_post_type() ) ) ) : ?>
 		<?php 
+		$lista_cat="";
 		$terms = wp_get_post_terms(get_the_id(), 'categoria_noticias');
 				// print_r($terms);
 				if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
 					$count=0;
-					$lista_cat="";
+					
 				    foreach ( $terms as $term ) {
 				    	if ($count==0) {
-				    		$lista_cat= $term->name;
+				    		$lista_cat= '<a href="'.get_term_link($term,'categoria_noticias' ).'">'.$term->name.'</a>';
 					    	$count++;
 
 				    	}
 				    	else{
-				    		$lista_cat .= ', '. $term->name;
+				    		$lista_cat .= ', '.'<a href="'.get_term_link($term,'categoria_noticias' ).'">'.$term->name.'</a>';
 
 				    	}
 
 				    }
+				?><span class="cat-links"><?php echo 'Categorias: ' . $lista_cat; ?></span>
+				<?php 
+
 				}
 				// echo 'cat_lista'.$lista_cat;
 
 		 ?>
-			<span class="cat-links"><?php echo 'Categorias: ' . $lista_cat; ?></span>
+
 		<?php endif; ?>
 		<?php 
-		// the_tags( '<span class="tag-links">' . __( 'Tagged as:', 'odin' ) . ' ', ', ', '</span>' ); ?>
-		<?php comments_template(); ?>  
+		// the_tags( '<span class="cat-links">' . __( 'Tags:', 'odin' ) . ' ', ', ', '</span>' ); ?>
+		<?php if ( comments_open() || get_comments_number() ) :
+						comments_template();
+				endif;
+		 ?>
 	</footer>
 </article><!-- #post-## -->
