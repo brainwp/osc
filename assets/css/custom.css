@@ -475,6 +475,8 @@ html .owl-theme .owl-controls .owl-buttons div{
 	margin: 0 20px 20px 20px;	
 }
 .pre-footer .box-footer.meio img{
+	-webkit-filter: contrast(235%);
+    filter: contrast(160%);
 	margin: 10px;	
 }
 .destaques-contato .link-banco p {
@@ -1859,9 +1861,9 @@ label.cabinet input.file
 	}
 }
 
-@media (max-width: 700px){
+@media (min-width: 700px){
 	.share-jetpack-whatsapp{
-		display: none;
+		display: none!important;
 	}
 }
 
