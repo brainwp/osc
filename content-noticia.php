@@ -1,6 +1,13 @@
 						<div class="cada-noticia-archive col-sm-4">
 							<a href="<?php echo get_permalink( );?>">
-								<?php if (!has_post_thumbnail( )) {
+								<?php 
+								$img_quadrada= get_field( "img_quadrada" );
+
+								if($img_quadrada){
+									echo '<img 	class="img thumb wp-post-image" src="'.$img_quadrada['url'].'" alt="">';
+									
+								} 
+								else if(!has_post_thumbnail( )) {
 				 					echo '<img 	class="img thumb wp-post-image" src="'.get_template_directory_uri().'/assets/images/logo-quadrado.png" alt="">';
 
 								 } 
