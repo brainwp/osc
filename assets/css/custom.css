@@ -590,15 +590,18 @@ html .owl-theme .owl-controls .owl-buttons div{
 
 
 .archive.category  #header.header-interna,
-.archive.post-type-archive-noticia  #header.header-interna, .search   #header.header-interna,
-.archive.post-type-archive-video  #header.header-interna, .search   #header.header-interna{
+.archive.post-type-archive-noticia  #header.header-interna,
+.archive.post-type-archive-fonte  #header.header-interna, 
+.archive.post-type-archive-video  #header.header-interna, 
+.search   #header.header-interna{
 	background: rgb(22,122,192)!important;
 }
 .archive.category #header.header-interna a,
 .archive.post-type-archive-publicacao #header.header-interna a,
 .search #header.header-interna a,
 .post-type-archive-noticia #header.header-interna a,
-.archive.post-type-archive-noticia #header.header-interna a{
+.archive.post-type-archive-noticia #header.header-interna a,
+.archive.post-type-archive-fonte #header.header-interna a{
 	color:#fff;
 }
 .archive.category #wrapper,
@@ -606,6 +609,7 @@ html .owl-theme .owl-controls .owl-buttons div{
 .search #wrapper,
 .post-type-archive-noticia #wrapper,
 .archive.post-type-archive-noticia #wrapper,
+.archive.post-type-archive-fonte #wrapper,
 .page #wrapper{
 
 
@@ -618,6 +622,7 @@ html .owl-theme .owl-controls .owl-buttons div{
 .archive.category .titulo,
 .archive.post-type-archive-publicacao .titulo,
 .archive.post-type-archive-noticia .titulo,
+.archive.post-type-archive-fonte .titulo,
 .archive.post-type-archive-video .titulo,
 .search .titulo,
 .page .titulo,
@@ -637,7 +642,9 @@ html .owl-theme .owl-controls .owl-buttons div{
 .archive.post-type-archive-video .cada-noticia-archive,
 .page .cada-noticia-archive,
 .search .cada-noticia-archive,
-.archive.post-type-archive-noticia .cada-noticia-archive{
+.archive.post-type-archive-noticia .cada-noticia-archive,
+.archive.post-type-archive-fonte .cada-noticia-archive
+{
 	position: relative;
 	margin-bottom: 30px;
 	padding:0 2%!important; 
@@ -664,20 +671,55 @@ color: #fff;
 	left:94%;
 	bottom:2%;
 }
-.archive.category ul.page-numbers>li>span.current,.archive.category ul.page-numbers>li>span.current:hover, .archive.category ul.page-numbers>li>span.current:focus,
-.search ul.page-numbers>li>span.current,.search ul.page-numbers>li>span.current:hover, .search ul.page-numbers>li>span.current:focus,
-.post-type-archive-noticia ul.page-numbers>li>span.current,.post-type-archive-noticia ul.page-numbers>li>span.current:hover, .post-type-archive-noticia ul.page-numbers>li>span.current:focus,
-.post-type-archive-video ul.page-numbers>li>span.current,.post-type-archive-video ul.page-numbers>li>span.current:hover, .post-type-archive-video ul.page-numbers>li>span.current:focus,
-.archive.post-type-archive-noticia ul.page-numbers>li>span.current,.archive.post-type-archive-noticia ul.page-numbers>li>span.current:hover, .archive.post-type-archive-noticia ul.page-numbers>li>span.current:focus{
+.archive.category ul.page-numbers>li>span.current,.archive.category ul.page-numbers>li>span.current:hover,
+.archive.category ul.page-numbers>li>span.current:focus,
+.search ul.page-numbers>li>span.current,
+.search ul.page-numbers>li>span.current:hover, 
+.search ul.page-numbers>li>span.current:focus,
+.post-type-archive-noticia ul.page-numbers>li>span.current,
+.post-type-archive-noticia ul.page-numbers>li>span.current:hover, 
+.post-type-archive-fonte ul.page-numbers>li>span.current:focus,
+.post-type-archive-fonte ul.page-numbers>li>span.current,
+.post-type-archive-fonte ul.page-numbers>li>span.current:hover, 
+.post-type-archive-fonte ul.page-numbers>li>span.current:focus,
+
+.post-type-archive-video ul.page-numbers>li>span.current,
+.post-type-archive-video ul.page-numbers>li>span.current:hover, 
+.post-type-archive-video ul.page-numbers>li>span.current:focus,
+.archive.post-type-archive-noticia ul.page-numbers>li>span.current,
+.archive.post-type-archive-noticia ul.page-numbers>li>span.current:hover, 
+.archive.post-type-archive-noticia ul.page-numbers>li>span.current:focus,
+.archive.post-type-archive-fonte ul.page-numbers>li>span.current,
+.archive.post-type-archive-fonte ul.page-numbers>li>span.current:hover, 
+.archive.post-type-archive-fonte ul.page-numbers>li>span.current:focus{
 	background-color: rgb(22,122,192);
     border-color: rgb(22,122,192);
     color: #fff;
 }
-.search .pagination>li>a,.search ul.page-numbers>li>a,.search .pagination>li>span, .search ul.page-numbers>li>span,
-.post-type-archive-noticia .pagination>li>a,.post-type-archive-noticia ul.page-numbers>li>a,.post-type-archive-noticia .pagination>li>span, .post-type-archive-noticia ul.page-numbers>li>span,
-.post-type-archive-video .pagination>li>a,.post-type-archive-video ul.page-numbers>li>a,.post-type-archive-video .pagination>li>span, .post-type-archive-video ul.page-numbers>li>span,
-.archive.category .pagination>li>a,.archive.category ul.page-numbers>li>a,.archive.category .pagination>li>span, .archive.category ul.page-numbers>li>span,
-.archive.post-type-archive-noticia .pagination>li>a,.archive.post-type-archive-noticia ul.page-numbers>li>a,.archive.post-type-archive-noticia .pagination>li>span, .archive.post-type-archive-noticia ul.page-numbers>li>span{
+.search .pagination>li>a,
+.search ul.page-numbers>li>a,
+.search .pagination>li>span, 
+.search ul.page-numbers>li>span,
+.post-type-archive-noticia .pagination>li>a,
+.post-type-archive-noticia ul.page-numbers>li>a,
+.post-type-archive-noticia .pagination>li>span, 
+.post-type-archive-noticia ul.page-numbers>li>span,
+.post-type-archive-video .pagination>li>a,
+.post-type-archive-video ul.page-numbers>li>a,
+.post-type-archive-video .pagination>li>span, 
+.post-type-archive-video ul.page-numbers>li>span,
+.archive.category .pagination>li>a,
+.archive.category ul.page-numbers>li>a,
+.archive.category .pagination>li>span, 
+.archive.category ul.page-numbers>li>span,
+.archive.post-type-archive-noticia .pagination>li>a,
+.archive.post-type-archive-noticia ul.page-numbers>li>a,
+.archive.post-type-archive-noticia .pagination>li>span, 
+.archive.post-type-archive-noticia ul.page-numbers>li>span,
+.archive.post-type-archive-fonte .pagination>li>a,
+.archive.post-type-archive-fonte ul.page-numbers>li>a,
+.archive.post-type-archive-fonte .pagination>li>span, 
+.archive.post-type-archive-fonte ul.page-numbers>li>span{
 	color:rgb(22,122,192);
 }
 .pagination-wrap {
