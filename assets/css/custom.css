@@ -1017,15 +1017,22 @@ ul.menu-busca {
 .archive.post-type-archive-publicacao  #header.header-interna{
 	background: #c34b4c;
 }
-.archive.post-type-archive-publicacao  .cada-publicacao-archive a{
+.archive.post-type-archive-publicacao  .cada-publicacao-archive a,
+.archive.post-type-archive-fonte  .cada-publicacao-archive a{
+
 	color: #333333;
 	font-weight: 200;
 }
-.archive.post-type-archive-publicacao  .cada-publicacao-archive  p{
+.archive.post-type-archive-publicacao  .cada-publicacao-archive  p,
+.archive.post-type-archive-fonte  .cada-publicacao-archive  p{
+
 	color: #333333;
 	font-weight: 200;
 }
-.archive.post-type-archive-publicacao  .cada-publicacao-archive{
+.archive.post-type-archive-publicacao  .cada-publicacao-archive,
+.archive.post-type-archive-fonte  .cada-publicacao-archive
+{
+
 	background: #f2f2f2;
 	position: relative;
 	margin-bottom:30px;

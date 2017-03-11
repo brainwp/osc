@@ -44,17 +44,7 @@ get_header('internas'); ?>
 
 
 					<?php
-						$terms = get_terms([
-    						'taxonomy' => "tema_fonte",
-    						
-						]);
-						$count=count($terms);
-						foreach ($terms as $term) {
-							?>
-							<a href="<?php  echo get_term_link($term->term_id);?>"><?php echo $term->name; ?></a>
-							<?php 
-						}
-						print_r($terms);
+						
 					?>
 					<div class="clearfix"></div>
 				</div>

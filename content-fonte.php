@@ -7,8 +7,10 @@
  		?>
  		</a>
  		<?php
-
-		the_content( );
+			the_content( );
+			the_field('email');
+			the_field('telfone');
+			
 	 	?>
 	</div>	
 	
