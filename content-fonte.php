@@ -2,16 +2,41 @@
 
 	
 	 <div class="col-md-9 titulo-publicacao-archive">
-	 	<a href="<?php echo get_permalink( );?>">
 	 	<?php the_title( '<h4>', '</h4>'  ); 
  		?>
- 		</a>
  		<?php
 			the_content( );
-			the_field('email');
-			the_field('telfone');
+			?>
 			
-	 	?>
+				<a id="email" target="_blank" href="mailto:<?php the_field('email'); ?>"><?php the_field('email');?> </a>
+			
+			
+			<?php if( get_field('telefone') ): ?>
+	
+					<p>☎ <?php the_field('telefone'); ?></p>
+					
+			<?php endif; ?>
+				<?php
+				$terms = get_terms([
+	    					'taxonomy' => "tema_fonte",
+						]);
+				$count=count($terms);
+				foreach ($terms as $term) {
+			?>
+				<a href="<?php  echo get_term_link($term->term_id);?>"><?php echo $term->name; 
+				if ($count > 1){
+						echo ", ";
+						$count--;
+					}
+				}
+				?>
+				</a>
+			</p>
+			<?php 
+				
+
+	 		?>
+	 		</p>
 	</div>	
 	
 

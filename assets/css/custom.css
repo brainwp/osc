@@ -1054,6 +1054,30 @@ ul.menu-busca {
 /*archive-publicacoes category.php*/
 /*archive-publicacoes category.php*/
 
+/*fonte*/
+/*fonte*/
+/*fonte*/
+
+.archive.post-type-archive-fonte .cada-publicacao-archive{
+	padding: 30px!important;
+    height: 287px;
+    border: solid 15px white;
+    margin-bottom: 0!important;
+}
+.archive.post-type-archive-fonte .cada-publicacao-archive a{
+	color:#337ab7;
+	font-style: italic;
+
+}
+.archive.post-type-archive-fonte #email{
+	display: block;
+}
+.archive.post-type-archive-fonte .cada-publicacao-archive p {
+    margin: 0 0 0px;
+}
+/*fonte*/
+/*fonte*/
+/*fonte*/
 .page-template-page-home-banco.page #footer{
 	border-top: solid 15px #9ab87a!important;
 
