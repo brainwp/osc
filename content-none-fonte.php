@@ -19,12 +19,12 @@
 	<?php elseif ( is_search() ) : ?>
 
 		<p><?php _e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'odin' ); ?></p>
-		<a href="<?php echo get_site_url(); ?>/home-banco"> voltar para a busca</a>
+		<a href="<?php echo get_site_url(); ?>/fonte"> voltar para a busca</a>
 
 	<?php else : ?>
 
 		<p><?php _e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'odin' ); ?></p>
-		<a href="<?php echo get_site_url(); ?>/home-banco"> voltar para a busca</a>
+		<a href="<?php echo get_site_url(); ?>/fonte"> voltar para a busca</a>
 
 	<?php endif; ?>
 </div><!-- .page-content -->

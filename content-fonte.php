@@ -17,9 +17,11 @@
 					
 			<?php endif; ?>
 				<?php
-				$terms = get_terms([
-	    					'taxonomy' => "tema_fonte",
-						]);
+				// print_r($post);
+				$terms = get_the_terms($post->ID, 'tema_fonte');
+					// get_terms([
+	    // 					'taxonomy' => "tema_fonte",
+					// 	]);
 				$count=count($terms);
 				foreach ($terms as $term) {
 			?>

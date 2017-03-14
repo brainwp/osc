@@ -736,11 +736,51 @@ function tag_pra_categoria(){
 
 }
 function SearchFilter($query) {
-	// print_r($query->query['post_type']);
-	if ($query->is_search AND $query->query['post_type'] != 'pratica' ) {
-		$query->set('post_type', array('noticia','publicacao', 'video'));
+	// print_r($query);
+	if (isset($query->query['post_type'])){
+		if ($query->is_main_query() AND $query->is_search AND $query->query['post_type'] == 'fonte' ) {
+			
+
+			$busca= $query->query['s'];
+			$term = get_term_by('name', $query->query['s'], 'tema_fonte');
+			// print_r($te);
+			
+			if ($term) {
+				global $wpdb;
+				$busca=$query->query['s'];
+				$id_termo = $term->term_id;
+
+				$IDS = $wpdb->get_results('SELECT object_id FROM '.$wpdb->term_relationships.' WHERE term_taxonomy_id ='.$term->term_id, ARRAY_A);
+				$lista_id = array();
+				foreach ($IDS as $nome => $id) {
+					array_push($lista_id,$id['object_id']);
+				}
+				$sql = 'SELECT ' .$wpdb->posts.'.ID FROM  '.$wpdb->posts.' WHERE  '.$wpdb->posts.'.post_type = "fonte" AND '.$wpdb->posts.'.post_status = "publish" AND ( ' . $wpdb->posts . '.post_title LIKE \'%' . $wpdb->esc_like( $busca ) . '%\'';
+        		$sql .= ' OR ' . $wpdb->posts . '.post_content LIKE \'%' .$wpdb->esc_like( $busca ) . '%\')
+				UNION
+				SELECT object_id FROM '.$wpdb->term_relationships.' WHERE term_taxonomy_id ='.$id_termo;
+				$IDS_busca = $wpdb->get_results($sql, ARRAY_A);
+				$lista_id = array();
+				foreach ($IDS_busca as $nome => $id) {
+					array_push($lista_id,$id['ID']);
+				}
+				$query->set('post__in',$lista_id );
+				$query->set('s','' );
+				return $query;
+         	}
+		}
+		elseif ($query->is_search AND $query->query['post_type'] != 'pratica' AND $query->query['post_type'] != 'fonte' ) {
+			$query->set('post_type', array('noticia','publicacao', 'video'));
+		}
+
+		return $query;
 	}
-	return $query;
+	elseif ($query->is_search){
+		$query->set('post_type', array('noticia','publicacao', 'video'));
+		return $query;
+	}
+
+
 }
 
 add_filter('pre_get_posts','SearchFilter');

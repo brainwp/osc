@@ -1059,7 +1059,7 @@ ul.menu-busca {
 /*fonte*/
 
 .archive.post-type-archive-fonte .cada-publicacao-archive{
-	padding: 30px!important;
+	padding: 15px 30px!important;
     height: 287px;
     border: solid 15px white;
     margin-bottom: 0!important;
@@ -1074,6 +1074,9 @@ ul.menu-busca {
 }
 .archive.post-type-archive-fonte .cada-publicacao-archive p {
     margin: 0 0 0px;
+}
+.archive.post-type-archive-fonte .cada-publicacao-archive p:first-of-type {
+	margin:0 0 10px 0;
 }
 /*fonte*/
 /*fonte*/
@@ -1942,3 +1945,13 @@ label.cabinet input.file
 
 
 
+/*em caso de erro depois da atualizacao*/
+input.form-control {
+	padding:0 40px 0 5px!important;
+}
+.form-busca .form-group input{
+	width: 150px;
+}
+.header-interna .navbar-form input[type="search"]{
+	width: 250px;
+}

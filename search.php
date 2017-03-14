@@ -11,7 +11,12 @@ $post_type = get_query_var('post_type');
 if ($post_type == 'pratica') {
 	get_header('banco'); 
 }
-else{
+elseif ($post_type == 'fonte'){
+	get_header('fonte'); 
+
+}
+else
+{
 	get_header('internas'); 
 
 }
@@ -181,6 +186,90 @@ if( $post_type == 'pratica'){
 
 
 }
+elseif( $post_type == 'fonte'){
+	?>
+
+	<main id="content" class="row" tabindex="-1" role="main">
+			<?php if ( have_posts() ) : ?>
+				<h2 class="titulo">Banco de fontes</b></h2>
+			
+				<div class="barra-busca">
+					<h6>Busque fontes: </h6>
+				<form method="get" class="form-busca" action="<?php echo esc_url( home_url( '/fonte/' ) ); ?>" role="search">
+					<label for="navbar-search" class="sr-only">
+						<?php _e( 'Search:', 'odin' ); ?>
+					</label>
+					<div class="form-group">
+						<input type="search" value="<?php echo get_search_query(); ?>" class="form-control" name="s" id="navbar-search" />
+					</div>
+					<button type="submit" class="btn botao-busca"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/lupa.png" alt=""></button>
+				</form>
+
+					<h6>Temas: </h6>
+					 <?php $terms = get_terms( 'tema_fonte' );
+					 if (is_tax('tema_fonte')){
+					    	$term_page = get_queried_object()->term_id;
+					    }
+					if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
+
+					    echo '<select>';
+
+					    foreach ( $terms as $term ) {
+					    	// print_r($term);
+					    	if ($term_page == $term->term_id) {
+					    		$selected=' selected ';
+					    	}
+					    	else{
+					    		$selected=' ';
+
+					    	}
+					        echo '<option value="'.esc_url( home_url( '/tema_fonte/'.$term->slug ) ).'"'.$selected.'>' . $term->name . '</option>';
+					    }
+					    echo '</select>';
+					}?> 
+
+
+					<?php
+						
+					?>
+					<div class="clearfix"></div>
+				</div>
+				<div>
+				<?php
+					// echo '<pre>';
+					// print_r(;
+					// echo '</pre>';
+						// Start the Loop.
+						while ( have_posts() ) : the_post();
+
+							/*
+							 * Include the post format-specific template for the content. If you want to
+							 * use this in a child theme, then include a file called called content-___.php
+							 * (where ___ is the post format) and that will be used instead.
+							 */
+							get_template_part( 'content', 'fonte' );
+
+
+						endwhile;
+
+						// Post navigation.
+						odin_paging_nav();
+
+					else :
+						// If no content, include the "No posts found" template.
+						get_template_part( 'content', 'none-fonte' );
+
+				endif;
+			?>
+			</div>
+
+	</main>
+
+
+
+	<?php 
+} 
+
 else{
 	?>
 
@@ -237,7 +326,7 @@ else{
 
 					else :
 						// If no content, include the "No posts found" template.
-						get_template_part( 'content', 'none-banco' );
+						get_template_part( 'content', 'none' );
 
 				endif;
 			?>

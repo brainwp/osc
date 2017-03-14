@@ -658,4 +658,9 @@ $("#anexos").click(function(e){
 
 	});
 
+	$(".post-type-archive-fonte select").change(function(){
+		$(location).attr('href',$(this).val());
+
+	});
+
 });
