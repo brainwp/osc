@@ -64,7 +64,7 @@ if( $post_type == 'pratica'){
 	// echo 'praticas: '.count($post_ids_praticas).'<br>';
 	$query_parts = array();
 	foreach ($post_ids_praticas as $val) {
-    	$query_parts[] = "'".mysql_real_escape_string($val)."%'";
+    	$query_parts[] = "'".$val."%'";
 	}
 	// echo "key:".$keyword."<br>";
 	$string = implode(',', $post_ids_praticas);
@@ -85,67 +85,79 @@ if( $post_type == 'pratica'){
 	$post_ids = array_merge( $post_ids_meta, $post_ids_post );
 	// echo 'contagem final: '.count( array_unique($post_ids))."<br>";
 	$post_ids = array_unique($post_ids);
-	// Query arguments
-	$args = array(
-	'post_type'=>'post',
-	'post_status'=>'publish',
-	'post__in'=> $post_ids,
-	'post_type' => 'pratica',
-	'posts_per_page' =>12,
-	);
-	if ($cidade != 0 && $uf !=0){
-		$args['meta_query']=array(
-			array(
-				'key'     => 'uf',
-				'value'   => $uf,
-				'compare' => '=',
-			),
-			array(
-				'key' => 'cidade',
-				'value'   => $cidade,
-				'compare' => '=',
-			),
-		);	
-	}
-	elseif($cidade!=0){
-		$args['meta_query']=array(
-			'relation' => 'OR',
-			array(
-				'key' => 'cidade',
-				'value'   => $cidade,
-				'compare' => '=',
-			),
-		);
-	}
-	else if ($uf!="0"){
-		$args['meta_query']=array(
-			'relation' => 'OR',
-			array(
-				'key'     => 'uf',
-				'value'   => $uf,
-				'compare' => '=',
-			),
-		);
-	}
-	if ($tema !=0){
-		$args['tax_query']=array(
-			array(
-				'taxonomy' => 'tema',
-				'field'    => 'id',
-				'terms'    => $tema,
-			),
-		);
-	}
-	$paged=(get_query_var('paged')) ? get_query_var('paged') : 1;
-	$args['paged']=$paged;
-	// echo 'paged: '.get_query_var('paged');
-	$wp_query = new WP_Query( $args );
-	// echo '<pre>';
-	// print_r($wp_query->found_posts);
-	// echo '<br>';
-	// print_r($wp_query->max_num_pages);
-	// echo '</pre>';
+	// echo "teste";
+	// print_r($post_ids);
+	if ($post_ids == array()){
+		// echo $nome;
+		$wp_query = new WP_Query( array('post_type' => 'pratica', 'post__in' => array(0,1)));
+		// echo "<pre>";
+		// print_r($wp_query);
+		// echo "</pre>";
 
+	}
+	else{
+
+		
+		// Query arguments
+		$args = array(
+		'post_status'=>'publish',
+		'post__in'=> $post_ids,
+		'post_type' => 'pratica',
+		'posts_per_page' =>12,
+		);
+		if ($cidade != 0 && $uf !=0){
+			$args['meta_query']=array(
+				array(
+					'key'     => 'uf',
+					'value'   => $uf,
+					'compare' => '=',
+				),
+				array(
+					'key' => 'cidade',
+					'value'   => $cidade,
+					'compare' => '=',
+				),
+			);	
+		}
+		elseif($cidade!=0){
+			$args['meta_query']=array(
+				'relation' => 'OR',
+				array(
+					'key' => 'cidade',
+					'value'   => $cidade,
+					'compare' => '=',
+				),
+			);
+		}
+		else if ($uf!="0"){
+			$args['meta_query']=array(
+				'relation' => 'OR',
+				array(
+					'key'     => 'uf',
+					'value'   => $uf,
+					'compare' => '=',
+				),
+			);
+		}
+		if ($tema !=0){
+			$args['tax_query']=array(
+				array(
+					'taxonomy' => 'tema',
+					'field'    => 'id',
+					'terms'    => $tema,
+				),
+			);
+		}
+		$paged=(get_query_var('paged')) ? get_query_var('paged') : 1;
+		$args['paged']=$paged;
+		// echo 'paged: '.get_query_var('paged');
+		$wp_query = new WP_Query( $args );
+		// echo '<pre>';
+		// print_r($wp_query->found_posts);
+		// echo '<br>';
+		// print_r($wp_query->max_num_pages);
+		// echo '</pre>';
+	}
 	?>
 
 	<main id="content" class="busca-banco banco" tabindex="-1" role="main">

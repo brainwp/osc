@@ -98,7 +98,15 @@
 					<?php _e( 'Search:', 'odin' ); ?>
 				</label>
 				<div class="form-group">
-					<input type="search" value="<?php echo get_search_query(); ?>" class="form-control" name="s" id="navbar-search" />
+					<input type="search" value="<?php 
+						$queried_object = get_queried_object();
+ 
+						if ($queried_object->name !='fonte'){
+							echo get_search_query(); 
+
+						}
+
+					?>" class="form-control" name="s" id="navbar-search" />
 				</div>
 				<button type="submit" class="btn botao-busca"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/lupa.png" alt=""></button>
 			</form>
