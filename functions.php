@@ -738,38 +738,42 @@ function tag_pra_categoria(){
 function SearchFilter($query) {
 	// print_r($query);
 	if (isset($query->query['post_type'])){
-		if ($query->is_main_query() AND $query->is_search AND $query->query['post_type'] == 'fonte' ) {
+		// if ($query->is_main_query() AND $query->is_search AND $query->query['post_type'] == 'fonte' ) {
 			
 
-			$busca= $query->query['s'];
-			$term = get_term_by('name', $query->query['s'], 'tema_fonte');
-			// print_r($te);
+		// 	$busca= $query->query['s'];
+		// 	$term = get_term_by('name', $query->query['s'], 'tema_fonte');
+		// 	echo '<pre>';
+		// 	print_r($query);
+		// 	echo '</pre>';
+		// 	// print_r($te);
 			
-			if ($term) {
-				global $wpdb;
-				$busca=$query->query['s'];
-				$id_termo = $term->term_id;
+		// 	if ($term) {
+		// 		global $wpdb;
+		// 		$busca=$query->query['s'];
+		// 		$id_termo = $term->term_id;
 
-				$IDS = $wpdb->get_results('SELECT object_id FROM '.$wpdb->term_relationships.' WHERE term_taxonomy_id ='.$term->term_id, ARRAY_A);
-				$lista_id = array();
-				foreach ($IDS as $nome => $id) {
-					array_push($lista_id,$id['object_id']);
-				}
-				$sql = 'SELECT ' .$wpdb->posts.'.ID FROM  '.$wpdb->posts.' WHERE  '.$wpdb->posts.'.post_type = "fonte" AND '.$wpdb->posts.'.post_status = "publish" AND ( ' . $wpdb->posts . '.post_title LIKE \'%' . $wpdb->esc_like( $busca ) . '%\'';
-        		$sql .= ' OR ' . $wpdb->posts . '.post_content LIKE \'%' .$wpdb->esc_like( $busca ) . '%\')
-				UNION
-				SELECT object_id FROM '.$wpdb->term_relationships.' WHERE term_taxonomy_id ='.$id_termo;
-				$IDS_busca = $wpdb->get_results($sql, ARRAY_A);
-				$lista_id = array();
-				foreach ($IDS_busca as $nome => $id) {
-					array_push($lista_id,$id['ID']);
-				}
-				$query->set('post__in',$lista_id );
-				$query->set('s','' );
-				return $query;
-         	}
-		}
-		elseif ($query->is_search AND $query->query['post_type'] != 'pratica' AND $query->query['post_type'] != 'fonte' ) {
+		// 		$IDS = $wpdb->get_results('SELECT object_id FROM '.$wpdb->term_relationships.' WHERE term_taxonomy_id ='.$term->term_id, ARRAY_A);
+		// 		$lista_id = array();
+		// 		foreach ($IDS as $nome => $id) {
+		// 			array_push($lista_id,$id['object_id']);
+		// 		}
+		// 		$sql = 'SELECT ' .$wpdb->posts.'.ID FROM  '.$wpdb->posts.' WHERE  '.$wpdb->posts.'.post_type = "fonte" AND '.$wpdb->posts.'.post_status = "publish" AND ( ' . $wpdb->posts . '.post_title LIKE \'%' . $wpdb->esc_like( $busca ) . '%\'';
+  //       		$sql .= ' OR ' . $wpdb->posts . '.post_content LIKE \'%' .$wpdb->esc_like( $busca ) . '%\')
+		// 		UNION
+		// 		SELECT object_id FROM '.$wpdb->term_relationships.' WHERE term_taxonomy_id ='.$id_termo;
+		// 		$IDS_busca = $wpdb->get_results($sql, ARRAY_A);
+		// 		$lista_id = array();
+		// 		foreach ($IDS_busca as $nome => $id) {
+		// 			array_push($lista_id,$id['ID']);
+		// 		}
+		// 		$query->set('post__in',$lista_id );
+		// 		$query->set('s','' );
+		// 		return $query;
+  //        	}
+		// }
+		// else
+		if ($query->is_search AND $query->query['post_type'] != 'pratica' AND $query->query['post_type'] != 'fonte' ) {
 			$query->set('post_type', array('noticia','publicacao', 'video'));
 		}
 
@@ -784,3 +788,65 @@ function SearchFilter($query) {
 }
 
 add_filter('pre_get_posts','SearchFilter');
+
+// Outra tentativa
+// add_filter( 'posts_where' , 'posts_where_statement' );
+ 
+// function posts_where_statement( $where ) {
+// 	//gets the global query var object
+// 	global $wp_query;
+// 	echo '<pre>';
+
+// 	print_r($wp_query);
+// 	echo '</pre>';	
+
+// 	if ($wp_query->is_main_query() AND $wp_query->is_search AND $wp_query->query['post_type'] == 'fonte' ) {
+// 		$where .= "";
+// 		return $where;
+	
+// 	}
+// 	else{
+// 		return $where;
+// 	}
+ 
+// 	//removes the actions hooked on the '__after_loop' (post navigation)
+// 	remove_all_actions ( '__after_loop');
+ 
+// 	return $where;
+// }
+function AIO_AlphabeticSearch_WhereString( $where, &$wp_query )
+{
+   		global $wpdb;
+    	global $wp_query;
+   	if (isset($wp_query->query['post_type'])){
+		if ($wp_query->is_main_query() AND $wp_query->is_search AND $wp_query->query['post_type'] == 'fonte' ) {
+			$busca = $_GET['s']; 
+			$where .= " 
+				OR $wpdb->posts.ID 
+				IN (SELECT tr.object_id 
+					FROM $wpdb->term_relationships 
+					AS tr 
+					INNER JOIN $wpdb->term_taxonomy 
+					AS tt 
+					ON tr.term_taxonomy_id = tt.term_taxonomy_id 
+					WHERE tt.taxonomy = 'tema_fonte'  
+					AND tt.term_id 
+					IN (SELECT t.term_id 
+						FROM $wpdb->terms 
+						AS t 
+						WHERE name 
+						LIKE '%$busca%'
+					)
+				)";  
+		return $where;
+
+		}
+		
+	}  
+
+	return $where; 
+
+        // use only if the post meta db table has been joined to the search tables using posts_join filter
+}
+
+add_filter( 'posts_where', 'AIO_AlphabeticSearch_WhereString', 10, 2 );

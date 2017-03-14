@@ -1057,10 +1057,12 @@ ul.menu-busca {
 /*fonte*/
 /*fonte*/
 /*fonte*/
-
+.archive.post-type-archive-fonte .cada-publicacao-archive:nth-child(2n+1){
+clear:left;
+}
 .archive.post-type-archive-fonte .cada-publicacao-archive{
 	padding: 15px 30px!important;
-    height: 287px;
+    min-height: 287px;
     border: solid 15px white;
     margin-bottom: 0!important;
 }

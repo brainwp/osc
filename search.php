@@ -192,7 +192,8 @@ elseif( $post_type == 'fonte'){
 	<main id="content" class="row" tabindex="-1" role="main">
 			<?php if ( have_posts() ) : ?>
 				<h2 class="titulo">Banco de fontes</b></h2>
-			
+				<h4 class='resultados-cont'><b><?php echo get_search_query();?></b> retornou <b><?php echo $wp_query->found_posts; ?></b> itens</h4>
+
 				<div class="barra-busca">
 					<h6>Busque fontes: </h6>
 				<form method="get" class="form-busca" action="<?php echo esc_url( home_url( '/fonte/' ) ); ?>" role="search">
