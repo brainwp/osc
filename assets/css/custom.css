@@ -1726,6 +1726,20 @@ label.cabinet input.file
 	position: relative;
 	display: inline-block;
 }
+.search-no-results.post-type-archive-pratica main{
+
+	    margin:0 auto;
+
+}
+.container .page-content a:hover{
+	    color: #23527c;
+
+}
+@media (min-width: 1150px){
+	.search-no-results.post-type-archive-pratica main {
+    	width: 1100px;
+	}
+}
 @media (max-width: 1200px){
 	#categorias-nav{
 		max-width: 80%;
@@ -1948,7 +1962,7 @@ label.cabinet input.file
 
 
 /*em caso de erro depois da atualizacao*/
-input.form-control {
+/*input.form-control {
 	padding:0 40px 0 5px!important;
 }
 .form-busca .form-group input{
@@ -1956,4 +1970,4 @@ input.form-control {
 }
 .header-interna .navbar-form input[type="search"]{
 	width: 250px;
-}
+}*/

@@ -22,14 +22,17 @@
 					// get_terms([
 	    // 					'taxonomy' => "tema_fonte",
 					// 	]);
-				$count=count($terms);
-				foreach ($terms as $term) {
-			?>
-				<a href="<?php  echo get_term_link($term->term_id);?>"><?php echo $term->name; 
-				if ($count > 1){
-						echo ", ";
-						$count--;
+				if ($terms){
+					$count=count($terms);
+					foreach ($terms as $term) {
+					?>
+					<a href="<?php  echo get_term_link($term->term_id);?>"><?php echo $term->name; 
+					if ($count > 1){
+							echo ", ";
+							$count--;
+						}
 					}
+				
 				}
 				?>
 				</a>
