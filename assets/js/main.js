@@ -657,10 +657,11 @@ $("#anexos").click(function(e){
 
 
 	});
-
-	$(".post-type-archive-fonte select").change(function(){
+	document.getElementById('temaFonteSelect').addEventListener('change', function() {
 		$(location).attr('href',$(this).val());
+	}, false);
+	// $(".post-type-archive-fonte select").change(function(){
 
-	});
+	// });
 
 });

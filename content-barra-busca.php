@@ -1,10 +1,26 @@
 
 <h2 class="titulo">Banco de fontes</b></h2>
-<h4 class='resultados-cont'><b><?php echo $wp_query->found_posts; ?></b> itens</h4>
+<?php 
+	$url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+
+	if ($url != esc_url( home_url( '/bancodefontes/'))) {
+		if (isset($wp_query->query['s'])) {
+			?>
+			<h4 class='resultados-cont'><?php echo $wp_query->query['s'];?><b> retornou <?php echo $wp_query->found_posts; ?></b> itens</h4>
+		<?php
+		}
+		else{
+		?>
+		<h4 class='resultados-cont'><?php echo $wp_query->queried_object->name;?><b> retornou <?php echo $wp_query->found_posts; ?></b> itens</h4>
+		<?php
+		}
+	}
+ ?>
+
 
 <div class="barra-busca">
 	<h6>Busque fontes: </h6>
-	<form method="get" class="form-busca" action="<?php echo esc_url( home_url( '/fonte/' ) ); ?>" role="search">
+	<form method="get" class="form-busca" action="<?php echo esc_url( home_url( '/bancodefontes/' ) ); ?>" role="search">
 		<label for="navbar-search" class="sr-only">
 			<?php _e( 'Search:', 'odin' ); ?>
 		</label>
@@ -23,8 +39,8 @@
 	
 	}
 	if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
-	    echo '<select>';
-		echo '<option value="'.esc_url( home_url( '/fonte')).'"'.$selected_todas.'> Todos </option>';
+	    echo '<select id="temaFonteSelect">';
+		echo '<option value="'.esc_url( home_url( '/bancodefontes')).'"'.$selected_todas.'> Todos </option>';
 	    foreach ( $terms as $term ) {
 	   		if ($term_page == $term->term_id) {
 	   			$selected=' selected ';
@@ -39,7 +55,7 @@
 	else{
 		
 		echo '<select>';
-	    echo '<option value="'.esc_url( home_url( '/fonte')).'"'.$selected.'> Todos </option>';
+	    echo '<option value="'.esc_url( home_url( '/bancodefontes')).'"'.$selected.'> Todos </option>';
 	    echo '</select>';
 	}?> 
 

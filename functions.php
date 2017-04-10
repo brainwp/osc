@@ -219,7 +219,7 @@ function odin_enqueue_scripts() {
 	wp_enqueue_style( 'odin-style', get_stylesheet_uri(), array(), null, 'all' );
 	wp_enqueue_style( 'custom-style', $template_url . '/assets/css/custom.css', array(), null, 'all' );
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300|Ubuntu:400,300,300italic,400italic,500,500italic', array(), null, 'all' );
-	if( is_page_template('page-equipe.php') OR is_home()) { 
+	if( is_page_template('page-equipe.php') OR is_home()) {
 		wp_enqueue_script( 'owl-js',$template_url .'/inc/owl-carousel/owl-carousel/owl.carousel.js', array(), null, true );
 		wp_enqueue_style( 'owl-style', $template_url .'/inc/owl-carousel/owl-carousel/owl.carousel.css', array(), null, 'all' );
 		wp_enqueue_style( 'owl-theme', $template_url .'/inc/owl-carousel/owl-carousel/owl.theme.css', array(), null, 'all' );
@@ -325,7 +325,7 @@ require_once get_template_directory() . '/inc/custom-fields.php';
 */
 require_once get_template_directory() . '/inc/ajax-functions.php';
 
-// add_action("after_switch_theme", "cria_cidades"); 
+// add_action("after_switch_theme", "cria_cidades");
 
 // global $wpdb;
 // $table_name = $wpdb->prefix.'w_cidades';
@@ -355,7 +355,7 @@ require_once get_template_directory() . '/inc/ajax-functions.php';
 // }
 
 function cria_cidades(){
-	
+
 }
 
 function drop_tags($nome,$tax,$cont,$id, $esconde=0, $mae='')
@@ -364,7 +364,7 @@ function drop_tags($nome,$tax,$cont,$id, $esconde=0, $mae='')
 <?php
 }
 
-// remove_role( 'entidade' ); 
+// remove_role( 'entidade' );
 
 
 $result = add_role(
@@ -409,7 +409,7 @@ function kv_handle_attachment($file_handler,$post_id,$set_thu=true) {
 
 	$attach_id = media_handle_upload( $file_handler, $post_id );
 
-         // If you want to set a featured image frmo your uploads. 
+         // If you want to set a featured image frmo your uploads.
 	if ($set_thu) set_post_thumbnail($post_id, $attach_id);
 	return $attach_id;
 }
@@ -421,7 +421,7 @@ remove_filter('authenticate', 'wp_authenticate_username_password', 20);
 add_filter('authenticate', function($user, $email, $password){
 
     //Check for empty fields
-        if(empty($email) || empty ($password)){        
+        if(empty($email) || empty ($password)){
             //create new error object and add errors to it.
             $error = new WP_Error();
 
@@ -459,20 +459,20 @@ add_filter('authenticate', function($user, $email, $password){
         }
 }, 20, 3);
 add_filter('login_redirect', '_catch_login_error', 10, 3);
- 
+
 function _catch_login_error($redir1, $redir2, $wperr_user)
-{	
+{
     if(!is_wp_error($wperr_user) || !$wperr_user->get_error_code()) return $redir1;
     if (isset($_SERVER["HTTP_REFERER"])) {
 	 	$url=parse_url(($_SERVER["HTTP_REFERER"]));
 		if ($url['host'].$url['path']=='http://rede.com.br/osc/edicao-de-praticas-existentes/') {
 
 		    switch($wperr_user->get_error_code())
-		    {   
+		    {
 		    	case 'invalid':
 		        	$erro=urlencode("Senha não confere ou e-mail incorreto.");
-		            wp_redirect($url['host'].$url['path'].'/?erro='.$erro); 
-		        
+		            wp_redirect($url['host'].$url['path'].'/?erro='.$erro);
+
 		    }
 		 }
     }
@@ -488,17 +488,17 @@ function _catch_empty_user( $username, $pwd ) {
 			if ( empty( $username ) ) {
 			  	    $erro= urlencode("E-mail em branco");
 
-			        wp_redirect($url['host'].$url['path'].'/?erro='.$erro); 
+			        wp_redirect($url['host'].$url['path'].'/?erro='.$erro);
 			    exit();
 			  }
 			  elseif( empty($pwd)){
 			  		$erro= urlencode("Senha em branco");
 
-			        wp_redirect($url['host'].$url['path'].'/?erro='.$erro); 
+			        wp_redirect($url['host'].$url['path'].'/?erro='.$erro);
 			  }
 		}
 	}
-  
+
 }
 function my_custom_admin_styles() {
    ?>
@@ -536,7 +536,7 @@ add_filter('request', 'fix_category_pagination');
 // tag_pra_categoria();
 function tag_pra_categoria(){
 	$alteracoes = array(
-		"OSC" => array(	
+		"OSC" => array(
 			'OSCs',
 			'Sociedade Civil',
 			'OSC',
@@ -568,7 +568,7 @@ function tag_pra_categoria(){
 			'organizações não governamentais',
 			'abong'
 		),
-		"Direitos" => array(	
+		"Direitos" => array(
 			'Direitos',
 			'Direitos sociais',
 			'Feminismo',
@@ -622,7 +622,7 @@ function tag_pra_categoria(){
 			'mídia',
 			'comunicação',
 		),
-		"Movimentos" => array(	
+		"Movimentos" => array(
 			'Movimentos',
 			'Movimentos sociais',
 			'Manifestação',
@@ -638,7 +638,7 @@ function tag_pra_categoria(){
 			'manifestações',
 			'protestos',
 		),
-		"Democracia" => array(	
+		"Democracia" => array(
 			'Democracia',
 			'Participação social',
 			'participação',
@@ -674,7 +674,7 @@ function tag_pra_categoria(){
 			'impeachment',
 			'eduardo cunha',
 		),
-		"Novos paradigmas" => array(	
+		"Novos paradigmas" => array(
 			"Novos paradigmas de desenvolvimento",
 			"Novos modelos de desenvolvimento",
 			"Meio ambiente",
@@ -705,8 +705,8 @@ function tag_pra_categoria(){
 		// echo "<pre>";
 		// print_r( array_search($tags, $alteracoes));
 		// echo "</pre>";
-		$postlist = get_posts( 
-		array(	
+		$postlist = get_posts(
+		array(
 			'posts_per_page'   => -1,
 			'post_type'=>'noticia',
 			'tax_query' => array(
@@ -726,18 +726,22 @@ function tag_pra_categoria(){
 			wp_set_post_categories( $post->ID, $category, true ) ;
 		}
 	}
-	
+
 
 	// wp_update_post( array('ID'=>1929, 'post_category' => 'OSC'  ) );
-	
+
 	// echo "<pre>";
 	// print_r($posts);
 	// echo '</pre>';
 
 }
 function SearchFilter($query) {
+
 	if (isset($query->query['post_type'])){
-	
+		if ( $query->query['post_type'] == 'fonte' && $query->is_main_query() ) {
+				 $query->set( 'orderby', 'title' );
+				 $query->set( 'order', 'ASC' );
+		 }
 		if ($query->is_search AND $query->query['post_type'] != 'pratica' AND $query->query['post_type'] != 'fonte' ) {
 			$query->set('post_type', array('noticia','publicacao', 'video'));
 		}
@@ -748,6 +752,12 @@ function SearchFilter($query) {
 		$query->set('post_type', array('noticia','publicacao', 'video'));
 		return $query;
 	}
+	elseif ( is_tax("tema_fonte") ) {
+		$query->set( 'orderby', 'title' );
+		$query->set( 'order', 'ASC' );
+	}
+
+
 
 
 }
@@ -763,31 +773,38 @@ function busca_tax( $where, &$wp_query )
     	global $wp_query;
    	if (isset($wp_query->query['post_type'])){
 		if ($wp_query->is_main_query() AND $wp_query->is_search AND $wp_query->query['post_type'] == 'fonte' ) {
-			$busca = $_GET['s']; 
-			$where .= " 
-				OR $wpdb->posts.ID 
-				IN (SELECT tr.object_id 
-					FROM $wpdb->term_relationships 
-					AS tr 
-					INNER JOIN $wpdb->term_taxonomy 
-					AS tt 
-					ON tr.term_taxonomy_id = tt.term_taxonomy_id 
-					WHERE tt.taxonomy = 'tema_fonte'  
-					AND tt.term_id 
-					IN (SELECT t.term_id 
-						FROM $wpdb->terms 
-						AS t 
-						WHERE name 
+			$busca = get_search_query();
+			$where .= "
+				OR $wpdb->posts.ID
+				IN (SELECT tr.object_id
+					FROM $wpdb->term_relationships
+					AS tr
+					INNER JOIN $wpdb->term_taxonomy
+					AS tt
+					ON tr.term_taxonomy_id = tt.term_taxonomy_id
+					WHERE tt.taxonomy = 'tema_fonte'
+					AND tt.term_id
+					IN (SELECT t.term_id
+						FROM $wpdb->terms
+						AS t
+						WHERE name
 						LIKE '%$busca%'
 					)
-				)";  
+				)";
 		return $where;
 
 		}
-		
-	}  
 
-	return $where; 
+	}
+
+	return $where;
 }
 
 add_filter( 'posts_where', 'busca_tax', 10, 2 );
+
+
+function myplugin_rewrite_rule() {
+	add_rewrite_rule( '^bancodefontes([^/]*)/?', 'index.php?post_type=fonte','top' );
+	// add_rewrite_rule( '^bancodefontes/tema/([^/]*)/?', 'index.php?tema_fonte=$matches[1]','top' );
+}
+add_action('init', 'myplugin_rewrite_rule', 10, 0);
