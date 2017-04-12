@@ -16,7 +16,8 @@
  * @since 2.2.0
  */
 
-get_header('fonte'); ?>
+get_header('fonte');
+?>
 	<main id="content" class="row" tabindex="-1" role="main">
 			<?php if ( have_posts() ) : ?>
 				<?php get_template_part( 'content', 'barra-busca' ); ?>

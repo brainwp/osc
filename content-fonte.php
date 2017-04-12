@@ -1,4 +1,4 @@
-<div class="cada-publicacao-archive col-sm-6">
+	<div class="cada-publicacao-archive col-sm-6">
 
 
 	 <div class="col-md-9 titulo-publicacao-archive">

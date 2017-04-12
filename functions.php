@@ -802,9 +802,11 @@ function busca_tax( $where, &$wp_query )
 
 add_filter( 'posts_where', 'busca_tax', 10, 2 );
 
+add_rewrite_rule( 'region/([^/]+)/type/([^/]+)/page/([0-9]{1,})/?', 'index.php?taxonomy=region&term=$matches[1]&post_type=$matches[2]&paged=$matches[3]', 'top' );
 
 function myplugin_rewrite_rule() {
-	add_rewrite_rule( '^bancodefontes([^/]*)/?', 'index.php?post_type=fonte','top' );
-	// add_rewrite_rule( '^bancodefontes/tema/([^/]*)/?', 'index.php?tema_fonte=$matches[1]','top' );
+
+	add_rewrite_rule( 'bancodefontes/page/([0-9]{1,})/?', 'index.php?post_type=fonte&paged=$matches[1]','top' );
+	add_rewrite_rule( 'bancodefontes', 'index.php?post_type=fonte','top' );
 }
 add_action('init', 'myplugin_rewrite_rule', 10, 0);
