@@ -5,10 +5,10 @@ jQuery(document).ready(function($) {
 // front-page
 if ($('body').hasClass("home")){
 	$('#slider-1').owlCarousel({
- 
+
 	    // Most important owl features
-	    items : 1,
-   	    autoPlay:6000, 
+	    items : 2,
+   	    autoPlay:6000,
 
 	    itemsDesktop : [1200,1], //5 items between 1000px and 901px
 	    itemsDesktopSmall : [900,1], // betweem 900px and 601px
@@ -17,28 +17,28 @@ if ($('body').hasClass("home")){
 	    navigation : false,
 	    pagination:true
 
-    
- 
+
+
 	});
 $('#slider-2').owlCarousel({
- 
+
 	    // Most important owl features
 	    items : 1,
 	     itemsDesktop : [1200,1], //5 items between 1000px and 901px
 	    itemsDesktopSmall : [900,1], // betweem 900px and 601px
 
-   	    autoPlay:6000, 
+   	    autoPlay:6000,
 	    navigation : false,
 	    pagination:true
 
-    
- 
+
+
 	});
 	$('#categorias-nav').owlCarousel({
- 
+
 	    // Most important owl features
 	    items : 5,
-   	    autoPlay:false, 
+   	    autoPlay:false,
 	    navigationText : ["<div class='prev-slider-cat nav-slider'></div>","<div class='prox-slider-cat nav-slider'></div>"],
 	    itemsMobile : [992,3], //5 items between 1000px and 901px
 
@@ -46,8 +46,8 @@ $('#slider-2').owlCarousel({
 	    navigation : true,
 	    pagination:false
 
-    
- 
+
+
 	});
 	// if ($('.current-cat').lenght){
 		var rect = $('.current-cat').offset();
@@ -60,7 +60,7 @@ $('#slider-2').owlCarousel({
 		$('#categorias-nav .owl-wrapper').css('transform','translate(-'+rect+'px)')
 		console.log(rect);
 	// }
-	
+
 
 
 	$(".cat-item").click(function(e){
@@ -78,7 +78,7 @@ $('#slider-2').owlCarousel({
 				'cat':cat
 		};
 		           	console.log(data);
-		current=$(this);           	
+		current=$(this);
 		$.post(odin_main.ajaxurl, data, function(response) {
            	response=jQuery.parseJSON(response)
            	console.log(response);
@@ -94,7 +94,7 @@ $('#slider-2').owlCarousel({
 	});
 
 }
-	
+
 
 // front-page
 // front-page
@@ -125,14 +125,14 @@ $('#slider-2').owlCarousel({
 
 
 
-	$('.ajax-filtro-tema').change(function(e){	
+	$('.ajax-filtro-tema').change(function(e){
 		busca = $('#filtro-palavra').val();
 		// materiaisFiltro(busca);
-			
+
 	});
-	
-	
-	
+
+
+
 	$("#continue").click(function(e){
 		e.preventDefault();
 		$('#resumo p:nth-child(5)').css('max-height','500px');
@@ -162,10 +162,10 @@ $('#slider-2').owlCarousel({
 
 
 			// $.getJSON('cidades.ajax.php?search=',{cod_estados: $(this).val(), ajax: 'true'}, function(j){
-			// 	var options = '<option value=""></option>';	
+			// 	var options = '<option value=""></option>';
 			// 	for (var i = 0; i < j.length; i++) {
 			// 		options += '<option value="' + j[i].cod_cidades + '">' + j[i].nome + '</option>';
-			// 	}	
+			// 	}
 			// 	$('#cod_cidades').html(options).show();
 			// 	$('.carregando').hide();
 			// });
@@ -174,7 +174,7 @@ $('#slider-2').owlCarousel({
 		}
 	});
 	$(document).on('change',"#subs select",function(e){
-		//Write stuffs		
+		//Write stuffs
 		var data = {
 				'action': 'pega_sub2',
 				'mae':$(this).val(),
@@ -182,7 +182,7 @@ $('#slider-2').owlCarousel({
 		$.post(odin_main.ajaxurl, data, function(response) {
 			// console.log(response);
 			$('#subs2').html(response);
-		});		
+		});
 	});
 
 	$('#tema-continua-cadastro').change(function(){
@@ -198,7 +198,7 @@ $('#slider-2').owlCarousel({
 		$.post(odin_main.ajaxurl, data, function(response) {
 			// console.log(response);
 			$('#subs').html(response);
-		});	
+		});
 	};
 	// continua cadastro
 	// continua cadastro
@@ -243,7 +243,7 @@ $('#slider-2').owlCarousel({
 
 		};
 		var tax={}
-		
+
 		$(".acf").each(function (i) {
 			var nome=$(this).attr('name');
 			data[nome]=$(this).val();
@@ -263,7 +263,7 @@ $('#slider-2').owlCarousel({
 
 		// console.log(data);
 			$('.enviarCadastro').fadeIn();
-			$('#enviar-cadastro').fadeOut();		
+			$('#enviar-cadastro').fadeOut();
 			$.post(odin_main.ajaxurl, data, function(response) {
 			// console.log(response);
            	response=jQuery.parseJSON(response);
@@ -300,7 +300,7 @@ $('#slider-2').owlCarousel({
 			if (response.edicao==1) {
 				$('.listaPraticasEdit a[data-id="'+response.praticasEdits+'"]').fadeOut();
 			};
-		});	
+		});
 	});
 	// envia cadastro
 	// envia cadastro
@@ -336,8 +336,8 @@ $('#slider-2').owlCarousel({
     		});
 
 		$('#ibenic_file_input').on('change', prepareUpload);
-		
-function prepareUpload(event) { 
+
+function prepareUpload(event) {
 	var file = event.target.files;
   	var parent = $("#" + event.target.id).parent();
   	var data = new FormData();
@@ -356,12 +356,12 @@ function prepareUpload(event) {
 	          dataType: 'json',
 	          processData: false, // Don't process the files
 	          contentType: false, // Set content type to false as jQuery will tell the server its a query string request
-	          success: function(data, textStatus, jqXHR) {	
-	  	 
+	          success: function(data, textStatus, jqXHR) {
+
 	              if( data.response == "SUCCESS" ){
 		                var preview = "";
-		                if( data.type === "image/jpg" 
-		                  || data.type === "image/png" 
+		                if( data.type === "image/jpg"
+		                  || data.type === "image/png"
 		                  || data.type === "image/gif"
 		                  || data.type === "image/jpeg"
 		                ) {
@@ -369,7 +369,7 @@ function prepareUpload(event) {
 		                } else {
 		                  preview = data.filename;
 		                }
-		  
+
 		                var previewID = parent.attr("id") + "_preview";
 		                var previewParent = $("#"+previewID);
 		                previewParent.show();
@@ -380,7 +380,7 @@ function prepareUpload(event) {
 		                $('#imagem_destacada').attr('data-id', data.id);
 						$('#ibenic_file_upload .ajax-loader').fadeOut();
 
-	                
+
 	                 } else {
 		             alert( data.error );
 	                 }
@@ -401,8 +401,8 @@ $(".ibenic_file_delete").on("click", function(e){
 	  data: data,
 	  cache: false,
 	  dataType: 'json',
-	  success: function(data, textStatus, jqXHR) {	
-		 
+	  success: function(data, textStatus, jqXHR) {
+
 	  	if( data.response == "SUCCESS" ){
 	  		$("#ibenic_file_upload_preview").hide();
 	  		$("#ibenic_file_upload").show();
@@ -415,7 +415,7 @@ $(".ibenic_file_delete").on("click", function(e){
     	}
 	  },
  	  error: function(jqXHR, textStatus, errorThrown)
-    { 
+    {
       	add_message( textStatus, "danger" );
     }
   });
@@ -430,17 +430,17 @@ $("#anexos").click(function(e){
 
 		var fd = new FormData();
         var files_data = $('#anexosUp'); // The <input type="file" /> field
-        
+
         // Loop through each data and create an array file[] containing our files data.
         $.each($(files_data), function(i, obj) {
             $.each(obj.files,function(j,file){
                 fd.append('files[' + j + ']', file);
             })
         });
-        
+
         // our AJAX identifier
-        fd.append('action', 'cvf_upload_files');  
-        
+        fd.append('action', 'cvf_upload_files');
+
         // Remove this code if you do not want to associate your uploads to the current page.
 
         $.ajax({
@@ -472,10 +472,10 @@ $("#anexos").click(function(e){
 //                 fd.append('files[' + j + ']', file);
 //             })
 //         });
-        
+
 //         // our AJAX identifier
-//         fd.append('action', 'cvf_upload_files_gal');  
-        
+//         fd.append('action', 'cvf_upload_files_gal');
+
 //         // Remove this code if you do not want to associate your uploads to the current page.
 
 //         $.ajax({
@@ -496,14 +496,14 @@ $("#anexos").click(function(e){
 // 	});
 
 
-    
-    
+
+
     $(window).scroll(function () {
     	var scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
     	// console.log(scrollBottom);
         if ($(this).scrollTop() > 275 && scrollBottom > 500){
 	        $('#sidebar').addClass("fixo");
-        } 
+        }
         else if(scrollBottom < 500){
         	topo=$(this).scrollTop();
             $('#sidebar').removeClass("fixo");
@@ -516,7 +516,7 @@ $("#anexos").click(function(e){
             $('#sidebar').removeClass("fundo");
         }
     });
- 
+
 	$(".praticaEdit").click(function(e){
 		e.preventDefault();
 		var id = $(this).attr('data-id');
@@ -572,7 +572,7 @@ $("#anexos").click(function(e){
 			    $('#imagem_destacada').attr('data-id', response.imagem_destacada_id);
 			   	$('.ibenic_file_delete').attr('data-fileurl', response.imagem_destacada);
 			};
-			
+
 		   	$('.imagensAnexas').html(response.galeria);
 		   	$('.arquivosAnexos').html(response.anexos);
 
@@ -598,11 +598,11 @@ $("#anexos").click(function(e){
 		$.post(odin_main.ajaxurl, data, function(response) {
 			console.log(response);
            	response=jQuery.parseJSON(response);
-           	           		window.location.reload(false); 
+           	           		window.location.reload(false);
 
         });
 
-    });     	
+    });
 	$("input.criaUser").click(function(e){
 		e.preventDefault();
 		var nome = $('input[name="nome"]').val();
@@ -624,17 +624,17 @@ $("#anexos").click(function(e){
 
            	}
            	else{
-           		window.location.reload(false); 
+           		window.location.reload(false);
 
            	}
 
 
         });
 
-    });     	
+    });
 
 	$(document).on('click',".deletaGaleria",function(e){
-		e.preventDefault(); 
+		e.preventDefault();
 		esse=$(this);
 		id=$(this).attr('data-id');
 		post_id=$('#postId').attr('value');
@@ -663,5 +663,15 @@ $("#anexos").click(function(e){
 	// $(".post-type-archive-fonte select").change(function(){
 
 	// });
+	alturaPublicacao=0;
+	$( ".cada-publicacao-archive" ).each(function( index ) {
+	  if (alturaPublicacao < $(this).height()){
+			alturaPublicacao = $(this).height();
+		}
+		console.log(alturaPublicacao);
+	});
+	$( ".cada-publicacao-archive" ).each(function( index ) {
+	  $(this).height(alturaPublicacao);
 
+	});
 });

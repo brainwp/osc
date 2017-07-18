@@ -1062,7 +1062,7 @@ clear:left;
 }
 .archive.post-type-archive-fonte .cada-publicacao-archive{
 	padding: 15px 30px!important;
-    min-height: 287px;
+	min-height: 430px;
     border: solid 15px white;
     margin-bottom: 0!important;
 }
